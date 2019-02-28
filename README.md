@@ -1,2 +1,2 @@
-# mhc-bali
-Mandiri Health Care | https://mhc-bali.com
+# mhc-club
+Mandiri Health Care | https://mhc-club.com
