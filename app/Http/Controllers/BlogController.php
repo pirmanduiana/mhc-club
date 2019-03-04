@@ -19,7 +19,7 @@ class BlogController extends Controller
         $blog_post = Trnblog::where("published", 1)->join("admin_users","trn_blog.user_id","=","admin_users.id")->join("mst_blog_category","trn_blog.category_id","=","mst_blog_category.id")
         ->select("trn_blog.*",DB::raw("admin_users.name as user_full_name"),DB::raw("mst_blog_category.name as category_name"));
         $categories = Mstblogcategory::all();
-        $product_categories = Mstproductcategory::orderBy("rating","desc")->get();
+        // $product_categories = Mstproductcategory::orderBy("rating","desc")->get();
         
         $all_post = $blog_post->orderBy("created_at","desc")->get();
         $latest_post = $blog_post->orderBy("created_at","desc")->limit(2)->get();
@@ -34,9 +34,9 @@ class BlogController extends Controller
         
         if (!empty($blog_id)) {
             $blog_post_by_id = $blog_post->where("trn_blog.id",$blog_id)->first();
-            return view('pages.includes.sgl-blog', compact('company','blog_post_by_id','categories','latest_post','archives','product_categories'));
+            return view('pages.includes.sgl-blog', compact('company','blog_post_by_id','categories','latest_post','archives'));
         }
-        return view('pages.includes.all-blog', compact('company','all_post','categories','latest_post','archives','product_categories'));
+        return view('pages.includes.all-blog', compact('company','all_post','categories','latest_post','archives'));
 
     }
 

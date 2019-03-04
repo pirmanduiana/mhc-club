@@ -13,9 +13,7 @@ Route::group([
     $router->get('/', 'HomeController@index');
 
     $router->resource('/currency', 'CurrencyController');
-    $router->resource('/company', 'CompanyController');
-    $router->resource('/product-category', 'ProductCategoryController');
-    $router->resource('/product', 'ProductController');
+    $router->resource('/company', 'CompanyController');    
     $router->resource('/testimony', 'TestimoniesController');
     $router->resource('/blog-category', 'BlogcategoryController');
     $router->resource('/blog', 'BlogController');
