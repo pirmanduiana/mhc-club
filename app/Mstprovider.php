@@ -9,6 +9,7 @@ class Mstprovider extends Model
     //
     protected $table = "mst_provider";
     protected $fillable = [
+        'code',
         'name',
         'address',
         'phone',

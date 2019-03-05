@@ -16,6 +16,8 @@ Route::group([
     $router->resource('/company', 'CompanyController');    
     $router->resource('/currency', 'CurrencyController');
     $router->resource('/status', 'StatusController');
+    $router->resource('/coverage', 'CoverageController');
+    $router->resource('/plafon', 'ClientcoverageController');    
     $router->resource('/class', 'ClassController');
     $router->resource('/provider', 'ProviderController');
     $router->resource('/department', 'DepartmentController');

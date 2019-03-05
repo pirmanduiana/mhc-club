@@ -9,13 +9,13 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use URL;
-use App\Mstprovider;
+use App\Mstcoverage;
 
-class ProviderController extends Controller
+class CoverageController extends Controller
 {
     use HasResourceActions;
 
-    protected $page_header = "Provider";
+    protected $page_header = "Jenis Tanggungan";
 
     /**
      * Index interface.
@@ -82,21 +82,10 @@ class ProviderController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Mstprovider);
+        $grid = new Grid(new Mstcoverage);
 
         $grid->id('ID')->sortable();
-        $grid->code('Kode');
         $grid->name('Nama');
-        $grid->address('Alamat');
-        $grid->phone('Telp.');
-        $grid->email('Email');
-        $grid->status_id('Status')->display(function($status_id){
-            $status = [
-                1=>"<span class='label label-info'>Active</span>",
-                2=>"<span class='label label-default'>Inactive</span>"
-            ];
-            return @$status[$status_id] ?: null;
-        });
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
 
@@ -111,14 +100,10 @@ class ProviderController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Mstprovider::findOrFail($id));
+        $show = new Show(Mstcoverage::findOrFail($id));
 
         $show->id('ID');
         $show->name('Nama');
-        $show->address('Alamat');
-        $show->phone('Telp.');
-        $show->email('Email');
-        $show->status_id('Status');
         $show->created_at('Created at');
         $show->updated_at('Updated at');
 
@@ -132,20 +117,10 @@ class ProviderController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Mstprovider);
+        $form = new Form(new Mstcoverage);
 
         $form->display('id', 'ID');
-        $form->text('code', 'Kode provider')->rules('required');
         $form->text('name', 'Nama provider')->rules('required');
-        $form->text('address', 'Alamat')->rules('required');
-        $form->text('phone', 'Telp')->rules('required');
-        $form->text('fax', 'Fax')->rules('required');
-        $form->text('website', 'Website')->rules('required');
-        $form->text('email', 'Email')->rules('required');
-        $form->text('contract_number', 'No. kontrak')->rules('required');
-        $form->date('contract_start', 'Tgl. mulai kontrak')->rules('required');
-        $form->date('contract_end', 'Tgl. berakhir kontrak')->rules('required');
-        $form->radio('status_id','Status')->options(['1'=>'Active', '2'=>'Inactive'])->default('1');
 
         return $form;
     }
