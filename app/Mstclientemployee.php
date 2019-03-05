@@ -14,9 +14,25 @@ class Mstclientemployee extends Model
         'dob',
         'address',
         'phone',
+        'client_id',
         'department_id',
         'class_id',
         'status_id',
         'bpjs_code'
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Mstclient::class, 'client_id', 'id');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Mstclientdepartment::class, 'department_id', 'id');
+    }
+
+    public function class()
+    {
+        return $this->hasOne(Mstclass::class, 'id', 'class_id');
+    }
 }

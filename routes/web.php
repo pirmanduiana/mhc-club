@@ -14,5 +14,3 @@ use App\Mstproduct;
 */
 
 Route::get('/', 'PageController@index');
-
-Route::get('/blog/{id?}', 'BlogController@index');

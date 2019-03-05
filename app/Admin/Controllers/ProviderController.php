@@ -8,14 +8,14 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
-use Encore\Admin\Facades\Admin;
 use URL;
-use App\Trnblog;
-use App\Mstblogcategory;
+use App\Mstprovider;
 
-class BlogController extends Controller
+class ProviderController extends Controller
 {
     use HasResourceActions;
+
+    protected $page_header = "Provider";
 
     /**
      * Index interface.
@@ -26,7 +26,8 @@ class BlogController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('Blog Post')
+            ->header($this->page_header)
+            ->description('daftar')
             ->body($this->grid());
     }
 
@@ -40,8 +41,8 @@ class BlogController extends Controller
     public function show($id, Content $content)
     {
         return $content
-            ->header('Detail')
-            ->description('description')
+            ->header($this->page_header)
+            ->description('readonly')
             ->body($this->detail($id));
     }
 
@@ -55,8 +56,8 @@ class BlogController extends Controller
     public function edit($id, Content $content)
     {
         return $content
-            ->header('Edit')
-            ->description('description')
+            ->header($this->page_header)
+            ->description('edit')
             ->body($this->form()->edit($id));
     }
 
@@ -69,7 +70,8 @@ class BlogController extends Controller
     public function create(Content $content)
     {
         return $content
-            ->header('Product')
+            ->header($this->page_header)
+            ->description('buat baru')
             ->body($this->form());
     }
 
@@ -80,17 +82,19 @@ class BlogController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Trnblog);
+        $grid = new Grid(new Mstprovider);
 
         $grid->id('ID')->sortable();
-        $grid->title('blog title');
-        $grid->column('category.name','category');
-        $grid->published()->display(function($published){
+        $grid->name('Nama');
+        $grid->address('Alamat');
+        $grid->phone('Telp.');
+        $grid->email('Email');
+        $grid->status_id('Status')->display(function($status_id){
             $status = [
-                0=>"<span class='label label-default'>No</span>",
-                1=>"<span class='label label-info'>Yes</span>"
+                1=>"<span class='label label-info'>Active</span>",
+                2=>"<span class='label label-default'>Inactive</span>"
             ];
-            return @$status[$published] ?: null;
+            return @$status[$status_id] ?: null;
         });
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
@@ -106,24 +110,16 @@ class BlogController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Trnblog::findOrFail($id));
+        $show = new Show(Mstprovider::findOrFail($id));
 
-        $show->id('ID')->sortable();
-        $show->title('blog title');
-        $show->category_id()->as(function ($category_id) {
-            return Mstblogcategory::find($category_id)->name;
-        });
-        $show->published()->as(function ($published) {
-            $status = [
-                0=>"No",
-                1=>"Yes"
-            ];
-            return @$status[$published] ?: null;
-        });
+        $show->id('ID');
+        $show->name('Nama');
+        $show->address('Alamat');
+        $show->phone('Telp.');
+        $show->email('Email');
+        $show->status_id('Status');
         $show->created_at('Created at');
         $show->updated_at('Updated at');
-        $show->divider();
-        $show->featured_img()->image();
 
         return $show;
     }
@@ -135,17 +131,19 @@ class BlogController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Trnblog);
+        $form = new Form(new Mstprovider);
 
         $form->display('id', 'ID');
-        $form->text('title', 'blog title')->rules('required');
-        $form->select('category_id', 'category')->options(function(){
-            return Mstblogcategory::get()->pluck('name','id');
-        })->rules('required');
-        $form->ckeditor('content', 'content')->rules('required');    
-        $form->radio('published','published this post?')->options(['0'=>'No', '1'=>'Yes'])->default('0');        
-        $form->image('featured_img', 'featured image')->rules('required');
-        $form->hidden('user_id')->value(Admin::user()->id);
+        $form->text('name', 'Nama provider')->rules('required');
+        $form->text('address', 'Alamat')->rules('required');
+        $form->text('phone', 'Telp')->rules('required');
+        $form->text('fax', 'Fax')->rules('required');
+        $form->text('website', 'Website')->rules('required');
+        $form->text('email', 'Email')->rules('required');
+        $form->text('contract_number', 'No. kontrak')->rules('required');
+        $form->date('contract_start', 'Tgl. mulai kontrak')->rules('required');
+        $form->date('contract_end', 'Tgl. berakhir kontrak')->rules('required');
+        $form->radio('status_id','Status')->options(['1'=>'Active', '2'=>'Inactive'])->default('1');
 
         return $form;
     }

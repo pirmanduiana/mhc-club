@@ -8,10 +8,13 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use App\Mstproduct;
+use App\Mstproductcategory;
+use App\Mstcurrency;
 use URL;
-use App\Mstblogcategory;
+use App\Trntestimonial;
 
-class BlogcategoryController extends Controller
+class TestimonyController extends Controller
 {
     use HasResourceActions;
 
@@ -24,7 +27,7 @@ class BlogcategoryController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('Blog Category')
+            ->header('Testimonies')
             ->body($this->grid());
     }
 
@@ -78,10 +81,13 @@ class BlogcategoryController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Mstblogcategory);
+        $grid = new Grid(new Trntestimonial);
 
         $grid->id('ID')->sortable();
-        $grid->name('category name');
+        $grid->guest_name('Guest name');
+        $grid->post_date('Post on');
+        $grid->subject('Subject');
+        $grid->message('Message');        
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
 
@@ -96,10 +102,12 @@ class BlogcategoryController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Mstblogcategory::findOrFail($id));
+        $show = new Show(Trntestimonial::findOrFail($id));
 
         $show->id('ID')->sortable();
-        $show->name('category name');
+        $show->guest_name('Guest name');
+        $show->post_date('Post on');
+        $show->subject('Subject');  
         $show->created_at('Created at');
 
         return $show;
@@ -112,9 +120,12 @@ class BlogcategoryController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Mstblogcategory);
+        $form = new Form(new Trntestimonial);
 
-        $form->text('name','category name')->rules('required');        
+        $form->text('guest_name','guest name')->rules('required');
+        $form->date('post_date','post date')->rules('required');
+        $form->text('subject','subject')->rules('required');
+        $form->ckeditor('message','message')->rules('required');
 
         return $form;
     }

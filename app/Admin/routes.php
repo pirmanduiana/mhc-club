@@ -12,10 +12,18 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
 
-    $router->resource('/currency', 'CurrencyController');
+    // backoffice
     $router->resource('/company', 'CompanyController');    
-    $router->resource('/testimony', 'TestimoniesController');
-    $router->resource('/blog-category', 'BlogcategoryController');
-    $router->resource('/blog', 'BlogController');
-
+    $router->resource('/currency', 'CurrencyController');
+    $router->resource('/status', 'StatusController');
+    $router->resource('/class', 'ClassController');
+    $router->resource('/provider', 'ProviderController');
+    $router->resource('/department', 'DepartmentController');
+    $router->resource('/client', 'ClientController');
+    $router->resource('/employee', 'EmployeeController');
+    $router->resource('/billing', 'BillingController');
+    $router->resource('/report', 'ReportController');
+        
+    // frontpage management ...
+    
 });
