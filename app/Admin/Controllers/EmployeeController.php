@@ -8,12 +8,14 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use DB;
 use URL;
 use DNS1D;
 use App\Mstclientemployee;
 use App\Mstclient;
 use App\Mstclass;
 use App\Mstclientdepartment;
+use App\Trnclientcoverage;
 
 class EmployeeController extends Controller
 {
@@ -134,18 +136,12 @@ class EmployeeController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Mstclientemployee::findOrFail($id));
-
-        $show->id('ID');        
-        $show->mhc_code('Kode MHC');
-        $show->name('Nama');
-        $show->dob('Tgl. lahir');
-        $show->client_id('Perusahaan');
-        $show->class_id('Kelas');
-        $show->created_at('Created at');
-        $show->updated_at('Updated at');
-
-        return $show;
+        $employee = Mstclientemployee::where('mst_client_employee.id',$id)->join('mst_client','mst_client.id','=','mst_client_employee.client_id')->join('mst_client_department','mst_client_department.id','=','mst_client_employee.department_id')->join('mst_class','mst_class.id','=','mst_client_employee.class_id')
+        ->select('mst_client_employee.*',DB::raw('mst_client.name as client_name'),DB::raw('mst_client_department.name as department_name'),DB::raw('mst_class.name as class_name'))->first();
+        $barcode = 'data:image/png;base64,' . DNS1D::getBarcodePNG($employee->mhc_code, "C39+",1,33,array(1,1,4));
+        $plafons = Trnclientcoverage::where('client_id',$employee->client_id)->join('mst_client','mst_client.id','=','trn_client_coverage.client_id')->join('mst_coverage','mst_coverage.id','=','trn_client_coverage.coverage_id')->select('trn_client_coverage.*',DB::raw('mst_client.name as client_name'),DB::raw('mst_coverage.name as cov_name'))
+        ->get();
+        return view('admin.employee_show')->with(compact('employee','barcode','plafons'));
     }
 
     /**
