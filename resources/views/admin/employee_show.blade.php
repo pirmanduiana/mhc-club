@@ -21,11 +21,6 @@
                     <div class="box-tools">
                         <div class="btn-group pull-right" style="margin-right: 5px">
                             <a href="{{ url('admin/employee') }}" class="btn btn-sm btn-default" title="List"><i class="fa fa-list"></i><span class="hidden-xs">&nbsp;List</span></a>                            
-                            @if($employee->status_id==1)
-                                <span class="btn btn-info btn-flat btn-sm" style="margin-left:10px;">Status: Aktif</span>
-                            @else
-                                <span class="btn btn-warning btn-flat btn-sm" style="margin-left:10px;">Status: Tidak aktif</span>
-                            @endif
                         </div>
                     </div>
                 </div>                
@@ -82,10 +77,20 @@
                                         <label for="opd_dari1">Nama perusahaan:</label><br>
                                         {{ $employee->client_name }}
                                     </div>
-                                    <div class="col-sm-6">
-                                        <label for="unit_kerja_dari1">Departmen:</label><br>
+                                    <div class="col-sm-3">
+                                        <label for="unit_kerja_dari1">Departemen:</label><br>
                                         {{ $employee->department_name }}
-                                    </div>                                
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="opd_dari1">Status:</label><br>
+                                        @if($employee->status_id==1)
+                                            <span class='label label-info'>Aktif </span>
+                                        @else
+                                            <span class='label label-default'>Tidak aktif </span>
+                                        @endif
+                                        @php $edit_url = '/admin/employee/'.$employee->id.'/edit'; @endphp
+                                        <br>Klik <a href="javascript:void(0)" id="a_triggerrubahstatus">disini</a> untuk merubah.
+                                    </div>
                                 </div>
                             </div>  
                         </fieldset>
@@ -120,8 +125,33 @@
                                     </table>
                                     </div>
                                 </div>
-                            </div>  
-                        </fieldset>                        
+                            </div>                            
+                        </fieldset>
+                        <fieldset>
+                            <legend>Riwayat status karyawan</legend>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th width="30%">Tanggal dicatat</th>
+                                            <th width="70%">Catatan</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($logs as $k=>$v)
+                                            <tr>
+                                                <td>{{$v->created_at}}</td>
+                                                <td>{!!$v->notes!!}</td>
+                                            </tr>                                        
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </fieldset> 
                     </div>
                     </form>
                 </div>            
@@ -139,22 +169,80 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">[MODAL_TITLE]</h4>
         </div>
+        <form name="frm_rubahstatuskaryawan">
+        @csrf
+        <input type="hidden" name="employee_id" value="{{$employee->id}}">
         <div class="modal-body">
-            <!-- // dyn -->
+            <div class="form-group">
+                <div class="radio">
+                <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="1" {{$employee->status_id==1 ? "checked" : ""}}>
+                    Aktif
+                </label>
+                </div>
+                <div class="radio">
+                <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="2" {{$employee->status_id==2 ? "checked" : ""}}>
+                    Non aktif
+                </label>
+                </div>                
+            </div>
+            <div class="form-group">
+                <label>Berikan alasan atas perubahan status karyawan!</label>
+                <textarea name="reason" class="form-control" rows="3" placeholder="Alasan ..."></textarea>
+            </div>
         </div>
         <div class="modal-footer">                            
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            <button type="button" id="btn_rubahstatuskaryawan" class="btn btn-info" data-dismiss="modal">Simpan</button>
         </div>
         </div>
+        </form>
     </div>
 </div>
 <!-- modal -->
 
 <script>    
     
+    karyawan_id = "{{$employee->id}}";
+    
+    var modalRubahStatus = function()
+    {
+        $("#myModal").modal('show');
+        $(".modal-title").html('Merubah status karyawan');
+    }
+
+    var submitRubahStatus = function()
+    {
+        var data = $("form[name='frm_rubahstatuskaryawan']").serializeArray();
+        $.ajax({
+            url: "/admin/post/employee/status/update",
+            type: "post",
+            data: data,
+            dataType: "json"
+        }).done(function(json){
+            if (json[0]) {                
+                $.pjax.reload('#pjax-container');
+                toastr.success('Status karyawan telah diperbaharui');
+            } else {
+                toastr.success('Terjadi kesalahan!');
+            }
+        }).fail(function(xhr){
+            //...
+        });
+    }
+
     $(document).ready(function(){
         
         // ...
+        $("#a_triggerrubahstatus").on("click", function(){
+            modalRubahStatus();
+        });
+
+        $("#btn_rubahstatuskaryawan").on("click", function(e){
+            e.preventDefault();
+            submitRubahStatus();
+        });
 
     });
 </script>

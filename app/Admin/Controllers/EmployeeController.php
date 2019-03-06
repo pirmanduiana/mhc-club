@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use Illuminate\Http\Request;
 use DB;
 use URL;
 use DNS1D;
@@ -16,6 +17,7 @@ use App\Mstclient;
 use App\Mstclass;
 use App\Mstclientdepartment;
 use App\Trnclientcoverage;
+use App\Trnemployeelog;
 
 class EmployeeController extends Controller
 {
@@ -141,7 +143,8 @@ class EmployeeController extends Controller
         $barcode = 'data:image/png;base64,' . DNS1D::getBarcodePNG($employee->mhc_code, "C39+",1,33,array(1,1,4));
         $plafons = Trnclientcoverage::where('client_id',$employee->client_id)->join('mst_client','mst_client.id','=','trn_client_coverage.client_id')->join('mst_coverage','mst_coverage.id','=','trn_client_coverage.coverage_id')->select('trn_client_coverage.*',DB::raw('mst_client.name as client_name'),DB::raw('mst_coverage.name as cov_name'))
         ->get();
-        return view('admin.employee_show')->with(compact('employee','barcode','plafons'));
+        $logs = Trnemployeelog::where("employee_id",$id)->orderBy("created_at","desc")->get();
+        return view('admin.employee_show')->with(compact('employee','barcode','plafons','logs'));
     }
 
     /**
@@ -171,6 +174,31 @@ class EmployeeController extends Controller
         $form->radio('status_id','Status karyawan')->options(['1'=>'Active', '2'=>'Inactive'])->default('1');
         $form->text('bpjs_code', 'Kode PBJS')->rules('required');
 
+        $form->saved(function (Form $form) {
+            // log
+            $log = new Trnemployeelog;
+            $log->employee_id = $form->model()->id;
+            $log->notes = "Karyawan dicatat di sistem untuk pertama kali.";
+            $log->save();
+        });
+
         return $form;
+    }
+
+    public function rubahStatus(Request $request)
+    {
+        // update status
+        $update = Mstclientemployee::find($request->employee_id)->update(["status_id"=>$request->optionsRadios]);
+        if ($update) {
+            // insert log
+            $log = new Trnemployeelog;
+            $log->employee_id = $request->employee_id;
+            $log->notes = $request->reason;
+            $log->save();
+            if (!empty($log)) {
+                return response()->json([true, $log]);
+            }
+        }
+        return response()->json([false, "error!"]);
     }
 }
