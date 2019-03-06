@@ -95,6 +95,38 @@
                             </div>  
                         </fieldset>
                         <fieldset>
+                            <legend>Data keluarga yang ditanggung</legend>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>Kode MHC</th>
+                                            <th>Kode BPJS</th>
+                                            <th>Nama</th>
+                                            <th>Hub. keluarga</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($tanggungan as $k=>$v)
+                                            <tr>
+                                                <td>
+                                                    <img src="{{$v['barcode']}}" alt="barcode"/><br>
+                                                    {{$v['mhc_code']}}
+                                                </td>
+                                                <td>{{$v['bpjs_code']}}</td>
+                                                <td>{{$v['name']}}</td>
+                                                <td>{{$v['family_status']}}</td>
+                                            </tr>                                        
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                            </div>  
+                        </fieldset>
+                        <fieldset>
                             <legend>Plafon tanggungan</legend>
                             <div class="form-group">
                                 <div class="row">
@@ -191,6 +223,7 @@
             </div>
             <div class="form-group">
                 <textarea name="reason" class="form-control" rows="3" placeholder="Berikan alasan atas perubahan status karyawan!"></textarea>
+                * Merubah status karyawan akan merubah seluruh status tanggungan keluarga
             </div>
         </div>
         <div class="modal-footer">                            
@@ -210,7 +243,7 @@
     var modalRubahStatus = function()
     {
         $("#myModal").modal('show');
-        $(".modal-title").html('Merubah status karyawan');
+        $(".modal-title").html('Merubah status karyawan*');
     }
 
     var submitRubahStatus = function()

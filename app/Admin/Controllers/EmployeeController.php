@@ -19,6 +19,8 @@ use App\Mstclass;
 use App\Mstclientdepartment;
 use App\Trnclientcoverage;
 use App\Trnemployeelog;
+use App\Admin\Extensions\CheckRow;
+use App\Mstclientemployeemember;
 
 class EmployeeController extends Controller
 {
@@ -112,7 +114,9 @@ class EmployeeController extends Controller
             // return '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($mhc_code, "C39+",1,33,array(1,1,4)) . '" alt="barcode"   /><div style="text-align:center; font-family: sans-serif;" text-anchor= "middle" >'.$mhc_code.'</div>';
             return $mhc_code;
         });
-        $grid->name('Nama');
+        $grid->name('Nama')->display(function($name){
+            return $name;
+        });
         $grid->dob('Tgl. lahir');
         $grid->column('client.name','Perusahaan');
         $grid->column('department.name','Departement');
@@ -127,6 +131,10 @@ class EmployeeController extends Controller
         });
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
+
+        $grid->actions(function ($actions) {
+            $actions->append(new CheckRow($actions->getKey()));
+        });
 
         return $grid;
     }
@@ -145,7 +153,20 @@ class EmployeeController extends Controller
         $plafons = Trnclientcoverage::where('client_id',$employee->client_id)->join('mst_client','mst_client.id','=','trn_client_coverage.client_id')->join('mst_coverage','mst_coverage.id','=','trn_client_coverage.coverage_id')->select('trn_client_coverage.*',DB::raw('mst_client.name as client_name'),DB::raw('mst_coverage.name as cov_name'))
         ->get();
         $logs = Trnemployeelog::where("employee_id",$id)->leftJoin('admin_users','admin_users.id','=','trn_employee_log.user_id')->orderBy("created_at","desc")->select('trn_employee_log.*',DB::raw('admin_users.name as username'))->get();
-        return view('admin.employee_show')->with(compact('employee','barcode','plafons','logs'));
+
+        $member = Mstclientemployeemember::where("employee_id",$id)->get();
+        $tanggungan = [];
+        foreach ($member as $x=>$y) {
+            $tanggungan[] = [
+                "mhc_code" => $y->mhc_code,
+                "bpjs_code" => $y->bpjs_code,
+                "name" => $y->name,
+                "family_status" => $y->family_status,
+                "barcode" => 'data:image/png;base64,' . DNS1D::getBarcodePNG($y->mhc_code, "C39+",1,33,array(1,1,4))
+            ];
+        }
+
+        return view('admin.employee_show')->with(compact('employee','barcode','plafons','logs','tanggungan'));
     }
 
     /**
@@ -163,7 +184,7 @@ class EmployeeController extends Controller
         })->rules('required');
         $form->select('department_id', 'Departemen')->options(function(){
             return Mstclientdepartment::get()->pluck('name','id');
-        })->rules('required');
+        });
         $form->text('mhc_code', 'Kode MHC')->rules('required');    
         $form->text('name', 'Nama lengkap')->rules('required');
         $form->date('dob', 'Tgl. lahir')->rules('required');

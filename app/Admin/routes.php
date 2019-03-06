@@ -23,9 +23,10 @@ Route::group([
     $router->resource('/department', 'DepartmentController');
     $router->resource('/client', 'ClientController');
     $router->resource('/employee', 'EmployeeController');
-    $router->post('/post/employee/status/update', 'EmployeeController@rubahStatus');
+    $router->post('/post/employee/status/update', 'EmployeeController@rubahStatus');    
     $router->resource('/billing', 'BillingController');
     $router->resource('/report', 'ReportController');
+    $router->resource('/tanggungan', 'TanggunganController');
         
     // frontpage management ...
     
