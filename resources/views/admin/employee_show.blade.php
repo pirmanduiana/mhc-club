@@ -135,8 +135,9 @@
                                     <table class="table table-condensed">
                                         <thead>
                                         <tr>
-                                            <th width="30%">Tanggal dicatat</th>
+                                            <th width="15%">Waktu dicatat</th>
                                             <th width="70%">Catatan</th>
+                                            <th width="15%">Dicatat oleh</th>                                            
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -144,6 +145,7 @@
                                             <tr>
                                                 <td>{{$v->created_at}}</td>
                                                 <td>{!!$v->notes!!}</td>
+                                                <td>{{$v->username}}</td>
                                             </tr>                                        
                                             @endforeach
                                         </tbody>
@@ -188,8 +190,7 @@
                 </div>                
             </div>
             <div class="form-group">
-                <label>Berikan alasan atas perubahan status karyawan!</label>
-                <textarea name="reason" class="form-control" rows="3" placeholder="Alasan ..."></textarea>
+                <textarea name="reason" class="form-control" rows="3" placeholder="Berikan alasan atas perubahan status karyawan!"></textarea>
             </div>
         </div>
         <div class="modal-footer">                            
