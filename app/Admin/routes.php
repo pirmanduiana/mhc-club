@@ -23,8 +23,12 @@ Route::group([
     $router->resource('/department', 'DepartmentController');
     $router->resource('/client', 'ClientController');
     $router->resource('/employee', 'EmployeeController');
-    $router->post('/post/employee/status/update', 'EmployeeController@rubahStatus');    
+    $router->post('/post/employee/status/update', 'EmployeeController@rubahStatus');
     $router->resource('/billing', 'BillingController');
+    $router->post('/post/billing', 'BillingController@store');
+    $router->post('/update/billing', 'BillingController@update');
+    $router->get('/get/employee/byclient/{client_id}', 'BillingController@getEmpByClient');
+    $router->resource('/billingobj', 'BillingobjController');
     $router->resource('/report', 'ReportController');
     $router->resource('/tanggungan', 'TanggunganController');
         

@@ -11,6 +11,7 @@ class Trnbilling extends Model
     protected $fillable = [
         'code',
         'date',
+        'client_id',
         'employee_id',
         'doctor_id',
         'subtotal',
@@ -18,4 +19,15 @@ class Trnbilling extends Model
         'discount',
         'total'
     ];
+
+    public function client()
+    {
+        return $this->hasOne(Mstclient::class, 'id', 'client_id');
+    }
+
+    public function employee()
+    {
+        return $this->hasOne(Mstclientemployee::class, 'id', 'employee_id');
+    }
+    
 }

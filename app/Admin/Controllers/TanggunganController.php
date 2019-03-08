@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use DB;
 use URL;
 use DNS1D;
+use Illuminate\Support\Facades\Session;
 use App\Mstclientemployee;
 use App\Trnemployeelog;
 use App\Admin\Extensions\CheckRow;
@@ -90,7 +91,17 @@ class TanggunganController extends Controller
      */
     protected function grid()
     {
+        if (isset($_GET["employee_id"])) {        
+            Session::put('employee_id', $_GET["employee_id"]);
+        } else {
+            Session::forget('employee_id');
+        }
+        
         $grid = new Grid(new Mstclientemployeemember);
+
+        $grid->tools(function ($tools) {
+            $tools->append('<a href="/admin/employee" class="btn btn-sm btn-info"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Daftar karyawan</a>');
+        });
 
         $grid->filter(function($filter){
             $filter->disableIdFilter();
@@ -138,11 +149,13 @@ class TanggunganController extends Controller
     {
         $form = new Form(new Mstclientemployeemember);
 
+        $default_employee_id = Session::get('employee_id');
+
         $form->display('id', 'ID');
         $form->select('employee_id', 'Penanggung')->options(function(){
             return Mstclientemployee::get()->pluck('name','id');
-        })->rules('required');
-        $form->text('mhc_code', 'Kode MHC')->rules('required');    
+        })->default($default_employee_id)->rules('required');
+        $form->text('mhc_code', 'Kode MHC')->rules('required');
         $form->text('name', 'Nama lengkap')->rules('required');
         $form->select('family_status', 'Hub. keluarga')->options(function(){
             return ["Istri"=>"Istri","Anak 1"=>"Anak 1","Anak 2"=>"Anak 2","Anak 3"=>"Anak 3"];

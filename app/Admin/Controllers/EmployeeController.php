@@ -110,16 +110,16 @@ class EmployeeController extends Controller
         });
 
         $grid->id('ID')->sortable();
-        $grid->mhc_code('Kode MHC')->display(function ($mhc_code) {
-            // return '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($mhc_code, "C39+",1,33,array(1,1,4)) . '" alt="barcode"   /><div style="text-align:center; font-family: sans-serif;" text-anchor= "middle" >'.$mhc_code.'</div>';
+        $grid->mhc_code('Kode MHC')->display(function ($mhc_code) {            
             return $mhc_code;
         });
         $grid->name('Nama')->display(function($name){
-            return $name;
+            $tanggungan = Mstclientemployeemember::where('employee_id', $this->id)->count();
+            return $name  . '&nbsp;&nbsp;<a href="/admin/tanggungan?&name=&mhc_code=&employee_id='.$this->id.'" class="label label-info" title="tampilkan tanggungan">'.$tanggungan.' <i class="fa fa-user"></i></a>&nbsp;';
         });
         $grid->dob('Tgl. lahir');
         $grid->column('client.name','Perusahaan');
-        $grid->column('department.name','Departement');
+        $grid->column('department.name','Departemen');
         $grid->column('class.name','Kelas');
         $grid->bpjs_code('Kode BPJS');
         $grid->status_id('Status')->display(function($status_id){
@@ -131,10 +131,6 @@ class EmployeeController extends Controller
         });
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
-
-        $grid->actions(function ($actions) {
-            $actions->append(new CheckRow($actions->getKey()));
-        });
 
         return $grid;
     }
@@ -195,15 +191,18 @@ class EmployeeController extends Controller
         })->rules('required');
         $form->radio('status_id','Status karyawan')->options(['1'=>'Active', '2'=>'Inactive'])->default('1');
         $form->text('bpjs_code', 'Kode PBJS')->rules('required');
-
+        
         $form->saved(function (Form $form) {
             // log
-            $before_reason = "[first record]";
-            $log = new Trnemployeelog;
-            $log->employee_id = $form->model()->id;
-            $log->notes = $before_reason . ": Karyawan dicatat di sistem untuk pertama kali.";
-            $log->user_id = Admin::user()->id;
-            $log->save();
+            $find = Trnemployeelog::where('notes','like','[first record]%')->where('employee_id',$form->model()->id)->first();
+            if(empty($find)){
+                $before_reason = "[first record]";
+                $log = new Trnemployeelog;
+                $log->employee_id = $form->model()->id;
+                $log->notes = $before_reason . ": Karyawan dicatat di sistem untuk pertama kali.";
+                $log->user_id = Admin::user()->id;
+                $log->save();
+            }
         });
 
         return $form;
