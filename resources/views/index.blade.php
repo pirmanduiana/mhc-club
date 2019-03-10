@@ -20,7 +20,7 @@
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
 
-	<link rel="icon" href="{{ asset('vendor/theme-travelix/images/favicon.ico') }}">
+	<link rel="icon" href="{{ asset('favicon.ico') }}">
 
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 	

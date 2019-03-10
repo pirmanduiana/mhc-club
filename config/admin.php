@@ -2,7 +2,7 @@
 
 return [
 
-    'landing-app' => 'Farmers Village',
+    'landing-app' => 'Mandiri Health Care',
 
     /*
     |--------------------------------------------------------------------------
@@ -13,7 +13,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Farmers Village Sambian Undagi',
+    'name' => 'Mandiri Health Care',
 
     /*
     |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>Farmers</b> Village',
+    'logo' => 'Mandiri Health Care',
 
     /*
     |--------------------------------------------------------------------------
@@ -36,7 +36,7 @@ return [
     | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<b>FV</b>',
+    'logo-mini' => '<b>MHC</b>',
 
     /*
     |--------------------------------------------------------------------------
