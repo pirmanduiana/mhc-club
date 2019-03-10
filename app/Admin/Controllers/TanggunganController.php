@@ -112,6 +112,8 @@ class TanggunganController extends Controller
             });            
         });
 
+        $grid->disableExport();
+
         $grid->id('ID')->sortable();
         $grid->mhc_code('Kode MHC');
         $grid->name('Nama');

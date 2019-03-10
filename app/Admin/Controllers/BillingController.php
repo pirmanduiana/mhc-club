@@ -113,6 +113,8 @@ class BillingController extends Controller
             $filter->like('employee.name', 'Pasien');
         });
 
+        $grid->disableExport();
+
         $grid->id('ID')->sortable();
         $grid->code('Kode')->display(function($code){
             $emp = Mstclientemployee::where("mst_client_employee.id",$this->employee_id)->join("mst_client","mst_client.id","=","mst_client_employee.client_id")->select("mst_client_employee.*",DB::raw("mst_client.name as client_name"))->first();
@@ -157,6 +159,11 @@ class BillingController extends Controller
         return view('admin.billing_create')->with(compact('billobj','employee','client'));
     }
 
+    public function getBillObj()
+    {
+        return response()->json(Mstbillingobj::all());
+    }
+
     public function store(Request $request)
     {
         $billing = Trnbilling::create([
@@ -164,6 +171,7 @@ class BillingController extends Controller
             "date" => $request->date,
             "client_id" => $request->client_id,
             "employee_id" => $request->employee_id,
+            "diagnosa" => $request->diagnosa,
             "doctor_id" => 99, // temp
             "total" => $request->total
         ]);
@@ -187,7 +195,8 @@ class BillingController extends Controller
             "date"=>$request->date,
             "total"=>$request->total,
             "client_id" => $request->client_id,
-            "employee_id"=>$request->employee_id
+            "employee_id"=>$request->employee_id,
+            "diagnosa" => $request->diagnosa
         ]);
         if ($update) {
             foreach ($request->item as $p=>$q) {

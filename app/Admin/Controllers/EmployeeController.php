@@ -109,6 +109,8 @@ class EmployeeController extends Controller
             ]);
         });
 
+        $grid->disableExport();
+
         $grid->id('ID')->sortable();
         $grid->mhc_code('Kode MHC')->display(function ($mhc_code) {            
             return $mhc_code;

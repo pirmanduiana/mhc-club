@@ -29,6 +29,7 @@ Route::group([
     $router->post('/update/billing', 'BillingController@update');
     $router->get('/get/employee/byclient/{client_id}', 'BillingController@getEmpByClient');
     $router->resource('/billingobj', 'BillingobjController');
+    $router->get('/get/billingobj', 'BillingController@getBillObj');
     $router->resource('/report', 'ReportController');
     $router->resource('/tanggungan', 'TanggunganController');
         

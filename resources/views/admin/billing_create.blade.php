@@ -34,7 +34,7 @@
                                 <label for="title" class="col-sm-2  control-label">Client</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-building fa-fw"></i></span>
                                         <select class="form-control" name="client_id">
                                             <option></option>
                                             @foreach($client as $k=>$v)
@@ -50,7 +50,7 @@
                                 <label for="title" class="col-sm-2  control-label">Pasien</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                                         <select class="form-control" name="employee_id">
                                             <!--  -->
                                         </select>
@@ -63,8 +63,19 @@
                                 <label for="title" class="col-sm-2  control-label">Tanggal</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                         <input type="text" name="date" value="" class="form-control title date" placeholder="Input tanggal">
+                                    </div>                         
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="col-md-12" style="margin-bottom:10px;">
+                            <div class="form-group">
+                                <label for="title" class="col-sm-2  control-label">Diagnosa</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-stethoscope fa-fw"></i></span>
+                                        <input type="text" name="diagnosa" value="" class="form-control title" placeholder="Input diagnosa">
                                     </div>                         
                                 </div>
                             </div>
@@ -76,7 +87,7 @@
                                 <label for="title" class="col-sm-2  control-label">{{$v->name}}</label>
                                 <div class="col-sm-8">                                    
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-medkit fa-fw"></i></span>
                                         <input type="number" id="item{{$v->id}}" name="item[{{$v->id}}]" value="0" class="form-control title" placeholder="Input {{$v->name}}">                   
                                     </div>                         
                                 </div>
@@ -136,11 +147,19 @@
 <script>    
 
     var getTotal = function(){
-        var satu = parseFloat($("#item1").val());
-        var dua = parseFloat($("#item2").val());
-        var tiga = parseFloat($("#item3").val());
-        var total = satu + dua - tiga;
-        $("input[name='total']").val(total);
+        $.ajax({
+            url: "/admin/get/billingobj",
+            type: "get",
+            dataType: "json"
+        }).done(function(json){
+            var total = 0;            
+            $.each(json, function(k,v){
+                total = total + (parseFloat($("#item"+v.id).val()) * v.multiplier);
+            });
+            $("input[name='total']").val(total);
+        }).fail(function(xhr){
+            //...
+        });
     }    
 
     var changeEmployee = function(this_value){
@@ -154,7 +173,6 @@
                 var newState = new Option(v.text, v.id, true, true);
                 $("select[name='employee_id']").append(newState).trigger('change');
             });
-            console.log(json);
         }).fail(function(xhr){
             //...
         });
@@ -192,7 +210,7 @@
             placeholder: "Pilih"
         });
 
-        $("#item1, #item2, #item3").on("keyup", function(){
+        $('[id^=item]').on("keyup", function(){
             getTotal();
         })
 

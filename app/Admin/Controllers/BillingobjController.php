@@ -94,8 +94,17 @@ class BillingobjController extends Controller
             $filter->like('name', 'Nama objek');            
         });
 
+        $grid->disableExport();
+
         $grid->id('ID')->sortable();
         $grid->name('name');
+        $grid->multiplier('Formula')->display(function($multiplier){
+            $array = [
+                1 => '<span class="label label-info"><i class="fa fa-plus"> Penambah</i></span>',
+                -1 => '<span class="label label-warning"><i class="fa fa-minus"> Pengurang</i></span>'
+            ];
+            return @$array[$multiplier] ?: null;
+        });
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
 
@@ -126,8 +135,14 @@ class BillingobjController extends Controller
     {
         $form = new Form(new Mstbillingobj);
 
-        $form->display('id', 'ID');        
+        $form->display('id', 'ID');
         $form->text('name', 'Nama objek billing')->rules('required');
+        $form->select('multiplier', 'Formula')->options(function(){
+            return [
+                1 => "Penambah",
+                -1 => "Pengurang"
+            ];
+        });
         return $form;
     }
 

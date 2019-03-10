@@ -13,6 +13,7 @@ class Trnbilling extends Model
         'date',
         'client_id',
         'employee_id',
+        'diagnosa',
         'doctor_id',
         'subtotal',
         'surcharge',
