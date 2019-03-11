@@ -121,6 +121,13 @@ class TanggunganController extends Controller
         $grid->dob('Tgl. lahir');
         $grid->bpjs_code('Kode BPJS');
         $grid->column('employee.name','Penanggung');
+        $grid->status_id('Status')->display(function($status_id){
+            $status = [
+                1=>"<span class='label label-info'>Active</span>",
+                2=>"<span class='label label-default'>Inactive</span>"
+            ];
+            return @$status[$status_id] ?: null;
+        });
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
 
@@ -164,6 +171,7 @@ class TanggunganController extends Controller
         })->rules('required');
         $form->date('dob', 'Tgl. lahir')->rules('required');        
         $form->text('bpjs_code', 'Kode PBJS')->rules('required');
+        $form->radio('status_id','Status')->options(['1'=>'Active', '2'=>'Inactive'])->default('1');
 
         $form->saved(function (Form $form) {
             // log

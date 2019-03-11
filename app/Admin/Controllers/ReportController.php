@@ -8,14 +8,25 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
-use App\Mstproduct;
-use App\Mstproductcategory;
-use App\Mstcurrency;
+use Encore\Admin\Facades\Admin;
+use Illuminate\Http\Request;
+use DB;
 use URL;
+use DNS1D;
+use App\Mstclientemployee;
+use App\Mstclient;
+use App\Mstclass;
+use App\Mstclientdepartment;
+use App\Trnclientcoverage;
+use App\Trnemployeelog;
+use App\Mstclientemployeemember;
+use Encore\Admin\Widgets\Tab;
 
 class ReportController extends Controller
 {
     use HasResourceActions;
+
+    protected $page_header = "Laporan";
 
     /**
      * Index interface.
@@ -26,9 +37,10 @@ class ReportController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('Product')
-            ->body($this->grid());
-    }
+            ->header($this->page_header)
+            ->description('daftar')
+            ->body($this->reports());
+    }    
 
     /**
      * Show interface.
@@ -40,8 +52,8 @@ class ReportController extends Controller
     public function show($id, Content $content)
     {
         return $content
-            ->header('Detail')
-            ->description('description')
+            ->header($this->page_header)
+            ->description('readonly')
             ->body($this->detail($id));
     }
 
@@ -55,8 +67,8 @@ class ReportController extends Controller
     public function edit($id, Content $content)
     {
         return $content
-            ->header('Edit')
-            ->description('description')
+            ->header($this->page_header)
+            ->description('edit')
             ->body($this->form()->edit($id));
     }
 
@@ -69,7 +81,8 @@ class ReportController extends Controller
     public function create(Content $content)
     {
         return $content
-            ->header('Product')
+            ->header($this->page_header)
+            ->description('buat baru')
             ->body($this->form());
     }
 
@@ -78,29 +91,26 @@ class ReportController extends Controller
      *
      * @return Grid
      */
-    protected function grid()
+    protected function reports()
     {
-        $grid = new Grid(new Mstproduct);
+        $tab = new Tab();
 
-        $grid->id('ID')->sortable();
-        $grid->name('Product');
-        $grid->min_pax('Min-pax');
-        $grid->max_pax('Max-pax');
-        $grid->column('currency.code','Curr.');
-        $grid->price()->display(function($price){
-            return number_format($price, 2);
-        }, 'Price');
-        $grid->rating()->display(function($rating){
-            $stars = "";
-            for ($i=0; $i<$rating; $i++) { 
-                $stars .= "<i class='fa fa-star-o'></i> ";
-            }
-            return $stars;
-        });
-        $grid->created_at('Created at');
-        $grid->updated_at('Updated at');
+        $clients = Mstclient::where("status_id",1)->get();
+        $bulan_array = [
+            1 => "Januari", 2 => "Februari", 3 => "Maret", 4 => "April",
+            5 => "Mei", 6 => "Juni", 7 => "Juli", 8 => "Agustus",
+            9 => "September", 10 => "Oktober", 11 => "November", 12 => "Desember"
+        ];
+        $tahun_skrg = date('Y'); $sampai_tahun = $tahun_skrg + 4;
+        $tahun_array = [];
+        for ($i=$tahun_skrg; $i<=$sampai_tahun; $i++) { 
+            $tahun_array[$i] = $i;
+        }
+        
+        $tab->add('Bill by month', view('admin.rpt_bill_bymonth')->with(compact('clients','bulan_array','tahun_array')));
+        $tab->add('Bill by date', view('admin.rpt_bill_bydate')->with(compact('clients','bulan_array','tahun_array')));
 
-        return $grid;
+        return $tab->render();
     }
 
     /**
@@ -111,15 +121,26 @@ class ReportController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Mstproduct::findOrFail($id));
+        $employee = Mstclientemployee::where('mst_client_employee.id',$id)->join('mst_client','mst_client.id','=','mst_client_employee.client_id')->join('mst_client_department','mst_client_department.id','=','mst_client_employee.department_id')->join('mst_class','mst_class.id','=','mst_client_employee.class_id')
+        ->select('mst_client_employee.*',DB::raw('mst_client.name as client_name'),DB::raw('mst_client_department.name as department_name'),DB::raw('mst_class.name as class_name'))->first();
+        $barcode = 'data:image/png;base64,' . DNS1D::getBarcodePNG($employee->mhc_code, "C39+",1,33,array(1,1,4));
+        $plafons = Trnclientcoverage::where('client_id',$employee->client_id)->join('mst_client','mst_client.id','=','trn_client_coverage.client_id')->join('mst_coverage','mst_coverage.id','=','trn_client_coverage.coverage_id')->select('trn_client_coverage.*',DB::raw('mst_client.name as client_name'),DB::raw('mst_coverage.name as cov_name'))
+        ->get();
+        $logs = Trnemployeelog::where("employee_id",$id)->leftJoin('admin_users','admin_users.id','=','trn_employee_log.user_id')->orderBy("created_at","desc")->select('trn_employee_log.*',DB::raw('admin_users.name as username'))->get();
 
-        $show->id('ID');
-        $show->name('Product Name');
-        $show->created_at('Created at');
-        $show->divider();
-        $show->featured_img()->image();
+        $member = Mstclientemployeemember::where("employee_id",$id)->get();
+        $tanggungan = [];
+        foreach ($member as $x=>$y) {
+            $tanggungan[] = [
+                "mhc_code" => $y->mhc_code,
+                "bpjs_code" => $y->bpjs_code,
+                "name" => $y->name,
+                "family_status" => $y->family_status,
+                "barcode" => 'data:image/png;base64,' . DNS1D::getBarcodePNG($y->mhc_code, "C39+",1,33,array(1,1,4))
+            ];
+        }
 
-        return $show;
+        return view('admin.employee_show')->with(compact('employee','barcode','plafons','logs','tanggungan'));
     }
 
     /**
@@ -129,26 +150,58 @@ class ReportController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new Mstproduct);
+        $form = new Form(new Mstclientemployee);
 
         $form->display('id', 'ID');
-        $form->text('name', 'Product')->rules('required');
-        $form->select('category_id', 'Category')->options(function(){
-            return Mstproductcategory::get()->pluck('name','id');
+        $form->select('client_id', 'Perusahaan')->options(function(){
+            return Mstclient::get()->pluck('name','id');
         })->rules('required');
-        $form->ckeditor('desc', 'Desc.')->rules('required');
-        $form->number('min_pax', 'Min Pax')->rules('required');
-        $form->number('max_pax', 'Max pax')->rules('required');
-        $form->select('currency_id', 'Curr.')->options(function(){
-            return Mstcurrency::get()->pluck('code','id');
+        $form->select('department_id', 'Departemen')->options(function(){
+            return Mstclientdepartment::get()->pluck('name','id');
+        });
+        $form->text('mhc_code', 'Kode MHC')->rules('required');    
+        $form->text('name', 'Nama lengkap')->rules('required');
+        $form->date('dob', 'Tgl. lahir')->rules('required');
+        $form->text('address', 'Alamat rumah')->rules('required');
+        $form->text('phone', 'No. HP')->rules('required');
+        $form->select('class_id', 'Kelas')->options(function(){
+            return Mstclass::get()->pluck('name','id');
         })->rules('required');
-        $form->number('price', 'Price')->rules('required');
-
-        $form->radio('show_price','Show price to public')->options(['0'=>'No', '1'=>'Yes'])->default('0');
-
-        $form->number('rating', 'Rating')->rules('required|max:5');
-        $form->image('featured_img', 'Featured image')->rules('required');
+        $form->radio('status_id','Status karyawan')->options(['1'=>'Active', '2'=>'Inactive'])->default('1');
+        $form->text('bpjs_code', 'Kode PBJS')->rules('required');
+        
+        $form->saved(function (Form $form) {
+            // log
+            $find = Trnemployeelog::where('notes','like','[first record]%')->where('employee_id',$form->model()->id)->first();
+            if(empty($find)){
+                $before_reason = "[first record]";
+                $log = new Trnemployeelog;
+                $log->employee_id = $form->model()->id;
+                $log->notes = $before_reason . ": Karyawan dicatat di sistem untuk pertama kali.";
+                $log->user_id = Admin::user()->id;
+                $log->save();
+            }
+        });
 
         return $form;
+    }
+
+    public function rubahStatus(Request $request)
+    {
+        // update status
+        $update = Mstclientemployee::find($request->employee_id)->update(["status_id"=>$request->optionsRadios]);
+        if ($update) {
+            // insert log
+            $before_reason = $request->optionsRadios==1 ? "[set active]" : "[set in-active]";
+            $log = new Trnemployeelog;
+            $log->employee_id = $request->employee_id;
+            $log->notes = $before_reason .": ". $request->reason;
+            $log->user_id = Admin::user()->id;
+            $log->save();
+            if (!empty($log)) {
+                return response()->json([true, $log]);
+            }
+        }
+        return response()->json([false, "error!"]);
     }
 }

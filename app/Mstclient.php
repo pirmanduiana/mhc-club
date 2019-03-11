@@ -9,6 +9,7 @@ class Mstclient extends Model
     //
     protected $table = "mst_client";
     protected $fillable = [
+        'code',
         'name',
         'address',
         'phone',

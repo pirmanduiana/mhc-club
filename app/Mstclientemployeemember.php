@@ -14,7 +14,8 @@ class Mstclientemployeemember extends Model
         'dob',
         'bpjs_code',
         'employee_id',
-        'family_status'
+        'family_status',
+        'status_id'
     ];
 
     public function employee()

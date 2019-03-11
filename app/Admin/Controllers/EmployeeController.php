@@ -21,6 +21,7 @@ use App\Trnclientcoverage;
 use App\Trnemployeelog;
 use App\Admin\Extensions\CheckRow;
 use App\Mstclientemployeemember;
+use Encore\Admin\Widgets\InfoBox;
 
 class EmployeeController extends Controller
 {
@@ -99,6 +100,7 @@ class EmployeeController extends Controller
             $filter->disableIdFilter();
             $filter->like('name', 'Nama');
             $filter->like('mhc_code', 'Kode MHC');
+            $filter->equal('dob', 'Tgl. lahir')->date();
             $filter->equal('client_id','Perusahaan')->select(function(){
                 return Mstclient::get()->pluck('name','id');
             });
@@ -175,7 +177,16 @@ class EmployeeController extends Controller
     protected function form()
     {
         $form = new Form(new Mstclientemployee);
-
+        
+        $form->html(function(Form $form){
+            if (!empty($form->model()->id)) {
+                return '<div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-warning"></i> Peringatan!</h4>
+                Merubah status karyawan akan merubah semua status tanggungan yang terkait dengannya!
+                </div>';
+            }
+        });
         $form->display('id', 'ID');
         $form->select('client_id', 'Perusahaan')->options(function(){
             return Mstclient::get()->pluck('name','id');
@@ -195,6 +206,8 @@ class EmployeeController extends Controller
         $form->text('bpjs_code', 'Kode PBJS')->rules('required');
         
         $form->saved(function (Form $form) {
+            // update tanggungan status
+            Mstclientemployeemember::where("employee_id",$form->model()->id)->update(["status_id"=>$form->status_id]);
             // log
             $find = Trnemployeelog::where('notes','like','[first record]%')->where('employee_id',$form->model()->id)->first();
             if(empty($find)){
