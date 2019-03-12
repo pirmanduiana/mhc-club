@@ -228,6 +228,8 @@ class EmployeeController extends Controller
         // update status
         $update = Mstclientemployee::find($request->employee_id)->update(["status_id"=>$request->optionsRadios]);
         if ($update) {
+            // update tanggungan status
+            Mstclientemployeemember::where("employee_id",$request->employee_id)->update(["status_id"=>$request->optionsRadios]);
             // insert log
             $before_reason = $request->optionsRadios==1 ? "[set active]" : "[set in-active]";
             $log = new Trnemployeelog;
