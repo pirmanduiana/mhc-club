@@ -12,7 +12,7 @@ class PageController extends Controller
     public function index()
     {
         $company = Syscompany::first();
-        return view('index',compact('company'));
+        return view('web.page.home',compact('company'));
     }
     
 }
