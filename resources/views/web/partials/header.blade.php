@@ -36,14 +36,8 @@
 					<div class="col-xs-8">
 						<div class="menu-1">
 							<ul>
-								<li class="active"><a href="index.html">Home</a></li>
-								<!-- <li class="has-dropdown">
-									<a href="doctors.html">Doctors</a>
-									<ul class="dropdown">
-										<li><a href="doctors-single.html">Single Doctor</a></li>
-									</ul>
-								</li> -->
-								<li><a href="services.html">Services</a></li>
+								<li class="active"><a href="{{url('/')}}">Home</a></li>
+								<li><a href="{{url('/service')}}">Services</a></li>
 								<li class="has-dropdown">
 									<a href="departments.html">Departments</a>
 									<ul class="dropdown">
