@@ -30,8 +30,12 @@ Route::group([
     $router->get('/get/employee/byclient/{client_id}', 'BillingController@getEmpByClient');
     $router->resource('/billingobj', 'BillingobjController');
     $router->get('/get/billingobj', 'BillingController@getBillObj');
-    $router->resource('/report', 'ReportController');
     $router->resource('/tanggungan', 'TanggunganController');
+    
+    // report
+    $router->resource('/report', 'ReportController');
+    $router->post('/rpt/bill/bymonth', 'ReportController@bill_bymonth');
+    $router->post('/rpt/bill/bydate', 'ReportController@bill_bydate');
         
     // frontpage management ...
     

@@ -61,6 +61,22 @@
                         </div><br>
                         <div class="col-md-12" style="margin-bottom:10px;">
                             <div class="form-group">
+                                <label for="title" class="col-sm-2  control-label">Provider</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-building fa-fw"></i></span>
+                                        <select class="form-control" name="provider_id">
+                                            <option></option>
+                                            @foreach($provider as $k=>$v)
+                                            <option value="{{$v->id}}" {{$v->id==$trnbilling->provider_id?"selected":""}}>{{$v->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>                         
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="col-md-12" style="margin-bottom:10px;">
+                            <div class="form-group">
                                 <label for="title" class="col-sm-2  control-label">Tanggal</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">

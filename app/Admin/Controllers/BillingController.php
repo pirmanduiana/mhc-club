@@ -24,6 +24,7 @@ use App\Mstclientemployeemember;
 use App\Trnbilling;
 use App\Mstbillingobj;
 use App\Trnbillingitem;
+use App\Mstprovider;
 
 class BillingController extends Controller
 {
@@ -73,11 +74,12 @@ class BillingController extends Controller
         $employee = Mstclientemployee::where('status_id', '1')->get();
         $trnbilling = Trnbilling::find($id);
         $client = Mstclient::where('status_id','1')->get();
+        $provider = Mstprovider::where('status_id','1')->get();
 
         return $content
             ->header($this->page_header)
             ->description('edit')
-            ->body(view('admin.billing_edit')->with(compact('billobj','employee','trnbilling','client')));
+            ->body(view('admin.billing_edit')->with(compact('billobj','employee','trnbilling','client','provider')));
     }
 
     /**
@@ -106,6 +108,9 @@ class BillingController extends Controller
 
         $grid->filter(function($filter){
             $filter->disableIdFilter();
+            $filter->equal('provider_id','Provider')->select(function(){
+                return Mstprovider::get()->pluck('name','id');
+            });
             $filter->equal('client_id','Client')->select(function(){
                 return Mstclient::get()->pluck('name','id');
             });
@@ -116,10 +121,8 @@ class BillingController extends Controller
         $grid->disableExport();
 
         $grid->id('ID')->sortable();
-        $grid->code('Kode')->display(function($code){
-            $emp = Mstclientemployee::where("mst_client_employee.id",$this->employee_id)->join("mst_client","mst_client.id","=","mst_client_employee.client_id")->select("mst_client_employee.*",DB::raw("mst_client.name as client_name"))->first();
-            return $emp->client_name;
-        });   
+        $grid->column('provider.name','Provider');
+        $grid->column('client.name','Client');        
         $grid->date('Tgl. bill');
         $grid->column('employee.name','Pasien');
         $grid->total('Total bill')->display(function($total){
@@ -156,7 +159,8 @@ class BillingController extends Controller
         $billobj = Mstbillingobj::all();
         $client = Mstclient::where('status_id','1')->get();
         $employee = Mstclientemployee::where('status_id', '1')->get();
-        return view('admin.billing_create')->with(compact('billobj','employee','client'));
+        $provider = Mstprovider::where('status_id','1')->get();
+        return view('admin.billing_create')->with(compact('billobj','employee','client','provider'));
     }
 
     public function getBillObj()
@@ -171,6 +175,7 @@ class BillingController extends Controller
             "date" => $request->date,
             "client_id" => $request->client_id,
             "employee_id" => $request->employee_id,
+            "provider_id" => $request->provider_id,
             "diagnosa" => $request->diagnosa,
             "doctor_id" => 99, // temp
             "total" => $request->total

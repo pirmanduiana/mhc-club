@@ -16,7 +16,7 @@
     <div class="row">
         <fieldset>
             <legend>parameter</legend>
-            <form name="frmBilling" id="frmBilling" method="post">
+            <form name="frmReport" id="frmReport" method="post">
             @csrf
                 <div class="col-md-12" style="margin-bottom:10px;">
                     <div class="form-group">
@@ -39,7 +39,7 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                                <select class="form-control" name="client_id">
+                                <select class="form-control" name="month_from">
                                     @foreach($bulan_array as $k=>$v)
                                     <option value="{{$k}}" {{$k==date('n')?"selected":""}}>{{$v}}</option>
                                     @endforeach
@@ -49,7 +49,7 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                                <select class="form-control" name="client_id">
+                                <select class="form-control" name="year_from">
                                     @foreach($tahun_array as $k=>$v)
                                     <option value="{{$k}}" {{$k==date('Y')?"selected":""}}>{{$v}}</option>
                                     @endforeach
@@ -64,7 +64,7 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                                <select class="form-control" name="client_id">
+                                <select class="form-control" name="month_to">
                                     @foreach($bulan_array as $k=>$v)
                                     <option value="{{$k}}" {{$k==date('n')?"selected":""}}>{{$v}}</option>
                                     @endforeach
@@ -74,7 +74,7 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                                <select class="form-control" name="client_id">
+                                <select class="form-control" name="year_to">
                                     @foreach($tahun_array as $k=>$v)
                                     <option value="{{$k}}" {{$k==date('Y')?"selected":""}}>{{$v}}</option>
                                     @endforeach
@@ -83,13 +83,17 @@
                         </div>
                     </div>
                 </div><br>
-                <div class="col-md-12" style="margin-bottom:10px;">
+                <div class="col-md-12">
                     <div class="form-group">
-                        <button class="btn btn-sm btn-success" id="btn_SimpanBill">Tampilkan &nbsp;<i class="fa fa-external-link"></i></button>
+                        <button class="btn btn-sm btn-success" id="btn_TampilRpt">Tampilkan &nbsp;<i class="fa fa-external-link"></i></button>
                     </div>
                 </div>
             </form>
         </fieldset>
+        <hr>
+        <div class="col-md-12" id="preview_bymonth">
+            preview
+        </div>
     </div>   
 </section>
 
@@ -120,22 +124,6 @@
 
 <script>    
 
-    var getTotal = function(){
-        $.ajax({
-            url: "/admin/get/billingobj",
-            type: "get",
-            dataType: "json"
-        }).done(function(json){
-            var total = 0;            
-            $.each(json, function(k,v){
-                total = total + (parseFloat($("#item"+v.id).val()) * v.multiplier);
-            });
-            $("input[name='total']").val(total);
-        }).fail(function(xhr){
-            //...
-        });
-    }    
-
     var changeEmployee = function(this_value){
         $.ajax({
             url: "/admin/get/employee/byclient/" + this_value,
@@ -152,16 +140,15 @@
         });
     }
 
-    var simpanBill = function(){
-        var data = $("form[name='frmBilling']").serializeArray();
+    var previewRpt = function(){
+        var data = $("form[name='frmReport']").serializeArray();
         $.ajax({
-            url: "/admin/post/billing",
+            url: "/admin/rpt/bill/bymonth",
             type: "post",
             data: data,
-            dataType: "json"
-        }).done(function(json){
-            $.pjax.reload('#pjax-container');
-            toastr.success('Billing telah dibuat');
+            dataType: "html"
+        }).done(function(html){
+            $("#preview_bymonth").html(html);
         }).fail(function(xhr){
             //...
         });
@@ -185,17 +172,9 @@
             width: "100%"
         });
 
-        $('[id^=item]').on("keyup", function(){
-            getTotal();
-        })
-
-        $("#btn_SimpanBill").on("click", function(e){
+        $("#btn_TampilRpt").on("click", function(e){
             e.preventDefault();
-            simpanBill();
-        })
-
-        $("select[name='client_id']").on("change", function(){
-            changeEmployee(this.value);
+            previewRpt();
         })
 
     });
