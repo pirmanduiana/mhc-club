@@ -6,5 +6,5 @@
         @yield('content')
         @include('web.partials.footer')
 	</body>
-	@yeild('customscript')
+	@yield('customscript')
 </html>

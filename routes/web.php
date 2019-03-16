@@ -13,4 +13,9 @@ use App\Mstproduct;
 |
 */
 
-Route::get('/', 'PageController@index');
+// Route::get('/', 'PageController@index');
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/', 'PageController@index')->name('homepage');
+    Route::get('/{uri}', 'PageController@page')->name('page');
+});
+
