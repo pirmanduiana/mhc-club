@@ -236,6 +236,8 @@ class ReportController extends Controller
 
         // header
         $vipot_columns = array_unique($data->pluck('month_name')->toArray());
+        $vipot_columns = array_values($vipot_columns);
+        // dd($vipot_columns);
 
         // data
         $grouping = [];
@@ -253,16 +255,33 @@ class ReportController extends Controller
                 $grouping[$key]['ttl_nilai'] = $grouping[$key]['ttl_nilai'] + $y->total;
             }
             // grouping by month
-            foreach($data as $j=>$k) {
-                if ($k->provider_code==$key) {
-                    $grouping[$key]['vipot_values'][$k->month_name] = [
-                        'px' => $k->jml_px,
-                        'nilai' => $k->total
-                    ];
+            foreach ($vipot_columns as $v=>$w) {
+                foreach($data as $j=>$k) {
+                    if ($k->month_name==$w) {
+                        if ($k->provider_code==$key) {
+                            $grouping[$key]['vipot_values'][$k->month_name] = [
+                                'px' => $k->jml_px,
+                                'nilai' => $k->total
+                            ];
+                        }
+                    } else {
+                        if ($k->provider_code==$key) {
+                            $grouping[$key]['vipot_values'][$k->month_name] = [
+                                'px' => $k->jml_px,
+                                'nilai' => $k->total
+                            ];
+                        } else {
+                            $grouping[$key]['vipot_values'][$w] = [
+                                'px' => 0,
+                                'nilai' => 0
+                            ];
+                        }
+                    }
                 }
             }
+            // sorting ref to vipot columns
+            $grouping[$key]['vipot_values'] = array_merge(array_flip($vipot_columns), $grouping[$key]['vipot_values']);
         }
-        // dd($grouping);
 
         // sum data
         $get_vipots = [];
