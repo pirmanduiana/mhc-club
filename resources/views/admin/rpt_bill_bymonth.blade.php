@@ -125,22 +125,6 @@
 
 <script>    
 
-    var changeEmployee = function(this_value){
-        $.ajax({
-            url: "/admin/get/employee/byclient/" + this_value,
-            type: "get",
-            dataType: "json"
-        }).done(function(json){
-            $("select[name='employee_id']").empty().trigger('change');
-            $.each(json, function(k,v){
-                var newState = new Option(v.text, v.id, true, true);
-                $("select[name='employee_id']").append(newState).trigger('change');
-            });
-        }).fail(function(xhr){
-            //...
-        });
-    }
-
     var previewRpt = function(){
         var data = $("form[name='frmReport']").serializeArray();
         $.ajax({
@@ -177,7 +161,7 @@
         $("#btn_TampilRpt").on("click", function(e){
             e.preventDefault();
             previewRpt();
-        });
+        });        
 
     });
 </script>

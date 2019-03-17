@@ -16,7 +16,7 @@
     <div class="row">
         <fieldset>
             <legend>parameter</legend>
-            <form name="frmBilling" id="frmBilling2" method="post">
+            <form name="frmReport2" id="frmReport2" method="post" action="{{url('/admin/rpt/bill/bydate/1')}}" target="_blank">
             @csrf
                 <div class="col-md-12" style="margin-bottom:10px;">
                     <div class="form-group">
@@ -39,7 +39,7 @@
                         <div class="col-sm-8">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                                <input type="text" name="date" value="{{date('Y/m/d')}}" class="form-control title date" placeholder="Input tanggal">
+                                <input type="text" name="first_date_of_month" value="{{date('Y/m/d')}}" class="form-control title date" placeholder="Input tanggal">
                             </div>
                         </div>                        
                     </div>
@@ -50,18 +50,23 @@
                         <div class="col-sm-8">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                                <input type="text" name="date" value="{{date('Y/m/d')}}" class="form-control title date" placeholder="Input tanggal">
+                                <input type="text" name="last_date_of_month" value="{{date('Y/m/d')}}" class="form-control title date" placeholder="Input tanggal">
                             </div>
                         </div>                        
                     </div>
                 </div><br>
-                <div class="col-md-12" style="margin-bottom:10px;">
-                    <div class="form-group">
-                        <button class="btn btn-sm btn-success" id="btn_SimpanBill2">Tampilkan &nbsp;<i class="fa fa-external-link"></i></button>
+                <div class="col-md-12">
+                    <div class="form-group" style="float:left;">
+                        <button class="btn btn-sm btn-primary" id="btn_TampilRpt2">Tampilkan &nbsp;<i class="fa fa-search"></i></button>
+                        <button class="btn btn-sm btn-danger" id="btn_PDFRpt2">PDF &nbsp;<i class="fa fa-file-pdf-o"></i></button>
                     </div>
-                </div>
+                </div>                
             </form>
         </fieldset>
+        <hr>
+        <div class="col-md-12" id="preview_bydate">
+            <!-- preview -->
+        </div>
     </div>   
 </section>
 
@@ -91,9 +96,27 @@
 <!-- modal -->
 
 <script>
+
+    var previewRpt2 = function(){
+        var data = $("form[name='frmReport2']").serializeArray();
+        $.ajax({
+            url: "/admin/rpt/bill/bydate/0",
+            type: "post",
+            data: data,
+            dataType: "html"
+        }).done(function(html){
+            $("#preview_bydate").html(html);
+        }).fail(function(xhr){
+            //...
+        });
+    }
+
     $(document).ready(function(){
         
-        // ... 
+        $("#btn_TampilRpt2").on("click", function(e){
+            e.preventDefault();
+            previewRpt2();
+        });
 
     });
 </script>
