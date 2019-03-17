@@ -70,7 +70,10 @@ class BillingController extends Controller
      */
     public function edit($id, Content $content)
     {
-        $billobj = Mstbillingobj::where('billing_id',$id)->join('trn_billing_item','trn_billing_item.item_id','=','mst_billing_obj.id')->select('mst_billing_obj.*', 'trn_billing_item.price')->get();
+        $billobj = Mstbillingobj::where('trn_billing_item.billing_id',$id)
+        ->join('trn_billing_item','trn_billing_item.item_id','=','mst_billing_obj.id')
+        ->select('mst_billing_obj.*', 'trn_billing_item.price')->get();
+
         $employee = Mstclientemployee::where('status_id', '1')->get();
         $trnbilling = Trnbilling::find($id);
         $client = Mstclient::where('status_id','1')->get();
@@ -226,6 +229,23 @@ class BillingController extends Controller
             ];
         }
         return response()->json($select2data);
+    }
+
+    public function destroy($id)
+    {
+        Trnbillingitem::where('billing_id', $id)->delete();
+        $delbil = Trnbilling::find($id)->delete();
+        if(!empty($delbil)){
+            return response()->json([
+                'success' => true,
+                'message' => 'Bill telah dihapus!'
+            ]);
+        }
+        
+        return response()->json([
+            'success' => false,
+            'message' => 'Bill gagal dihapus!'
+        ]);
     }
 
 }
