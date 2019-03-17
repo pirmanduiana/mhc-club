@@ -16,7 +16,7 @@
     <div class="row">
         <fieldset>
             <legend>parameter</legend>
-            <form name="frmReport" id="frmReport" method="post">
+            <form name="frmReport" id="frmReport" method="post" action="{{url('/admin/rpt/bill/bymonth/1')}}" target="_blank">
             @csrf
                 <div class="col-md-12" style="margin-bottom:10px;">
                     <div class="form-group">
@@ -84,15 +84,16 @@
                     </div>
                 </div><br>
                 <div class="col-md-12">
-                    <div class="form-group">
-                        <button class="btn btn-sm btn-success" id="btn_TampilRpt">Tampilkan &nbsp;<i class="fa fa-external-link"></i></button>
+                    <div class="form-group" style="float:left;">
+                        <button class="btn btn-sm btn-primary" id="btn_TampilRpt">Tampilkan &nbsp;<i class="fa fa-search"></i></button>
+                        <button class="btn btn-sm btn-danger" id="btn_PDFRpt">PDF &nbsp;<i class="fa fa-file-pdf-o"></i></button>
                     </div>
                 </div>
             </form>
         </fieldset>
         <hr>
         <div class="col-md-12" id="preview_bymonth">
-            preview
+            <!-- preview -->
         </div>
     </div>   
 </section>
@@ -143,7 +144,7 @@
     var previewRpt = function(){
         var data = $("form[name='frmReport']").serializeArray();
         $.ajax({
-            url: "/admin/rpt/bill/bymonth",
+            url: "/admin/rpt/bill/bymonth/0",
             type: "post",
             data: data,
             dataType: "html"
@@ -153,6 +154,7 @@
             //...
         });
     }
+
 
     $(document).ready(function(){
         
@@ -175,7 +177,7 @@
         $("#btn_TampilRpt").on("click", function(e){
             e.preventDefault();
             previewRpt();
-        })
+        });
 
     });
 </script>

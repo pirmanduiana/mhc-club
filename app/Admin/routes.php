@@ -34,7 +34,7 @@ Route::group([
     
     // report
     $router->resource('/report', 'ReportController');
-    $router->post('/rpt/bill/bymonth', 'ReportController@bill_bymonth');
+    $router->post('/rpt/bill/bymonth/{pdf}', 'ReportController@bill_bymonth');
     $router->post('/rpt/bill/bydate', 'ReportController@bill_bydate');
         
     // frontpage management ...

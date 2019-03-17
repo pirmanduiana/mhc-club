@@ -12,6 +12,7 @@ use Encore\Admin\Facades\Admin;
 use Illuminate\Http\Request;
 use DB;
 use DNS1D;
+use PDF;
 use App\Mstclientemployee;
 use App\Mstclient;
 use App\Mstclass;
@@ -222,7 +223,7 @@ class ReportController extends Controller
         ->groupBy('mst_provider.code','mst_provider.name','month_name')->orderBy('trn_billing.date');
     }
 
-    public function bill_bymonth(Request $request)
+    public function bill_bymonth(Request $request, $pdf=0)
     {
         $string_from = $request->year_from.'-'.$request->month_from.'-1';
         $dateObj_from   = DateTime::createFromFormat('Y-m-d', $string_from);
@@ -319,7 +320,28 @@ class ReportController extends Controller
             "to" => $this->get_MonthName($request->month_to).' '.$request->year_to
         ];
 
+        if ($pdf==1) {
+            $view_pdf = PDF::loadView('admin.print.rpt_bill_bymonth', compact('data_return','parameter'))->setPaper('a4', 'landscape');
+            return $view_pdf->stream('MHC-Bill Rekap Bulanan.pdf');
+        }
         return view('admin.print.rpt_bill_bymonth')->with(compact('data_return','parameter'));
+    }
+
+    public function pdf_bill_bymonth()
+    {
+        $data_return = [
+            "vipot" => null,
+            "data" => null,
+            "sum" => null
+        ];
+        $parameter = [
+            "title" => "Laporan Penjualan per Bulan",
+            "client" => null,
+            "from" => null,
+            "to" => null
+        ];
+        $pdf = PDF::loadView('admin.print.rpt_bill_bymonth', compact('data_return','parameter'));
+        return $pdf->download('MHC-Bill Rekap Bulanan.pdf');
     }
 
     public function bill_bydate(Request $request)

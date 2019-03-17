@@ -14,8 +14,9 @@
 .table>thead, .table>thead>tr>th, .table>tbody>tr>td, .table>tfoot>tr>td {
   border: 1px solid;
 }
-
 </style>
+
+<title>{{$parameter["title"]}}</title>
 
 <div style="text-align:center; margin-bottom:10px;">
     <h3>{{$parameter["title"]}}</h3>
@@ -30,34 +31,29 @@
 
     <div class="table-wrapper">
       <!--Table-->
-      <table class="table">
+      <table class="table" width="100%">
         <!--Table head-->
         <thead>
           <tr>            
             <th class="th-lg rowspan" rowspan="2">
-              <a>Provider code
-              </a>
+              Provider code
             </th>
             <th class="th-lg rowspan" rowspan="2">
-              <a href="">Provider name
-              </a>
+              Provider name
             </th>            
             @foreach($data_return['vipot'] as $x=>$y)
             <th class="th-lg algcenter" colspan="2">
-              <a href="">{{$y}}
-              </a>
+              {{$y}}
             </th>
             @endforeach
           </tr>
           <tr>
             @foreach($data_return['vipot'] as $x=>$y)
             <th class="th-lg algright">
-              <a href="">PX
-              </a>
+              PX
             </th>
             <th class="th-lg algright">
-              <a href="">Nilai
-              </a>
+              Nilai
             </th>
             @endforeach
           </tr>
