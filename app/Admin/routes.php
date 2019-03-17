@@ -36,6 +36,9 @@ Route::group([
     $router->resource('/report', 'ReportController');
     $router->post('/rpt/bill/bymonth/{pdf}', 'ReportController@bill_bymonth');
     $router->post('/rpt/bill/bydate/{pdf}', 'ReportController@bill_bydate');
+
+    // dashboard
+    $router->get('/dashboard/search/{search_value?}', 'HomeController@search');
         
     // frontpage management ...
     
