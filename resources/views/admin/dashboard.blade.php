@@ -1,4 +1,10 @@
 <style>
+    .title {
+        text-align: center;
+        font-size: 3em;
+        color: #d60e4d;;
+        font-weight: bold;
+    }
     .input-group {
         width: 50%;
         left: 25%;
@@ -26,6 +32,17 @@
 </style>
 
 <section class="content">                    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title">
+                @if(!empty($provider))
+                    {{ $provider->name }}
+                @else
+                    MHC
+                @endif
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="links">

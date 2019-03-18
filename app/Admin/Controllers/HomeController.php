@@ -7,15 +7,18 @@ use Encore\Admin\Layout\Content;
 use App\Mstclientemployee;
 use DB;
 use App\Mstclientemployeemember;
+use App\Mstprovider;
+use Encore\Admin\Facades\Admin;
 
 class HomeController extends Controller
 {
     public function index(Content $content)
     {
+        $provider = Mstprovider::find(Admin::user()->provider_id);
         return $content
             ->header('Dashboard')
             ->description(' ')
-            ->body(view('admin.dashboard'));
+            ->body(view('admin.dashboard')->with(compact('provider')));
     }
 
     private function searchSrc($search_value)
