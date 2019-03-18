@@ -65,7 +65,9 @@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-building fa-fw"></i></span>
                                         <select class="form-control" name="provider_id">
+                                            @if(empty(Admin::user()->provider_id))
                                             <option></option>
+                                            @endif
                                             @foreach($provider as $k=>$v)
                                             <option value="{{$v->id}}">{{$v->name}}</option>
                                             @endforeach
