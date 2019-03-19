@@ -35,9 +35,9 @@
 				<div class="row">
 					<div class="col-xs-8">
 						<div class="menu-1">
-							<ul>
-								<li class="active"><a href="{{url('/')}}">Home</a></li>
-								<li><a href="{{url('/service')}}">Services</a></li>
+							<ul>							
+								<li class="{{$page == '' ? 'active' : ''}}"><a href="{{url('/')}}">Home</a></li>
+								<li class="{{$page == 'service' ? 'active' : ''}}"><a href="{{url('/service')}}">Services</a></li>
 								<!-- <li class="has-dropdown">
 									<a href="departments.html">Departments</a>
 									<ul class="dropdown">
@@ -46,7 +46,7 @@
 										<li><a href="departments-single.html">Psychological Department</a></li>
 									</ul>
 								</li> -->
-								<li><a href="{{url('/blog')}}">Blog</a></li>
+								<li class="{{$page == 'blog' ? 'active' : ''}}"><a href="{{url('/blog')}}">Blog</a></li>
 								<li><a href="contact.html">Contact</a></li>
 							</ul>
 						</div>

@@ -12,16 +12,15 @@ class PageController extends Controller
     public function index()
     {
         // $company = Syscompany::first();
-        return view('web.page.home');
+        $page = '';
+        return view('web.page.home',compact('page'));
     }
 
     public function page($page = "")
     {
-    	$template = 'web.page.'.$page;
-        
-        
+        $template = 'web.page.'.$page;
         if(view()->exists($template)){
-		    return view('/'.$template);
+		    return view('/'.$template, compact('page'));
 		}else{
 			abort('404');
 		}
