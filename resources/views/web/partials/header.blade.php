@@ -38,15 +38,15 @@
 							<ul>
 								<li class="active"><a href="{{url('/')}}">Home</a></li>
 								<li><a href="{{url('/service')}}">Services</a></li>
-								<li class="has-dropdown">
+								<!-- <li class="has-dropdown">
 									<a href="departments.html">Departments</a>
 									<ul class="dropdown">
 										<li><a href="departments-single.html">Plasetic Surgery Department</a></li>
 										<li><a href="departments-single.html">Dental Department</a></li>
 										<li><a href="departments-single.html">Psychological Department</a></li>
 									</ul>
-								</li>
-								<li><a href="blog.html">Blog</a></li>
+								</li> -->
+								<li><a href="{{url('/blog')}}">Blog</a></li>
 								<li><a href="contact.html">Contact</a></li>
 							</ul>
 						</div>

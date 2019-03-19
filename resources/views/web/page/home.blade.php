@@ -10,8 +10,8 @@
 		   			<div class="row">
 			   			<div class="col-md-8 col-md-offset-2 col-md-pull-2 slider-text">
 			   				<div class="slider-text-inner">
-			   					<h1>Your Health <strong>is always <br>in the first place</strong></h1>
-									<h2>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</h2>
+			   					<h1>Your Health <strong>is our <br>Priority</strong></h1>
+									<h2>We provide the best services for you and your family.</h2>
 									<p><a class="btn btn-primary btn-lg btn-learn" href="#">Make an Appointment</a></p>
 			   				</div>
 			   			</div>
@@ -24,8 +24,8 @@
 		   			<div class="row">
 			   			<div class="col-md-8 col-md-offset-2 col-md-pull-2 slider-text">
 			   				<div class="slider-text-inner">
-			   					<h1>We help you <strong>to find the best doctor around you</strong></h1>
-									<h2>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</h2>
+			   					<h1>We help you <strong>to find the best hospital around you</strong></h1>
+									<h2>We consider that availability as the most important of the best healt services around you.</h2>
 									<p><a class="btn btn-primary btn-lg btn-learn" href="#">Make an Appointment</a></p>
 			   				</div>
 			   			</div>
@@ -38,8 +38,8 @@
 		   			<div class="row">
 			   			<div class="col-md-8 col-md-offset-2 col-md-pull-2 slider-text">
 			   				<div class="slider-text-inner">
-			   					<h1>Guaranted <strong>safe &amp; potent</strong> Medicine</h1>
-									<h2>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</h2>
+			   					<h1>We have <strong>"In House Hotel Clinic"</strong> that provide you 24 hours healt services</h1>
+									<h2>We provide an easy and quick Helath Services as well as supported by medical person that available in 24 hours.</h2>
 									<p><a class="btn btn-primary btn-lg btn-learn" href="#">Make an Appointment</a></p>
 			   				</div>
 			   			</div>
@@ -52,8 +52,8 @@
 		   			<div class="row">
 			   			<div class="col-md-8 col-md-offset-2 col-md-pull-2 slider-text">
 			   				<div class="slider-text-inner">
-			   					<h1>Helping to improve <strong>quality stimulate</strong> innovation</h1>
-									<h2>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</h2>
+			   					<h1>We have <strong>24 Hour Call Center</strong></h1>
+									<h2>We have 24 hours call center every day to accelerate coordination and make promise to consult with specialist doctors or inpatient in the hospital.</h2>
 									<p><a class="btn btn-primary btn-lg btn-learn" href="#">Make an Appointment</a></p>
 			   				</div>
 			   			</div>
@@ -123,7 +123,7 @@
 				<div class="col-md-6 col-md-pull-6 animate-box">
 					<h2>About Healthcare</h2>
 					<p>
-						Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.
+						We are a company that engaged in health services and already have some clients. We commited to provide the best health services and doctors that are ready every time. Mhc has professional doctors and nurses and they are already certified. We deliver quality services and have 24 hours call center that can help you every time.
 					</p>
 						<div class="fancy-collapse-panel">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -199,30 +199,31 @@
 									<div class="features animate-box">
 										<span class="icon text-center"><i class="flaticon-healthy-1"></i></span>
 										<div class="desc">
-											<h3>Qualified Doctors</h3>
+											<h3>Disgnostic and Emergency Treatment</h3>
 											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
 										</div>
 									</div>
 									<div class="features animate-box">
 										<span class="icon text-center"><i class="flaticon-stethoscope"></i></span>
 										<div class="desc">
-											<h3>Free Consultation</h3>
+											<h3>Specialist Doctor Appointment</h3>
 											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
 										</div>
 									</div>
+									
 								</div>
 								<div class="col-md-6">
 									<div class="features animate-box">
 										<span class="icon text-center"><i class="flaticon-medical-1"></i></span>
 										<div class="desc">
-											<h3>Online Enrollment</h3>
+											<h3>In House Clinic Hotel</h3>
 											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
 										</div>
 									</div>
 									<div class="features animate-box">
 										<span class="icon text-center"><i class="flaticon-radiation"></i></span>
 										<div class="desc">
-											<h3>Modern Facilities</h3>
+											<h3>Long Term Medical Care In Hospital With Cob BPJS System</h3>
 											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
 										</div>
 									</div>
@@ -236,69 +237,7 @@
 	</div>
 
 
-	<div class="colorlib-doctor">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-6 col-md-offset-3 text-center colorlib-heading">
-					<h2>Well Experienced Doctors</h2>
-					<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 animate-box">
-					<div class="row">
-						<div class="owl-carousel2">
-							<div class="item">
-								<div class="col-md-6">
-									<div class="doctor-desc">
-										<h3><a href="#">Dr. Paul Armstrong</a></h3>
-										<span class="specialty">Dental Hygienist</span>
-										<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
-										<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-										<p><a href="#" class="btn btn-primary">Email us</a> <a href="#" class="btn btn-primary btn-outline">Make an appointment</a></p>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="doctor-img" style="background-image: url({{ asset('vendor/healthcare/images/staff-3.jpg') }});">
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="col-md-6">
-									<div class="doctor-desc">
-										<h3><a href="#">Dr. Paul Armstrong</a></h3>
-										<span class="specialty">Dental Hygienist</span>
-										<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
-										<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-										<p><a href="#" class="btn btn-primary">Email us</a> <a href="#" class="btn btn-primary btn-outline">Make an appointment</a></p>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="doctor-img" style="background-image: url({{ asset('vendor/healthcare/images/staff-1.jpg')}} );">
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="col-md-6">
-									<div class="doctor-desc">
-										<h3><a href="#">Dr. Paul Armstrong</a></h3>
-										<span class="specialty">Dental Hygienist</span>
-										<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
-										<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-										<p><a href="#" class="btn btn-primary">Email us</a> <a href="#" class="btn btn-primary btn-outline">Make an appointment</a></p>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="doctor-img" style="background-image: url({{ asset('vendor/healthcare/images/staff-2.jpg') }});">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	<div id="colorlib-testimonial" class="colorlib-bg-section">
 		<div class="container">
@@ -365,64 +304,4 @@
 			</div>
 		</div>
 	</div>
-
-
-	<div id="colorlib-blog">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-6 col-md-offset-3 text-center colorlib-heading">
-					<h2>Recent blog</h2>
-					<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4 animate-box">
-					<div class="blog-entry">
-						<a href="blog.html" class="blog-img" style="background-image: url({{ asset('vendor/healthcare/images/blog-1.jpg') }});"></a>
-						<div class="desc">
-							<p class="date">
-								<span><a href="#">Admin</a></span>
-								<span>June 8 2017</span>
-								<span><a href="#">4 <i class="icon-speech-bubble"></i></a></span>
-							</p>
-							<h3><a href="blog.html">Here's why yoga is best for your health</a></h3>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p><a href="#">Read more <i class="icon-arrow-right3"></i></a></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 animate-box">
-					<div class="blog-entry">
-						<a href="blog.html" class="blog-img" style="background-image: url({{ asset('vendor/healthcare/images/blog-2.jpg') }});"></a>
-						<div class="desc">
-							<p class="date">
-								<span><a href="#">Admin</a></span>
-								<span>June 8 2017</span>
-								<span><a href="#">4 <i class="icon-speech-bubble"></i></a></span>
-							</p>
-							<h3><a href="blog.html">live better get to know your medical technology</a></h3>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p><a href="#">Read more <i class="icon-arrow-right3"></i></a></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 animate-box">
-					<div class="blog-entry">
-						<a href="blog.html" class="blog-img" style="background-image: url({{ asset('vendor/healthcare/images/blog-3.jpg') }});"></a>
-						<div class="desc">
-							<p class="date">
-								<span><a href="#">Admin</a></span>
-								<span>June 8 2017</span>
-								<span><a href="#">4 <i class="icon-speech-bubble"></i></a></span>
-							</p>
-							<h3><a href="blog.html">Eating apple is the source of energy</a></h3>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p><a href="#">Read more <i class="icon-arrow-right3"></i></a></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
 @endsection
