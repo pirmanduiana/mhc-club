@@ -24,6 +24,7 @@ use App\Mstclientemployeemember;
 use App\Trnbilling;
 use App\Mstbillingobj;
 use App\Trnbillingitem;
+use App\Mstprovider;
 
 class BillingController extends Controller
 {
@@ -69,15 +70,19 @@ class BillingController extends Controller
      */
     public function edit($id, Content $content)
     {
-        $billobj = Mstbillingobj::where('billing_id',$id)->join('trn_billing_item','trn_billing_item.item_id','=','mst_billing_obj.id')->select('mst_billing_obj.*', 'trn_billing_item.price')->get();
+        $billobj = Mstbillingobj::where('trn_billing_item.billing_id',$id)
+        ->join('trn_billing_item','trn_billing_item.item_id','=','mst_billing_obj.id')
+        ->select('mst_billing_obj.*', 'trn_billing_item.price')->get();
+
         $employee = Mstclientemployee::where('status_id', '1')->get();
         $trnbilling = Trnbilling::find($id);
         $client = Mstclient::where('status_id','1')->get();
+        $provider = Mstprovider::where('status_id','1')->get();
 
         return $content
             ->header($this->page_header)
             ->description('edit')
-            ->body(view('admin.billing_edit')->with(compact('billobj','employee','trnbilling','client')));
+            ->body(view('admin.billing_edit')->with(compact('billobj','employee','trnbilling','client','provider')));
     }
 
     /**
@@ -103,9 +108,17 @@ class BillingController extends Controller
     {
         $grid = new Grid(new Trnbilling);
         $grid->model()->orderBy('client_id', 'asc')->orderBy('date', 'desc');
+        if (!empty(Admin::user()->provider_id)) {
+            $grid->model()->where('provider_id', Admin::user()->provider_id);
+        }
 
         $grid->filter(function($filter){
             $filter->disableIdFilter();
+            if (empty(Admin::user()->provider_id)) {
+                $filter->equal('provider_id','Provider')->select(function(){
+                    return Mstprovider::get()->pluck('name','id');
+                });
+            }
             $filter->equal('client_id','Client')->select(function(){
                 return Mstclient::get()->pluck('name','id');
             });
@@ -116,10 +129,8 @@ class BillingController extends Controller
         $grid->disableExport();
 
         $grid->id('ID')->sortable();
-        $grid->code('Kode')->display(function($code){
-            $emp = Mstclientemployee::where("mst_client_employee.id",$this->employee_id)->join("mst_client","mst_client.id","=","mst_client_employee.client_id")->select("mst_client_employee.*",DB::raw("mst_client.name as client_name"))->first();
-            return $emp->client_name;
-        });   
+        $grid->column('provider.name','Provider');
+        $grid->column('client.name','Client');        
         $grid->date('Tgl. bill');
         $grid->column('employee.name','Pasien');
         $grid->total('Total bill')->display(function($total){
@@ -152,11 +163,15 @@ class BillingController extends Controller
      * @return Form
      */
     protected function form()
-    {
+    {        
         $billobj = Mstbillingobj::all();
         $client = Mstclient::where('status_id','1')->get();
         $employee = Mstclientemployee::where('status_id', '1')->get();
-        return view('admin.billing_create')->with(compact('billobj','employee','client'));
+        $provider = Mstprovider::where('status_id','1');
+        if (!empty(Admin::user()->provider_id)) {
+            $provider = $provider->where('id', Admin::user()->provider_id);
+        } $provider = $provider->get();
+        return view('admin.billing_create')->with(compact('billobj','employee','client','provider'));
     }
 
     public function getBillObj()
@@ -171,6 +186,7 @@ class BillingController extends Controller
             "date" => $request->date,
             "client_id" => $request->client_id,
             "employee_id" => $request->employee_id,
+            "provider_id" => $request->provider_id,
             "diagnosa" => $request->diagnosa,
             "doctor_id" => 99, // temp
             "total" => $request->total
@@ -217,10 +233,27 @@ class BillingController extends Controller
         foreach ($data as $key => $value) {
             $select2data[] = [
                 "id" => $value->id,
-                "text" => $value->name
+                "text" => $value->mhc_code ." - ". $value->name
             ];
         }
         return response()->json($select2data);
+    }
+
+    public function destroy($id)
+    {
+        Trnbillingitem::where('billing_id', $id)->delete();
+        $delbil = Trnbilling::find($id)->delete();
+        if(!empty($delbil)){
+            return response()->json([
+                'success' => true,
+                'message' => 'Bill telah dihapus!'
+            ]);
+        }
+        
+        return response()->json([
+            'success' => false,
+            'message' => 'Bill gagal dihapus!'
+        ]);
     }
 
 }

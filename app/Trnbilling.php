@@ -13,6 +13,7 @@ class Trnbilling extends Model
         'date',
         'client_id',
         'employee_id',
+        'provider_id',
         'diagnosa',
         'doctor_id',
         'subtotal',
@@ -20,6 +21,11 @@ class Trnbilling extends Model
         'discount',
         'total'
     ];
+
+    public function provider()
+    {
+        return $this->hasOne(Mstprovider::class, 'id', 'provider_id');
+    }
 
     public function client()
     {

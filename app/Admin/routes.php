@@ -2,7 +2,7 @@
 
 use Illuminate\Routing\Router;
 
-Admin::registerAuthRoutes();
+// Admin::registerAuthRoutes();
 
 Route::group([
     'prefix'        => config('admin.route.prefix'),
@@ -10,9 +10,25 @@ Route::group([
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
 
-    $router->get('/', 'HomeController@index');
+    // registerAuthRoutes() diatas dinonaktifkan diganti dengan yg ini:
+    /* @var \Illuminate\Routing\Router $router */
+    $router->resource('auth/users', 'UserController');
+    $router->resource('auth/roles', 'RoleController');
+    $router->resource('auth/permissions', 'PermissionController');
+    $router->resource('auth/menu', 'MenuController', ['except' => ['create']]);
+    $router->resource('auth/logs', 'LogController', ['only' => ['index', 'destroy']]);
+    $authController = config('admin.auth.controller', AuthController::class);
+    /* @var \Illuminate\Routing\Router $router */
+    $router->get('auth/login', $authController.'@getLogin');
+    $router->post('auth/login', $authController.'@postLogin');
+    $router->get('auth/logout', $authController.'@getLogout');
+    $router->get('auth/setting', $authController.'@getSetting');
+    $router->put('auth/setting', $authController.'@putSetting');
+    // registerAuthRoutes() diatas dinonaktifkan diganti dengan yg ini:
+
 
     // backoffice
+    $router->get('/', 'HomeController@index');
     $router->resource('/company', 'CompanyController');    
     $router->resource('/currency', 'CurrencyController');
     $router->resource('/status', 'StatusController');
@@ -30,8 +46,15 @@ Route::group([
     $router->get('/get/employee/byclient/{client_id}', 'BillingController@getEmpByClient');
     $router->resource('/billingobj', 'BillingobjController');
     $router->get('/get/billingobj', 'BillingController@getBillObj');
-    $router->resource('/report', 'ReportController');
     $router->resource('/tanggungan', 'TanggunganController');
+    
+    // report
+    $router->resource('/report', 'ReportController');
+    $router->post('/rpt/bill/bymonth/{pdf}', 'ReportController@bill_bymonth');
+    $router->post('/rpt/bill/bydate/{pdf}', 'ReportController@bill_bydate');
+
+    // dashboard
+    $router->get('/dashboard/search/{search_value?}', 'HomeController@search');
         
     // frontpage management ...
     
