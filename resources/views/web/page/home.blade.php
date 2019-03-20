@@ -4,7 +4,7 @@
 	<aside id="colorlib-hero">
 		<div class="flexslider">
 			<ul class="slides">
-		   	<li style="background-image: url({{ asset('vendor/healthcare/images/img_bg_6.jpg') }});">
+		   	<li style="background-image: url({{ asset('vendor/healthcare/images/slide-1.jpg') }});">
 		   		<div class="overlay"></div>
 		   		<div class="container">
 		   			<div class="row">
@@ -46,7 +46,7 @@
 			   		</div>
 		   		</div>
 		   	</li>
-		   	<li style="background-image: url({{ asset('vendor/healthcare/images/img_bg_2.jpg') }});">
+		   	<li style="background-image: url({{ asset('vendor/healthcare/images/slide-4.jpg') }});">
 		   		<div class="overlay"></div>
 		   		<div class="container">
 		   			<div class="row">
@@ -70,7 +70,7 @@
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 col-md-push-2 counter-wrap">
 					<div class="row">
-						<div class="col-md-3 col-sm-6 animate-box">
+						<!-- <div class="col-md-3 col-sm-6 animate-box">
 							<div class="desc">
 								<p class="wrap">
 									<span class="icon"><i class="flaticon-healthy"></i></span>
@@ -78,7 +78,7 @@
 								</p>
 								<span class="colorlib-counter-label">Satisfied Customer</span>
 							</div>
-						</div>
+						</div> -->
 						<div class="col-md-3 col-sm-6 animate-box">
 							<div class="desc">
 								<p class="wrap">
@@ -88,7 +88,7 @@
 								<span class="colorlib-counter-label">Hospitals</span>
 							</div>
 						</div>
-						<div class="col-md-3 col-sm-6 animate-box">
+						<!-- <div class="col-md-3 col-sm-6 animate-box">
 							<div class="desc">
 								<p class="wrap">
 									<span class="icon"><i class="flaticon-healthy-1"></i></span>
@@ -96,14 +96,14 @@
 								</p>
 								<span class="colorlib-counter-label">Qualified Doctor</span>
 							</div>
-						</div>
+						</div> -->
 						<div class="col-md-3 col-sm-6 animate-box">
 							<div class="desc">
 								<p class="wrap">
 									<span class="icon"><i class="flaticon-ambulance"></i></span>
 									<span class="colorlib-counter js-counter" data-from="0" data-to="30" data-speed="5000" data-refresh-interval="50"></span>
 								</p>
-								<span class="colorlib-counter-label">Departments</span>
+								<span class="colorlib-counter-label">Client</span>
 							</div>
 						</div>
 					</div>
@@ -118,10 +118,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-md-push-6 animate-box">
-					<img class="img-responsive about-img" src="{{ asset('vendor/healthcare/images/about.png') }}" alt="">
+					<img class="img-responsive about-img" src="{{ asset('vendor/healthcare/images/aboutus.jpg') }}" alt="">
 				</div>
 				<div class="col-md-6 col-md-pull-6 animate-box">
-					<h2>About Healthcare</h2>
+					<h2>About Mandiri Health Care</h2>
 					<p>
 						We are a company that engaged in health services and already have some clients. We commited to provide the best health services and doctors that are ready every time. Mhc has professional doctors and nurses and they are already certified. We deliver quality services and have 24 hours call center that can help you every time.
 					</p>
@@ -137,13 +137,16 @@
                          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                              <div class="panel-body">
                                  <div class="row">
-								      		<div class="col-md-6">
-								      			<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-								      		</div>
-								      		<div class="col-md-6">
-								      			<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								      		</div>
-								      	</div>
+						      		<!-- <div class="col-md-6">
+						      			<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+						      		</div>
+						      		<div class="col-md-6">
+						      			<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+						      		</div> -->
+						      		<p>
+						      			Creating the health of employee for support the company optimization with a useful level of health.
+						      		</p>
+						      	</div>
                              </div>
                          </div>
                      </div>
@@ -156,11 +159,11 @@
                          </div>
                          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                              <div class="panel-body">
-                                 <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-											<ul>
-												<li>Separated they live in Bookmarksgrove right</li>
-												<li>Separated they live in Bookmarksgrove right</li>
-											</ul>
+                                 <p>Providing a sutainable health services by keeping the commitment and profesionalism of the code of health ethics with work partners.</p>
+									<!-- <ul>
+										<li>Separated they live in Bookmarksgrove right</li>
+										<li>Separated they live in Bookmarksgrove right</li>
+									</ul> -->
                              </div>
                          </div>
                      </div>
@@ -173,7 +176,7 @@
                          </div>
                          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                              <div class="panel-body">
-                                 <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>	
+                                 <p>Mhc has some advantages which are flexibility, 24 hours call center service, professional workers availability, doctors and nurses, hospital cooperation, clinic and laboratory and we have the other advantages which are training of first aid by certified doctors that we create directly from the provider. We also provide health seminars for our health workers who are very useful to increase their knowledge in health.</p>	
                              </div>
                          </div>
                      </div>

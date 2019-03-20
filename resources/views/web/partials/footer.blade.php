@@ -1,3 +1,6 @@
+@php
+	$company = App\Syscompany::first();
+@endphp
 <footer id="colorlib-footer" role="contentinfo">
 	<div class="overlay"></div>
 	<div class="container">
@@ -5,16 +8,16 @@
 			<div class="col-md-3 colorlib-widget">
 					<h3>Head Office</h3>
 					<ul class="colorlib-footer-links">
-						<li>291 South 21th Street, <br> Suite 721 New York NY 10016</li>
-						<li><a href="tel://1234567920"><i class="icon-phone"></i> + 1235 2355 98</a></li>
-						<li><a href="mailto:info@yoursite.com"><i class="icon-mail"></i> info@yoursite.com</a></li>
-						<li><a href="http://luxehotel.com"><i class="icon-location4"></i> yourwebsite.com</a></li>
+						<li>{{$company->address}}</li>
+						<li><a href="tel://1234567920"><i class="icon-phone"></i> {{$company->main_phone}}</a></li>
+						<li><a href="mailto:info@yoursite.com"><i class="icon-mail"></i> {{$company->main_email}}</a></li>
+						<li><a href="http://luxehotel.com"><i class="icon-location4"></i> {{$company->main_website}}</a></li>
 						<li>Mon-Thu: 9:30 – 21:00</li>
 						<li>Fri: 6:00 – 21:00</li>
 						<li>Sat: 10:00 – 15:00</li>
 					</ul>
 				</div>
-				<div class="col-md-2 colorlib-widget">
+				<!-- <div class="col-md-2 colorlib-widget">
 					<h3>Departments</h3>
 					<p>
 						<ul class="colorlib-footer-links">
@@ -26,16 +29,14 @@
 							<li><a href="#">Pulmonary</a></li>
 						</ul>
 					</p>
-				</div>
+				</div> -->
 				<div class="col-md-2 colorlib-widget">
 					<h3>Useful Links</h3>
 					<p>
 						<ul class="colorlib-footer-links">
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Departments</a></li>
-							<li><a href="#">Doctors</a></li>
-							<li><a href="#">Services</a></li>
-							<li><a href="#">News</a></li>
+							<li><a href="{{url('/')}}">Home</a></li>
+							<li><a href="{{url('/service')}}">Services</a></li>
+							<li><a href="{{url('/blog')}}">Blog</a></li>
 							<li><a href="#">Contact</a></li>
 						</ul>
 					</p>
@@ -81,9 +82,9 @@
 		<div class="col-md-12 text-center">
 			<p>
 				<small class="block">&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="{{url('/')}}" target="_blank">{{$company->name}}</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></small> 
-				<small class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a> , <a href="https://www.pexels.com/" target="_blank">Pexels</a></small>
+				<!-- <small class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a> , <a href="https://www.pexels.com/" target="_blank">Pexels</a></small> -->
 			</p>
 		</div>
 	</div>
