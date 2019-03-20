@@ -1,6 +1,17 @@
 @extends('web.layouts.index')
 
 @section('content')
+
+	<style>
+	.about-logo {
+		float: left;
+		width: 19%;
+	}
+	.text-justify {
+		text-align: justify;
+	}
+	</style>
+
 	<aside id="colorlib-hero">
 		<div class="flexslider">
 			<ul class="slides">
@@ -122,7 +133,8 @@
 				</div>
 				<div class="col-md-6 col-md-pull-6 animate-box">
 					<h2>About Mandiri Health Care</h2>
-					<p>
+					<p class="text-justify">
+						<img src="{{ asset('vendor/healthcare/mhc-logo.png') }}" class="about-logo">
 						We are a company that engaged in health services and already have some clients. We commited to provide the best health services and doctors that are ready every time. Mhc has professional doctors and nurses and they are already certified. We deliver quality services and have 24 hours call center that can help you every time.
 					</p>
 						<div class="fancy-collapse-panel">
@@ -143,7 +155,7 @@
 						      		<div class="col-md-6">
 						      			<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
 						      		</div> -->
-						      		<p>
+						      		<p class="text-justify">
 						      			Creating the health of employee for support the company optimization with a useful level of health.
 						      		</p>
 						      	</div>
@@ -159,7 +171,7 @@
                          </div>
                          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                              <div class="panel-body">
-                                 <p>Providing a sutainable health services by keeping the commitment and profesionalism of the code of health ethics with work partners.</p>
+                                 <p class="text-justify">Providing a sutainable health services by keeping the commitment and profesionalism of the code of health ethics with work partners.</p>
 									<!-- <ul>
 										<li>Separated they live in Bookmarksgrove right</li>
 										<li>Separated they live in Bookmarksgrove right</li>
@@ -176,7 +188,7 @@
                          </div>
                          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                              <div class="panel-body">
-                                 <p>Mhc has some advantages which are flexibility, 24 hours call center service, professional workers availability, doctors and nurses, hospital cooperation, clinic and laboratory and we have the other advantages which are training of first aid by certified doctors that we create directly from the provider. We also provide health seminars for our health workers who are very useful to increase their knowledge in health.</p>	
+                                 <p class="text-justify">Mhc has some advantages which are flexibility, 24 hours call center service, professional workers availability, doctors and nurses, hospital cooperation, clinic and laboratory and we have the other advantages which are training of first aid by certified doctors that we create directly from the provider. We also provide health seminars for our health workers who are very useful to increase their knowledge in health.</p>	
                              </div>
                          </div>
                      </div>
