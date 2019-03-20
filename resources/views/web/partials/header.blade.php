@@ -15,7 +15,8 @@
 								<div class="num">
 									<span class="icon"><i class="icon-phone"></i></span>
 									<p>
-										<a href="javascript:;;">{{$company->main_phone}}</a>
+										<a href="javascript:;;">{{$company->main_phone}}</a><br>
+										<a href="javascript:;;">{{$company->main_email}}</a>
 									</p>
 								</div>
 							</div>

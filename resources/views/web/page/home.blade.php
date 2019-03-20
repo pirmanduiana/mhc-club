@@ -85,7 +85,7 @@
 									<span class="icon"><i class="flaticon-hospital"></i></span>
 									<span class="colorlib-counter js-counter" data-from="0" data-to="378" data-speed="5000" data-refresh-interval="50"></span>
 								</p>
-								<span class="colorlib-counter-label">Hospitals</span>
+								<span class="colorlib-counter-label">Clients</span>
 							</div>
 						</div>
 						<!-- <div class="col-md-3 col-sm-6 animate-box">
@@ -103,7 +103,7 @@
 									<span class="icon"><i class="flaticon-ambulance"></i></span>
 									<span class="colorlib-counter js-counter" data-from="0" data-to="30" data-speed="5000" data-refresh-interval="50"></span>
 								</p>
-								<span class="colorlib-counter-label">Client</span>
+								<span class="colorlib-counter-label">Hospitals</span>
 							</div>
 						</div>
 					</div>
@@ -118,7 +118,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-md-push-6 animate-box">
-					<img class="img-responsive about-img" src="{{ asset('vendor/healthcare/images/aboutus.jpg') }}" alt="">
+					<img class="img-responsive about-img" src="{{ asset('vendor/healthcare/images/about.png') }}" alt="">
 				</div>
 				<div class="col-md-6 col-md-pull-6 animate-box">
 					<h2>About Mandiri Health Care</h2>

@@ -14,7 +14,6 @@
 						<li><a href="http://luxehotel.com"><i class="icon-location4"></i> {{$company->main_website}}</a></li>
 						<li>Mon-Thu: 9:30 – 21:00</li>
 						<li>Fri: 6:00 – 21:00</li>
-						<li>Sat: 10:00 – 15:00</li>
 					</ul>
 				</div>
 				<!-- <div class="col-md-2 colorlib-widget">
