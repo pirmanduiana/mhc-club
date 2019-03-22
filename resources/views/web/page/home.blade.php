@@ -36,7 +36,7 @@
 			   			<div class="col-md-8 col-md-offset-2 col-md-pull-2 slider-text">
 			   				<div class="slider-text-inner">
 			   					<h1>We help you <strong>to find the best hospital around you</strong></h1>
-									<h2>We consider that availability as the most important of the best healt services around you.</h2>
+									<h2>We consider that availability as the most important of the best health services around you.</h2>
 									<p><a class="btn btn-primary btn-lg btn-learn" href="#">Make an Appointment</a></p>
 			   				</div>
 			   			</div>
@@ -49,7 +49,7 @@
 		   			<div class="row">
 			   			<div class="col-md-8 col-md-offset-2 col-md-pull-2 slider-text">
 			   				<div class="slider-text-inner">
-			   					<h1>We have <strong>"In House Hotel Clinic"</strong> that provide you 24 hours healt services</h1>
+			   					<h1>We have <strong>"In House Hotel Clinic"</strong> that provide you 24 hours health services</h1>
 									<h2>We provide an easy and quick Helath Services as well as supported by medical person that available in 24 hours.</h2>
 									<p><a class="btn btn-primary btn-lg btn-learn" href="#">Make an Appointment</a></p>
 			   				</div>
