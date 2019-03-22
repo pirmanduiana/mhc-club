@@ -231,15 +231,15 @@
 									<div class="features animate-box">
 										<span class="icon text-center"><i class="flaticon-healthy-1"></i></span>
 										<div class="desc">
-											<h3>Disgnostic and Emergency Treatment</h3>
-											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
+											<h3>Qualified Doctors and Nurses</h3>
+											<p>The doctors and nurses are standby in 24 hours for on call service. </p>
 										</div>
 									</div>
 									<div class="features animate-box">
 										<span class="icon text-center"><i class="flaticon-stethoscope"></i></span>
 										<div class="desc">
-											<h3>Specialist Doctor Appointment</h3>
-											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
+											<h3>Free Consultation for 24 Hours</h3>
+											<p>Our call center is 24 hours available for free consultation. </p>
 										</div>
 									</div>
 									
@@ -248,15 +248,15 @@
 									<div class="features animate-box">
 										<span class="icon text-center"><i class="flaticon-medical-1"></i></span>
 										<div class="desc">
-											<h3>In House Clinic Hotel</h3>
-											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
+											<h3>We provide modern facilities</h3>
+											<p>Modern health facilities are available in our providers. </p>
 										</div>
 									</div>
 									<div class="features animate-box">
 										<span class="icon text-center"><i class="flaticon-radiation"></i></span>
 										<div class="desc">
-											<h3>Long Term Medical Care In Hospital With Cob BPJS System</h3>
-											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
+											<h3>Flexibility</h3>
+											<p>A flexible health services for patient and refferal. </p>
 										</div>
 									</div>
 								</div>
