@@ -107,7 +107,7 @@
 							<div class="desc">
 								<p class="wrap">
 									<span class="icon"><i class="flaticon-hospital"></i></span>
-									<span class="colorlib-counter js-counter" data-from="0" data-to="378" data-speed="5000" data-refresh-interval="50"></span>
+									<span class="colorlib-counter js-counter" data-from="0" data-to="{{$client}}" data-speed="5000" data-refresh-interval="50"></span>
 								</p>
 								<span class="colorlib-counter-label">Clients</span>
 							</div>
@@ -125,7 +125,7 @@
 							<div class="desc">
 								<p class="wrap">
 									<span class="icon"><i class="flaticon-ambulance"></i></span>
-									<span class="colorlib-counter js-counter" data-from="0" data-to="30" data-speed="5000" data-refresh-interval="50"></span>
+									<span class="colorlib-counter js-counter" data-from="0" data-to="{{$provider}}" data-speed="5000" data-refresh-interval="50"></span>
 								</p>
 								<span class="colorlib-counter-label">Hospitals</span>
 							</div>
