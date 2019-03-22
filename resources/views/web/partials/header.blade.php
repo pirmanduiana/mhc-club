@@ -1,6 +1,9 @@
 @php
 	$company = App\Syscompany::first();
 @endphp
+<div class="colorlib-loader"></div>
+	
+<div id="page">
 <nav class="colorlib-nav" role="navigation">
 	<div class="top-menu">
 		<div class="container">

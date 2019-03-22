@@ -88,7 +88,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		</div>
 	</div>
 </footer>
-
+</div>
 <div class="gototop js-top">
 	<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 </div>
