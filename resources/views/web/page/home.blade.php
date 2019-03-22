@@ -10,6 +10,19 @@
 	.text-justify {
 		text-align: justify;
 	}
+	.quotes {
+		position: absolute;
+		bottom: 44px;
+		left: 151px;
+		color: white;
+	}
+	.quotes > .title {
+		font-size: 24px;
+		font-style: italic;
+	}
+	.quotes > .author {
+		font-size: 12px;
+	}
 	</style>
 
 	<aside id="colorlib-hero">
@@ -130,6 +143,10 @@
 			<div class="row">
 				<div class="col-md-6 col-md-push-6 animate-box">
 					<img class="img-responsive about-img" src="{{ asset('vendor/healthcare/images/about.png') }}" alt="">
+					<span class="quotes">
+						<span class="title">"Your health is our priority"</span><br>
+						<span class="author">~ Victor Erenst Warembengan S,Si, Apt</span>
+					</span>
 				</div>
 				<div class="col-md-6 col-md-pull-6 animate-box">
 					<h2>About Mandiri Health Care</h2>
