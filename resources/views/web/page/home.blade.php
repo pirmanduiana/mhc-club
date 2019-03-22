@@ -63,7 +63,7 @@
 			   			<div class="col-md-8 col-md-offset-2 col-md-pull-2 slider-text">
 			   				<div class="slider-text-inner">
 			   					<h1>We have <strong>"In House Hotel Clinic"</strong> that provide you 24 hours health services</h1>
-									<h2>We provide an easy and quick Helath Services as well as supported by medical person that available in 24 hours.</h2>
+									<h2>We provide an easy and quick Health Services as well as supported by medical person that available in 24 hours.</h2>
 									<p><a class="btn btn-primary btn-lg btn-learn" href="#">Make an Appointment</a></p>
 			   				</div>
 			   			</div>
@@ -152,7 +152,7 @@
 					<h2>About Mandiri Health Care</h2>
 					<p class="text-justify">
 						<img src="{{ asset('vendor/healthcare/mhc-logo.png') }}" class="about-logo">
-						We are a company that engaged in health services and already have some clients. We commited to provide the best health services and doctors that are ready every time. Mhc has professional doctors and nurses and they are already certified. We deliver quality services and have 24 hours call center that can help you every time.
+						We are a company that engaged in health services and already have some clients. We commited to provide the best health services and doctors that are ready every time. MHC has professional doctors and nurses and they are already certified. We deliver quality services and have 24 hours call center that can help you every time.
 					</p>
 						<div class="fancy-collapse-panel">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -205,7 +205,7 @@
                          </div>
                          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                              <div class="panel-body">
-                                 <p class="text-justify">Mhc has some advantages which are flexibility, 24 hours call center service, professional workers availability, doctors and nurses, hospital cooperation, clinic and laboratory and we have the other advantages which are training of first aid by certified doctors that we create directly from the provider. We also provide health seminars for our health workers who are very useful to increase their knowledge in health.</p>	
+                                 <p class="text-justify">MHC has some advantages which are flexibility, 24 hours call center service, professional workers availability, doctors and nurses, hospital cooperation, clinic and laboratory and we have the other advantages which are training of first aid by certified doctors that we create directly from the provider. We also provide health seminars for our health workers who are very useful to increase their knowledge in health.</p>	
                              </div>
                          </div>
                      </div>
