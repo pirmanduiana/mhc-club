@@ -196,14 +196,14 @@ class EmployeeController extends Controller
         });
         $form->text('mhc_code', 'Kode MHC')->rules('required');    
         $form->text('name', 'Nama lengkap')->rules('required');
-        $form->date('dob', 'Tgl. lahir')->rules('required');
-        $form->text('address', 'Alamat rumah')->rules('required');
+        $form->date('dob', 'Tgl. lahir');
+        $form->text('address', 'Alamat rumah');
         $form->text('phone', 'No. HP')->rules('required');
         $form->select('class_id', 'Kelas')->options(function(){
             return Mstclass::get()->pluck('name','id');
         })->rules('required');
         $form->radio('status_id','Status karyawan')->options(['1'=>'Active', '2'=>'Inactive'])->default('1');
-        $form->text('bpjs_code', 'Kode PBJS')->rules('required');
+        $form->text('bpjs_code', 'Kode BPJS')->rules('required');
         
         $form->saved(function (Form $form) {
             // update tanggungan status

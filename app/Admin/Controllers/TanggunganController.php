@@ -167,7 +167,7 @@ class TanggunganController extends Controller
         $form->text('mhc_code', 'Kode MHC')->rules('required');
         $form->text('name', 'Nama lengkap')->rules('required');
         $form->select('family_status', 'Hub. keluarga')->options(function(){
-            return ["Istri"=>"Istri","Anak 1"=>"Anak 1","Anak 2"=>"Anak 2","Anak 3"=>"Anak 3"];
+            return ["Suami"=>"Suami","Istri"=>"Istri","Anak 1"=>"Anak 1","Anak 2"=>"Anak 2","Anak 3"=>"Anak 3","Anak 4"=>"Anak 4","Anak 4"=>"Anak 4","Anak 5"=>"Anak 5","Keluarga"=>"Keluarga"];
         })->rules('required');
         $form->date('dob', 'Tgl. lahir')->rules('required');        
         $form->text('bpjs_code', 'Kode PBJS')->rules('required');
