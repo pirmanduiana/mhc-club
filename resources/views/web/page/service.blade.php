@@ -38,7 +38,7 @@
 						</div>
 						<div class="one-forth animate-box">
 							<div class="head">
-								<h2>What makes us become the best?</h2>
+								<h2>Comprehensive services for our patients</h2>
 							</div>
 						</div>
 					</div>
