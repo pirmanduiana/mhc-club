@@ -49,7 +49,7 @@
 									<i class="flaticon-blood-donation"></i>
 								</span>
 								<div class="desc">
-									<h3><a href="#">Long term medical care in a hospital</a></h3>
+									<h3><a href="#">Long term medical care in a hospital with COB BPJS system</a></h3>
 								</div>
 							</div>
 						</div>
@@ -59,7 +59,7 @@
 								<div class="services">
 									<div class="desc">
 										<span>Mission</span>
-										<h3><a href="#">The correct diagnosis is half the battle</a></h3>
+										<h3><a href="#">Affordable premi</a></h3>
 									</div>
 								</div>
 							</div>
@@ -69,7 +69,7 @@
 										<div class="services">
 											<div class="desc">
 												<span>Vision</span>
-												<h3><a href="#">We refund 50% of the cost of medicines</a></h3>
+												<h3><a href="#">Take care of patient</a></h3>
 											</div>
 										</div>
 									</div>
@@ -89,7 +89,7 @@
 												<i class="flaticon-ambulance"></i>
 											</span>
 											<div class="desc">
-												<h3><a href="#">Medical transport to the hospital</a></h3>
+												<h3><a href="#">24 hours on call services</a></h3>
 											</div>
 										</div>
 									</div>

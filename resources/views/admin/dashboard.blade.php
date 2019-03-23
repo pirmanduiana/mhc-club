@@ -93,7 +93,7 @@
             url: "/admin/dashboard/search/" + search_value,
             type: "get",
             dataType: "json"
-        }).done(function(json){ console.log(json);
+        }).done(function(json){
             // ...
             $("#box_searchresult").show();
             var html = "";
