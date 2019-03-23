@@ -19,7 +19,7 @@
 									<span class="icon"><i class="icon-phone"></i></span>
 									<p>
 										<a href="javascript:;;">{{$company->main_phone}}</a><br>
-										<a href="javascript:;;">{{$company->main_email}}</a>
+										<a href="javascript:;;">{{$company->secondary_phone}}</a>
 									</p>
 								</div>
 							</div>

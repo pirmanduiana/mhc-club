@@ -12,8 +12,7 @@
 						<li><a href="tel://1234567920"><i class="icon-phone"></i> {{$company->main_phone}}</a></li>
 						<li><a href="mailto:info@yoursite.com"><i class="icon-mail"></i> {{$company->main_email}}</a></li>
 						<li><a href="http://luxehotel.com"><i class="icon-location4"></i> {{$company->main_website}}</a></li>
-						<li>Mon-Thu: 9:30 – 21:00</li>
-						<li>Fri: 6:00 – 21:00</li>
+						<li>Mon-Fri: 9:00 – 17:00</li>
 					</ul>
 				</div>
 				<!-- <div class="col-md-2 colorlib-widget">

@@ -129,6 +129,7 @@ class CompanyController extends Controller
         $form->text('latitude', 'latitude')->rules('required');
         $form->text('longitude', 'longitude')->rules('required');
         $form->text('main_phone', 'main phone')->rules('required');
+        $form->text('secondary_phone', 'secondary phone')->rules('required');
         $form->text('main_website', 'main web url')->rules('required');
         $form->text('main_email', 'main email')->rules('required');
 
