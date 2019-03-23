@@ -308,7 +308,7 @@ class ReportController extends Controller
             $param_to = $this->get_MonthName($request->month_to).' '.$request->year_to;
         }
         $parameter = [
-            "title" => "Laporan Penjualan per Bulan",
+            "title" => "Laporan Klaim per Bulan",
             "client" => Mstclient::find($request->client_id)->name,
             "from" => $param_from,
             "to" => $param_to
@@ -316,7 +316,7 @@ class ReportController extends Controller
 
         if ($pdf==1) {
             $view_pdf = PDF::loadView('admin.print.rpt_bill_bymonth', compact('data_return','parameter'))->setPaper('a4', 'landscape');
-            return $view_pdf->stream('MHC-Bill Rekap Bulanan.pdf');
+            return $view_pdf->stream('MHC-Bill Rekap Klaim per Bulan.pdf');
         }
         return view('admin.print.rpt_bill_bymonth')->with(compact('data_return','parameter'));
     }

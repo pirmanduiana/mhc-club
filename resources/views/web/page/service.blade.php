@@ -19,10 +19,10 @@
 						<div class="one-fifth no-border-bottom animate-box">
 							<div class="services">
 								<span class="icon">
-									<i class="flaticon-healthy-1"></i>
+									<i class="flaticon-stethoscope"></i>
 								</span>
 								<div class="desc">
-									<h3><a href="#">Home medical appointments</a></h3>
+									<h3><a href="#">Specialist doctor appointment</a></h3>
 								</div>
 							</div>
 						</div>
@@ -32,13 +32,13 @@
 									<i class="flaticon-stethoscope"></i>
 								</span>
 								<div class="desc">
-									<h3><a href="#">Pharmacy refunded from hospital</a></h3>
+									<h3><a href="#">In house clinic hotel</a></h3>
 								</div>
 							</div>
 						</div>
 						<div class="one-forth animate-box">
 							<div class="head">
-								<h2>Comprehensive services for our patients</h2>
+								<h2>What makes us become the best?</h2>
 							</div>
 						</div>
 					</div>
