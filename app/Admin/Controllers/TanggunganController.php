@@ -167,10 +167,10 @@ class TanggunganController extends Controller
         $form->text('mhc_code', 'Kode MHC')->rules('required');
         $form->text('name', 'Nama lengkap')->rules('required');
         $form->select('family_status', 'Hub. keluarga')->options(function(){
-            return ["Suami"=>"Suami","Istri"=>"Istri","Anak 1"=>"Anak 1","Anak 2"=>"Anak 2","Anak 3"=>"Anak 3","Anak 4"=>"Anak 4","Anak 4"=>"Anak 4","Anak 5"=>"Anak 5","Keluarga"=>"Keluarga"];
+            return ["Suami"=>"Suami","Istri"=>"Istri","Calon Anak"=>"Calon Anak","Anak 1"=>"Anak 1","Anak 2"=>"Anak 2","Anak 3"=>"Anak 3","Anak 4"=>"Anak 4","Anak 4"=>"Anak 4","Anak 5"=>"Anak 5","Keluarga"=>"Keluarga"];
         })->rules('required');
-        $form->date('dob', 'Tgl. lahir')->rules('required');        
-        $form->text('bpjs_code', 'Kode PBJS')->rules('required');
+        $form->date('dob', 'Tgl. lahir');        
+        $form->text('bpjs_code', 'Kode BPJS')->rules('required');
         $form->radio('status_id','Status')->options(['1'=>'Active', '2'=>'Inactive'])->default('1');
 
         $form->saved(function (Form $form) {
