@@ -84,6 +84,15 @@ class ProviderController extends Controller
     {
         $grid = new Grid(new Mstprovider);
 
+        $grid->filter(function($filter){
+            $filter->disableIdFilter();
+            $filter->like('name', 'Nama provider');            
+            $filter->equal('status_id','Status provider')->radio([
+                ''   => 'Semua',
+                1    => 'Active',
+                2    => 'Inactive',
+            ]);
+        });
         $grid->id('ID')->sortable();
         $grid->code('Kode');
         $grid->name('Nama');

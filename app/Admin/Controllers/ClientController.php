@@ -86,6 +86,16 @@ class ClientController extends Controller
     {
         $grid = new Grid(new Mstclient);
 
+        $grid->filter(function($filter){
+            $filter->disableIdFilter();
+            $filter->like('name', 'Nama client');
+            $filter->equal('status_id','Status client')->radio([
+                ''   => 'Semua',
+                1    => 'Active',
+                2    => 'Inactive',
+            ]);
+        });
+
         $grid->id('ID')->sortable();
         $grid->code('Kode');
         $grid->name('Nama');
