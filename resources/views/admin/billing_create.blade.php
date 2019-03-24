@@ -287,7 +287,7 @@
 
         initAutoNumeric();        
 
-        $('[id^=item]').on("keyup", function(){
+        $('[id^=item]').on("blur", function(){
             getTotal();
         })
 

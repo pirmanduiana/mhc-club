@@ -176,7 +176,7 @@ class BillingController extends Controller
 
     public function getBillObj()
     {
-        return response()->json(Mstbillingobj::all());
+        return response()->json(Mstbillingobj::select('id','multiplier')->get());
     }
 
     public function store(Request $request)
