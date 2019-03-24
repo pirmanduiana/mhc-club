@@ -24,3 +24,6 @@ use App\Admin\Extensions\Form\CKEditor;
 Encore\Admin\Form::forget(['map', 'editor']);
 
 Form::extend('ckeditor', CKEditor::class);
+
+// autonumeric js
+Admin::js('/vendor/autoNumeric/autoNumeric.js');

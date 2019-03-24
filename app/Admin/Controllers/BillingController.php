@@ -107,7 +107,7 @@ class BillingController extends Controller
     protected function grid()
     {
         $grid = new Grid(new Trnbilling);
-        $grid->model()->orderBy('client_id', 'asc')->orderBy('date', 'desc');
+        $grid->model()->orderBy('provider_id', 'asc')->orderBy('id', 'asc');
         if (!empty(Admin::user()->provider_id)) {
             $grid->model()->where('provider_id', Admin::user()->provider_id);
         }

@@ -104,7 +104,7 @@
                                 <div class="col-sm-8">                                    
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-medkit fa-fw"></i></span>
-                                        <input type="number" id="item{{$v->id}}" name="item[{{$v->id}}]" value="{{$v->price}}" class="form-control title" placeholder="Input {{$v->name}}">                   
+                                        <input type="text" id="item{{$v->id}}" name="item[{{$v->id}}]" value="{{$v->price}}" class="form-control title" placeholder="Input {{$v->name}}" data-a-sign="Rp. " data-a-dec="," data-a-sep=".">
                                     </div>                         
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                                 <div class="col-sm-8">                                    
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                                        <input type="number" name="total" value="" class="form-control title" readonly>
+                                        <input type="text" id="total" name="total" value="" class="form-control title"  data-a-sign="Rp. " data-a-dec="," data-a-sep="." readonly>
                                     </div>                         
                                 </div>
                             </div>
@@ -172,12 +172,46 @@
         }).done(function(json){
             var total = 0;            
             $.each(json, function(k,v){
-                total = total + (parseFloat($("#item"+v.id).val()) * v.multiplier);
+                rawNumeric = $("#item"+v.id).autoNumeric('get');
+                total = total + (parseFloat(rawNumeric) * v.multiplier);
             });
-            $("input[name='total']").val(total);
+            $("#total").autoNumeric('set',total);
         }).fail(function(xhr){
             //...
         });        
+    }
+
+    var initAutoNumeric = function(){
+        $.ajax({
+            url: "/admin/get/billingobj",
+            type: "get",
+            dataType: "json"
+        }).done(function(json){
+            $.each(json, function(k,v){
+                $('#item'+v.id).autoNumeric('init');
+            });
+            $('#total').autoNumeric('init');
+        }).fail(function(xhr){
+            //...
+        });
+    }
+
+    var getRawNumeric = function(){
+        $.ajax({
+            url: "/admin/get/billingobj",
+            type: "get",
+            dataType: "json"
+        }).done(function(json){
+            var itemArray = [];
+            $.each(json, function(k,v){
+                itemArray.push({
+                    'name' : 'item['+(k+1)+']',
+                    'value' : $("#item"+v.id).autoNumeric('get')
+                });
+            });
+        }).fail(function(xhr){
+            //...
+        });
     }
 
     var changeEmployee = function(this_value){
@@ -197,12 +231,38 @@
     }
 
     var simpanBill = function(){
-        var data = $("form[name='frmBilling']").serializeArray();
+        data = [];
+        $.ajax({
+            url: "/admin/get/billingobj",
+            type: "get",
+            dataType: "json",
+            async: false
+        }).done(function(json){
+            var itemArray = [];
+            $.each(json, function(k,v){
+                itemArray.push({
+                    'name' : 'item['+(k+1)+']',
+                    'value' : $("#item"+v.id).autoNumeric('get')
+                });
+            });            
+            var headerArray = [
+                {name:'_token', value:"{{ csrf_token() }}"},
+                {name:'id', value:billing_id},
+                {name:'client_id', value:$("select[name='client_id']").val()},
+                {name:'employee_id', value:$("select[name='employee_id']").val()},
+                {name:'provider_id', value:$("select[name='provider_id']").val()},
+                {name:'date', value:$("input[name='date']").val()},
+                {name:'diagnosa', value:$("input[name='diagnosa']").val()},
+                {name:'total', value:$("input[name='total']").autoNumeric('get')}
+            ];            
+            data = $.merge(itemArray, headerArray);            
+        });
         $.ajax({
             url: "/admin/update/billing",
             type: "post",
             data: data,
-            dataType: "json"
+            dataType: "json",
+            async: false
         }).done(function(json){
             $.pjax.reload('#pjax-container');
             toastr.success('Billing telah diperbaharui');
@@ -228,7 +288,10 @@
             placeholder: "Pilih"
         });
 
+        initAutoNumeric();
+
         changeEmployee($("select[name='client_id']").val());
+
         getTotal();
 
         $('[id^=item]').on("keyup", function(){
