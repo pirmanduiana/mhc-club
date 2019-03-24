@@ -106,6 +106,7 @@
                                             <th>Kode BPJS</th>
                                             <th>Nama</th>
                                             <th>Hub. keluarga</th>
+                                            <th>Status</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -118,6 +119,13 @@
                                                 <td>{{$v['bpjs_code']}}</td>
                                                 <td>{{$v['name']}}</td>
                                                 <td>{{$v['family_status']}}</td>
+                                                
+                                                @if($v['status_id']==1)
+                                                    <td><span class='label label-info'>Aktif </span></td>
+                                                @else
+                                                    <td><span class='label label-default'>Tidak aktif </span></td>
+                                                @endif
+
                                             </tr>                                        
                                             @endforeach
                                         </tbody>

@@ -109,6 +109,8 @@ class ProviderController extends Controller
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
 
+        $grid->model()->orderBy('code', 'asc');
+
         return $grid;
     }
 
@@ -151,9 +153,9 @@ class ProviderController extends Controller
         $form->text('fax', 'Fax')->rules('required');
         $form->text('website', 'Website')->rules('required');
         $form->text('email', 'Email')->rules('required');
-        $form->text('contract_number', 'No. kontrak')->rules('required');
-        $form->date('contract_start', 'Tgl. mulai kontrak')->rules('required');
-        $form->date('contract_end', 'Tgl. berakhir kontrak')->rules('required');
+        $form->text('contract_number', 'No. kontrak');
+        $form->date('contract_start', 'Tgl. mulai kontrak');
+        $form->date('contract_end', 'Tgl. berakhir kontrak');
         $form->radio('status_id','Status')->options(['1'=>'Active', '2'=>'Inactive'])->default('1');
 
         return $form;

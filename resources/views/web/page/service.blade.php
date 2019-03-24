@@ -97,8 +97,11 @@
 								<div class="one-full-flex animate-box">
 									<div class="services-desc">
 										<div class="desc">
-											<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-											<a href="#" class="btn btn-primary">View services</a>
+											<p>
+												From careful observation of existing health services, we as health care providers offer comprehensive services to our clients. The services that we can provide include emergency, inpatient, laboratory and specialist doctors at all of our providers.
+												We also provide hotel and oncall clinics that are available 24 hours in providing medical actions and consultations and activities such as SAT training, health seminars and free examinations.
+											</p>
+											<!-- <a href="#" class="btn btn-primary">View services</a> -->
 										</div>
 									</div>
 								</div>

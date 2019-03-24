@@ -55,6 +55,10 @@ Route::group([
 
     // dashboard
     $router->get('/dashboard/search/{search_value?}', 'HomeController@search');
+
+    // import
+    $router->get('/import/karyawan', 'ImportController@viewKaryawan');
+    $router->post('/import/karyawan/proses', 'ImportController@postKaryawan');
         
     // frontpage management ...
     

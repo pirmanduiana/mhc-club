@@ -162,7 +162,8 @@ class EmployeeController extends Controller
                 "bpjs_code" => $y->bpjs_code,
                 "name" => $y->name,
                 "family_status" => $y->family_status,
-                "barcode" => 'data:image/png;base64,' . DNS1D::getBarcodePNG($y->mhc_code, "C39+",1,33,array(1,1,4))
+                "barcode" => 'data:image/png;base64,' . DNS1D::getBarcodePNG($y->mhc_code, "C39+",1,33,array(1,1,4)),
+                "status_id" => $y->status_id
             ];
         }
 
