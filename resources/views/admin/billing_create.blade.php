@@ -259,8 +259,7 @@
         $.ajax({
             url: "/admin/post/billing",
             type: "post",
-            data: data,
-            dataType: "json"
+            data: data
         }).done(function(json){
             $.pjax.reload('#pjax-container');
             toastr.success('Billing telah dibuat');

@@ -261,8 +261,7 @@
             url: "/admin/update/billing",
             type: "post",
             data: data,
-            dataType: "json",
-            async: false
+            dataType: "json"
         }).done(function(json){
             $.pjax.reload('#pjax-container');
             toastr.success('Billing telah diperbaharui');
