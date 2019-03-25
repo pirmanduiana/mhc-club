@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="box box-info">                
                 <div class="box-header with-border">
-                    <h3 class="box-title">Halaman ini digunakan untuk import data karyawan pada suatu client</h3>                    
+                    <h3 class="box-title">Halaman ini digunakan untuk import data tanggungan pada suatu karyawan</h3>                    
                 </div>                
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -19,16 +19,8 @@
                             {{ session('salah') }}
                         </div>
                     @endif
-                    <form method="post" action="{{ url('/admin/import/karyawan/proses') }}" name="frmimport" files="true" enctype="multipart/form-data">
+                    <form method="post" action="{{ url('/admin/import/tanggungan/proses') }}" name="frmimport" files="true" enctype="multipart/form-data">
                     @csrf
-                        <p class="margin">Pilih client</p>
-                        <div class="input-group input-group-sm">
-                            <select class="form-control" name="client_id">
-                                @foreach($clients as $k=>$c)
-                                <option value="{{$c->id}}">{{$c->name}}</option>
-                                @endforeach
-                            </select>                            
-                        </div>
                         <p class="margin">Metode import</p>
                         <div class="input-group input-group-sm">
                             <input type="radio" name="import_type" value="0"> Timpa data sebelumnya!

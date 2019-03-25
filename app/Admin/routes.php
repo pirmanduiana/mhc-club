@@ -59,6 +59,8 @@ Route::group([
     // import
     $router->get('/import/karyawan', 'ImportController@viewKaryawan');
     $router->post('/import/karyawan/proses', 'ImportController@postKaryawan');
+    $router->get('/import/tanggungan', 'ImportController@viewTanggungan');
+    $router->post('/import/tanggungan/proses', 'ImportController@postTanggungan');
         
     // frontpage management ...
     
