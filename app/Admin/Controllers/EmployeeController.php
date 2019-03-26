@@ -98,6 +98,7 @@ class EmployeeController extends Controller
         $grid = new Grid(new Mstclientemployee);
 
         if (Admin::user()->isRole('provider')) {
+            $grid->disableCreateButton();
             $grid->actions(function (Grid\Displayers\Actions $actions) {                
                 $actions->disableEdit();
                 $actions->disableDelete();
