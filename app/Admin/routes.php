@@ -54,7 +54,7 @@ Route::group([
     $router->post('/rpt/bill/bydate/{pdf}', 'ReportController@bill_bydate');
 
     // dashboard
-    $router->get('/dashboard/search/{search_value?}', 'HomeController@search');
+    $router->get('/dashboard/search', 'HomeController@search');
 
     // import
     $router->get('/import/karyawan', 'ImportController@viewKaryawan');

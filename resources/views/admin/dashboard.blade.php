@@ -90,7 +90,7 @@
             return false;
         }
         $.ajax({
-            url: "/admin/dashboard/search/" + search_value,
+            url: "/admin/dashboard/search/?q=" + encodeURIComponent(search_value),
             type: "get",
             dataType: "json"
         }).done(function(json){

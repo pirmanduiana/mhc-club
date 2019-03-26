@@ -21,8 +21,9 @@ class HomeController extends Controller
             ->body(view('admin.dashboard')->with(compact('provider')));
     }
 
-    private function searchSrc($search_value)
+    private function searchSrc()
     {
+        $search_value = urldecode($_GET['q']);
         $karyawan = Mstclientemployee::join('mst_client','mst_client.id','=','mst_client_employee.client_id')
         ->join('mst_status','mst_status.id','=','mst_client_employee.status_id')
         ->where('mst_client_employee.name','LIKE',"%{$search_value}%")
