@@ -22,6 +22,7 @@ use App\Trnemployeelog;
 use App\Admin\Extensions\CheckRow;
 use App\Mstclientemployeemember;
 use Encore\Admin\Widgets\InfoBox;
+use App\Trnbilling;
 
 class EmployeeController extends Controller
 {
@@ -95,6 +96,13 @@ class EmployeeController extends Controller
     protected function grid()
     {
         $grid = new Grid(new Mstclientemployee);
+
+        if (Admin::user()->isRole('provider')) {
+            $grid->actions(function (Grid\Displayers\Actions $actions) {                
+                $actions->disableEdit();
+                $actions->disableDelete();
+            });
+        }
 
         $grid->filter(function($filter){
             $filter->disableIdFilter();
