@@ -88,8 +88,9 @@
                                         @else
                                             <span class='label label-default'>Tidak aktif </span>
                                         @endif
-                                        @php $edit_url = '/admin/employee/'.$employee->id.'/edit'; @endphp
+                                        @if(empty(Admin::user()->provider_id))
                                         <br>Klik <a href="javascript:void(0)" id="a_triggerrubahstatus">disini</a> untuk merubah.
+                                        @endif
                                     </div>
                                 </div>
                             </div>  
