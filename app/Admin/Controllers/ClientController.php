@@ -98,7 +98,18 @@ class ClientController extends Controller
 
         $grid->id('ID')->sortable();
         $grid->code('Kode');
-        $grid->name('Nama');
+        $grid->name('Nama')->display(function($name){
+            $employees = Mstclientemployee::where('client_id', $this->id)->count();
+            return $name  . '&nbsp;&nbsp;<a href="/admin/employee?&name=&mhc_code=&dob=&client_id='.$this->id.'" class="label label-success" title="tampilkan tanggungan">'.$employees.' <i class="fa fa-user"></i></a>&nbsp;';            
+        });
+        $grid->column('Aktif')->display(function(){
+            $active_employees = Mstclientemployee::where('client_id', $this->id)->where('status_id',1)->count();
+            return '<a href="/admin/employee?&name=&mhc_code=&dob=&status_id=1&client_id='.$this->id.'">' . $active_employees ." orang</a>";
+        });
+        $grid->column('Tidak aktif')->display(function(){
+            $nonactive_employees = Mstclientemployee::where('client_id', $this->id)->where('status_id',2)->count();
+            return '<a href="/admin/employee?&name=&mhc_code=&dob=&status_id=2&client_id='.$this->id.'">' . $nonactive_employees ." orang</a>";
+        });
         $grid->address('Alamat');
         $grid->phone('Telp.');
         $grid->email('Email');
