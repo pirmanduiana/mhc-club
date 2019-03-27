@@ -186,7 +186,7 @@
 	                 	<div class="panel panel-default">
 	                     	<div class="panel-heading" role="tab" id="heading{{$vmlist->id}}">
 	                             <h4 class="panel-title">
-	                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$vmlist->id}}" aria-expanded="true" aria-controls="collapseOne">{{$vmlist->title}}
+	                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$vmlist->id}}" aria-expanded="true" aria-controls="collapseOne" aria-expanded="false" class="collapsed">{{$vmlist->title}}
 	                                 </a>
 	                             </h4>
 	                        </div>
