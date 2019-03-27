@@ -220,7 +220,29 @@
 								<h2>What makes us best?</h2>
 							</div>
 							<div class="row">
-								<div class="col-md-6">
+								@php
+									$ourbest = App\WebOurBest::where('status','Online')->get();
+									$obcount = 0;
+								@endphp
+								@foreach($ourbest as $mybest)
+									@php $obcount = $obcount + 1; @endphp
+
+									@if($obcount == 1)
+									<div class="col-md-6">
+									@endif
+										<div class="features animate-box">
+											<span class="icon text-center"><i class="{{$mybest->icon}}"></i></span>
+											<div class="desc">
+												<h3>{{$mybest->title}}</h3>
+												<p>{{$mybest->content}}</p>
+											</div>
+										</div>
+									@if($obcount == 2)
+									</div>
+									@php $obcount = 0; @endphp
+									@endif
+								@endforeach
+								<!-- <div class="col-md-6">
 									<div class="features animate-box">
 										<span class="icon text-center"><i class="flaticon-healthy-1"></i></span>
 										<div class="desc">
@@ -252,7 +274,7 @@
 											<p>A flexible health services for patient and refferal. </p>
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -274,7 +296,23 @@
 			<div class="row">
 				<div class="col-md-12 animate-box">
 					<div class="owl-carousel">
+						@php
+							$testimony = App\WebTestimony::where('status','Online')->get();
+						@endphp
+						@foreach($testimony as $testi)
 						<div class="item">
+							<div class="testimony">
+								<span class="img-user" style="background-image: url({{ asset('/uploads').'/'.$testi->user_image }});"></span>
+								<span class="user">{{$testi->user}}</span>
+								<blockquote>
+									<p>"{{$testi->testimony}}"</p>
+									<p class="color"><span><i class="icon-star3"></i></span><span><i class="icon-star3"></i></span><span><i class="icon-star3"></i></span><span><i class="icon-star3"></i></span><span><i class="icon-star3"></i></span></p>
+								</blockquote>
+							</div>
+						</div>
+
+						@endforeach
+						{{--<div class="item">
 							<div class="testimony">
 								<span class="img-user" style="background-image: url({{ asset('vendor/healthcare/images/person1.jpg') }});"></span>
 								<span class="user">Edward Tom</span>
@@ -323,7 +361,7 @@
 									<p class="color"><span><i class="icon-star3"></i></span><span><i class="icon-star3"></i></span><span><i class="icon-star3"></i></span><span><i class="icon-star3"></i></span><span><i class="icon-star3"></i></span></p>
 								</blockquote>
 							</div>
-						</div>
+						</div>--}}
 					</div>
 				</div>
 			</div>

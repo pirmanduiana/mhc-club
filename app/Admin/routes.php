@@ -66,5 +66,7 @@ Route::group([
     $router->resource('/web/slider', 'WebSliderController');
     $router->resource('/web/about', 'WebAboutController');
     $router->resource('/web/visimisi', 'WebVisiMisiController');
+    $router->resource('/web/ourbest', 'WebOurBestController');
+    $router->resource('/web/testimony', 'WebTestimonyController');
     
 });
