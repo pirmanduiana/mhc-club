@@ -186,11 +186,11 @@
 	                 	<div class="panel panel-default">
 	                     	<div class="panel-heading" role="tab" id="heading{{$vmlist->id}}">
 	                             <h4 class="panel-title">
-	                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$vmlist->id}}" aria-expanded="true" aria-controls="collapseOne" aria-expanded="false" class="collapsed">{{$vmlist->title}}
+	                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$vmlist->id}}" aria-expanded="true" aria-controls="collapseOne" aria-expanded="{{$vmlist->id==3?'true':'false'}}" class="{{$vmlist->id==3?'':'collapsed'}}">{{$vmlist->title}}
 	                                 </a>
 	                             </h4>
 	                        </div>
-	                        <div id="collapse{{$vmlist->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$vmlist->id}}">
+	                        <div id="collapse{{$vmlist->id}}" class="panel-collapse collapse {{$vmlist->id==3?'in':''}}" role="tabpanel" aria-labelledby="heading{{$vmlist->id}}">
 	                             <div class="panel-body">
 	                                 <div class="row">
 							      		<p class="text-justify">
