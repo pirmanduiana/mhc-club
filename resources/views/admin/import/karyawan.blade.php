@@ -25,7 +25,7 @@
                         <div class="input-group input-group-sm">
                             <select class="form-control" name="client_id">
                                 @foreach($clients as $k=>$c)
-                                <option value="{{$c->id}}">{{$c->name}}</option>
+                                <option value="{{$c->id}}">{{$c->code ." - ". $c->name}}</option>
                                 @endforeach
                             </select>                            
                         </div>
