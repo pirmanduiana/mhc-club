@@ -63,5 +63,8 @@ Route::group([
     $router->post('/import/tanggungan/proses', 'ImportController@postTanggungan');
         
     // frontpage management ...
+    $router->resource('/web/slider', 'WebSliderController');
+    $router->resource('/web/about', 'WebAboutController');
+    $router->resource('/web/visimisi', 'WebVisiMisiController');
     
 });

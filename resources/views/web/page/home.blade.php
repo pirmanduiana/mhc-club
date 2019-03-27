@@ -27,7 +27,28 @@
 
 	<aside id="colorlib-hero">
 		<div class="flexslider">
+			@php
+				$slider = App\WebSlider::where('status','Online')->get();
+				
+			@endphp
 			<ul class="slides">
+			@foreach($slider as $list)
+		   	<li style="background-image: url({{ asset('/uploads/').'/'.$list->image_name }});">
+		   		<div class="overlay"></div>
+		   		<div class="container">
+		   			<div class="row">
+			   			<div class="col-md-8 col-md-offset-2 col-md-pull-2 slider-text">
+			   				<div class="slider-text-inner">
+			   					<h1><strong>{{$list->title}}</strong></h1>
+									<h2>{{$list->content}}</h2>
+									<p><a class="btn btn-primary btn-lg btn-learn" href="#">Make an Appointment</a></p>
+			   				</div>
+			   			</div>
+			   		</div>
+		   		</div>
+		   	</li>
+		   	@endforeach
+		   	{{--
 		   	<li style="background-image: url({{ asset('vendor/healthcare/images/slide-1.jpg') }});">
 		   		<div class="overlay"></div>
 		   		<div class="container">
@@ -83,7 +104,7 @@
 			   			</div>
 			   		</div>
 		   		</div>
-		   	</li>		   	
+		   	</li>--}}		   	
 		  	</ul>
 	  	</div>
 	</aside>
@@ -137,78 +158,50 @@
 	</div>
 
 	
-
+	@php
+		$about = App\WebAbout::where('status','Online')->first();			
+	@endphp
 	<div id="colorlib-about">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-md-push-6 animate-box">
-					<img class="img-responsive about-img" src="{{ asset('vendor/healthcare/images/about.png') }}" alt="">
+					<img class="img-responsive about-img" src="{{ asset('/uploads').'/'.$about->image_about }}" alt="">
 					<span class="quotes">
-						<span class="title">"Your health is our priority"</span><br>
-						<span class="author">~ Victor Erenst Warembengan S,Si, Apt</span>
+						<span class="title">"{{$about->image_title}}"</span><br>
+						<span class="author">~ {{$about->outhor_name}}</span>
 					</span>
 				</div>
 				<div class="col-md-6 col-md-pull-6 animate-box">
 					<h2>About Mandiri Health Care</h2>
 					<p class="text-justify">
-						<img src="{{ asset('vendor/healthcare/mhc-logo.png') }}" class="about-logo">
-						We are a company that engaged in health services and already have some clients. We commited to provide the best health services and doctors that are ready every time. MHC has professional doctors and nurses and they are already certified. We deliver quality services and have 24 hours call center that can help you every time.
+						<img src="{{ asset('/uploads').'/'.$about->image_logo }}" class="about-logo">
+						{{$about->content}}
 					</p>
-						<div class="fancy-collapse-panel">
+				<div class="fancy-collapse-panel">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                     <div class="panel panel-default">
-                         <div class="panel-heading" role="tab" id="headingOne">
-                             <h4 class="panel-title">
-                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Our Mission
-                                 </a>
-                             </h4>
-                         </div>
-                         <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                             <div class="panel-body">
-                                 <div class="row">
-						      		<!-- <div class="col-md-6">
-						      			<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-						      		</div>
-						      		<div class="col-md-6">
-						      			<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-						      		</div> -->
-						      		<p class="text-justify">
-						      			Creating the health of employee for support the company optimization with a useful level of health.
-						      		</p>
-						      	</div>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="panel panel-default">
-                         <div class="panel-heading" role="tab" id="headingTwo">
-                             <h4 class="panel-title">
-                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Our Vission
-                                 </a>
-                             </h4>
-                         </div>
-                         <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                             <div class="panel-body">
-                                 <p class="text-justify">Providing a sutainable health services by keeping the commitment and profesionalism of the code of health ethics with work partners.</p>
-									<!-- <ul>
-										<li>Separated they live in Bookmarksgrove right</li>
-										<li>Separated they live in Bookmarksgrove right</li>
-									</ul> -->
-                             </div>
-                         </div>
-                     </div>
-                     <div class="panel panel-default">
-                         <div class="panel-heading" role="tab" id="headingThree">
-                             <h4 class="panel-title">
-                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Why choose us
-                                 </a>
-                             </h4>
-                         </div>
-                         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                             <div class="panel-body">
-                                 <p class="text-justify">MHC has some advantages which are flexibility, 24 hours call center service, professional workers availability, doctors and nurses, hospital cooperation, clinic and laboratory and we have the other advantages which are training of first aid by certified doctors that we create directly from the provider. We also provide health seminars for our health workers who are very useful to increase their knowledge in health.</p>	
-                             </div>
-                         </div>
-                     </div>
+                     @php
+                 		$visimisi = App\WebVisiMisi::where('status','Online')->get();
+                 	@endphp
+                 	@foreach($visimisi as $vmlist)
+	                 	<div class="panel panel-default">
+	                     	<div class="panel-heading" role="tab" id="heading{{$vmlist->id}}">
+	                             <h4 class="panel-title">
+	                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$vmlist->id}}" aria-expanded="true" aria-controls="collapseOne">{{$vmlist->title}}
+	                                 </a>
+	                             </h4>
+	                        </div>
+	                        <div id="collapse{{$vmlist->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$vmlist->id}}">
+	                             <div class="panel-body">
+	                                 <div class="row">
+							      		<p class="text-justify">
+							      			{{$vmlist->content}}
+							      		</p>
+							      	</div>
+	                             </div>
+	                         </div>
+	                    </div>
+                 	@endforeach
+                     
                   </div>
                </div>
 				</div>
