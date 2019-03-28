@@ -306,7 +306,11 @@
 								<span class="user">{{$testi->user}}</span>
 								<blockquote>
 									<p>"{{$testi->testimony}}"</p>
-									<p class="color"><span><i class="icon-star3"></i></span><span><i class="icon-star3"></i></span><span><i class="icon-star3"></i></span><span><i class="icon-star3"></i></span><span><i class="icon-star3"></i></span></p>
+									<p class="color">
+										@for($i=0; $i<$testi->rating; $i++)
+										<span><i class="icon-star3"></i></span>
+										@endfor
+									</p>
 								</blockquote>
 							</div>
 						</div>

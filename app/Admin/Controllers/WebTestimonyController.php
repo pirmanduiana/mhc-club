@@ -88,6 +88,13 @@ class WebTestimonyController extends Controller
         $grid->id('ID')->sortable();
         $grid->user('User');
         $grid->testimony('Testimony');
+        $grid->rating()->display(function($rating){
+            $stars = "";
+            for ($i=0; $i<$rating; $i++) { 
+                $stars .= "<i class='fa fa-star-o'></i> ";
+            }
+            return $stars;
+        });
         $grid->status('Status');
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
@@ -133,6 +140,7 @@ class WebTestimonyController extends Controller
         $form->textarea('testimony', 'Testimony')->rules('required');
         $form->image('user_image')->rules('required');
         $form->select('status', 'Status')->options($status);
+        $form->number('rating', 'Rating')->rules('required|max:5');
         return $form;
     }
 }
