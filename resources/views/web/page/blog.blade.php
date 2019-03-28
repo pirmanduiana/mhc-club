@@ -17,7 +17,7 @@
 				@foreach($blog as $bloglist)
 				<div class="col-md-4 animate-box">
 					<div class="blog-entry">
-						<a href="blog.html" class="blog-img" style="background-image: url({{ asset('/upload').'/'.$bloglist->image }});"></a>
+						<a href="blog.html" class="blog-img" style="background-image: url({{ asset('/uploads').'/'.$bloglist->image }});"></a>
 						<div class="desc">
 							<p class="date">
 								<span><a href="#">{{$bloglist->user}}</a></span>
