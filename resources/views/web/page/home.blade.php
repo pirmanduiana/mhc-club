@@ -13,8 +13,8 @@
 	.quotes {
 		position: absolute;
 		bottom: 44px;
-		left: 151px;
-		color: white;
+		left: 131px;
+		color: #caac9d;
 	}
 	.quotes > .title {
 		font-size: 24px;
