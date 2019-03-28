@@ -41,7 +41,7 @@
 			   				<div class="slider-text-inner">
 			   					<h1><strong>{{$list->title}}</strong></h1>
 									<h2>{{$list->content}}</h2>
-									<p><a class="btn btn-primary btn-lg btn-learn" href="#">Make an Appointment</a></p>
+									<p><a class="btn btn-primary btn-lg btn-learn" href="{{url('/contact')}}">Make an Appointment</a></p>
 			   				</div>
 			   			</div>
 			   		</div>
