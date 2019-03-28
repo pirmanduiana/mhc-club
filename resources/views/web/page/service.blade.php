@@ -6,7 +6,31 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="services-flex">
-						<div class="one-fifth no-border-bottom animate-box">
+						@php
+							$serviceflex = App\WebService::where('status','Online')->where('group','flex')->get();
+						@endphp
+						@foreach($serviceflex as $flex)
+							@if(!empty($flex->icon))
+								<div class="one-fifth no-border-bottom animate-box">
+									<div class="services">
+										<span class="icon">
+											<i class="{{$flex->icon}}"></i>
+										</span>
+										<div class="desc">
+											<h3><a href="#">{{$flex->title}}</a></h3>
+										</div>
+									</div>
+								</div>
+							@else
+								<div class="one-forth animate-box">
+									<div class="head">
+										<h2>{{$flex->desc}}</h2>
+									</div>
+								</div>
+							@endif
+
+						@endforeach
+						{{--<div class="one-fifth no-border-bottom animate-box">
 							<div class="services">
 								<span class="icon">
 									<i class="flaticon-hospital"></i>
@@ -40,10 +64,47 @@
 							<div class="head">
 								<h2>Comprehensive services for our patients</h2>
 							</div>
-						</div>
+						</div>--}}
 					</div>
 					<div class="services-no-flex">
-						<div class="one-fifth animate-box">
+						@php
+							$servicenoflex = App\WebService::where('status','Online')->where('group','no-flex')->get();
+						@endphp
+						@foreach($servicenoflex as $noflex)
+							@if(!empty($noflex->icon))
+							<div class="one-fifth animate-box">
+								<div class="services">
+									<span class="icon">
+										<i class="{{$noflex->icon}}"></i>
+									</span>
+									<div class="desc">
+										<h3><a href="#">{{$noflex->title}}</a></h3>
+									</div>
+								</div>
+							</div>
+							@elseif(!empty($noflex->image))
+							<div class="one-fifth services-img animate-box" style="background-image: url({{ asset('/uploads').'/'.$noflex->image }});">
+								<div class="services">
+									<div class="desc">
+										<span>{{$noflex->title}}</span>
+										<h3><a href="#">{{$noflex->desc}}</a></h3>
+									</div>
+								</div>
+							</div>
+							@else
+							<div class="one-full-flex animate-box">
+								<div class="services-desc">
+									<div class="desc">
+										<p>
+											{{$noflex->desc}}
+										</p>
+										<!-- <a href="#" class="btn btn-primary">View services</a> -->
+									</div>
+								</div>
+							</div>
+							@endif
+						@endforeach
+						{{--<div class="one-fifth animate-box">
 							<div class="services">
 								<span class="icon">
 									<i class="flaticon-blood-donation"></i>
@@ -106,7 +167,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div>--}}
 					</div>
 				</div>
 			</div>

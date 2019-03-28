@@ -68,5 +68,8 @@ Route::group([
     $router->resource('/web/visimisi', 'WebVisiMisiController');
     $router->resource('/web/ourbest', 'WebOurBestController');
     $router->resource('/web/testimony', 'WebTestimonyController');
+    $router->resource('/web/blog', 'WebBlogController');
+    $router->resource('/web/service', 'WebServiceController');
+    
     
 });

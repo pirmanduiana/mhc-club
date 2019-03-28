@@ -10,7 +10,28 @@
 				</div>
 			</div>
 			<div class="row">
+				@php
+					$blog = App\WebBlog::where('status','Online')->get();
+				@endphp
+
+				@foreach($blog as $bloglist)
 				<div class="col-md-4 animate-box">
+					<div class="blog-entry">
+						<a href="blog.html" class="blog-img" style="background-image: url({{ asset('/upload').'/'.$bloglist->image }});"></a>
+						<div class="desc">
+							<p class="date">
+								<span><a href="#">{{$bloglist->user}}</a></span>
+								<span>{{date_format($bloglist->created_at,'M d Y')}}</span>
+								<span><a href="#">4 <i class="icon-speech-bubble"></i></a></span>
+							</p>
+							<h3><a href="blog.html">{{$bloglist->title}}</a></h3>
+							<p>{{$bloglist->content}}</p>
+							<p><a href="#">Read more <i class="icon-arrow-right3"></i></a></p>
+						</div>
+					</div>
+				</div>
+				@endforeach
+				{{--<div class="col-md-4 animate-box">
 					<div class="blog-entry">
 						<a href="blog.html" class="blog-img" style="background-image: url({{ asset('vendor/healthcare/images/img-blog-1.jpg') }});"></a>
 						<div class="desc">
@@ -54,7 +75,7 @@
 							<p><a href="#">Read more <i class="icon-arrow-right3"></i></a></p>
 						</div>
 					</div>
-				</div>
+				</div>--}}
 			</div>
 		</div>
 	</div>
