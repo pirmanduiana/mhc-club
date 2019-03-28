@@ -22,7 +22,6 @@
 							<p class="date">
 								<span><a href="#">{{$bloglist->user}}</a></span>
 								<span>{{date_format($bloglist->created_at,'M d Y')}}</span>
-								<span><a href="#">4 <i class="icon-speech-bubble"></i></a></span>
 							</p>
 							<h3><a href="blog.html">{{$bloglist->title}}</a></h3>
 							<p>{{$bloglist->content}}</p>
