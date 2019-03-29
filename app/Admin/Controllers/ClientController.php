@@ -8,7 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
-use URL;
+use DB;
 use App\Mstclient;
 use App\Mstclientemployee;
 use App\Mstclientemployeemember;
@@ -88,7 +88,10 @@ class ClientController extends Controller
 
         $grid->filter(function($filter){
             $filter->disableIdFilter();
-            $filter->like('name', 'Nama client');
+            $filter->equal('id','Nama client')->select(function(){
+                return Mstclient::select(DB::raw('CONCAT(code," - ",name) as name'), 'id')->get()
+                ->pluck('name','id');
+            });
             $filter->equal('status_id','Status client')->radio([
                 ''   => 'Semua',
                 1    => 'Active',

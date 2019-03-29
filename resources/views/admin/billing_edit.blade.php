@@ -39,7 +39,7 @@
                                         <select class="form-control" name="client_id">
                                             <option></option>
                                             @foreach($client as $k=>$v)
-                                            <option value="{{$v->id}}" {{$v->id==$trnbilling->client_id?"selected":""}}>{{$v->name}}</option>
+                                            <option value="{{$v->id}}" {{$v->id==$trnbilling->client_id?"selected":""}}>{{$v->code .' - '. $v->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>                         
