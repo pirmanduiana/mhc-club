@@ -52,7 +52,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                        <select class="form-control" name="employee_id">
+                                        <select class="form-control" name="mhc_code">
                                             <!--  -->
                                         </select>
                                     </div>                         
@@ -68,7 +68,9 @@
                                         <select class="form-control" name="provider_id">
                                             <option></option>
                                             @foreach($provider as $k=>$v)
-                                            <option value="{{$v->id}}" {{$v->id==$trnbilling->provider_id?"selected":""}}>{{$v->name}}</option>
+                                            <option value="{{$v->id}}" {{$v->id==$trnbilling->provider_id?"selected":""}}>
+                                                {{$v->code .' - '. $v->name}}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>                         
@@ -163,6 +165,7 @@
 <script>    
 
     billing_id = "{{$trnbilling->id}}";
+    mhc_code = "{{$trnbilling->mhc_code}}";
 
     var getTotal = function(){
         $.ajax({
@@ -220,11 +223,12 @@
             type: "get",
             dataType: "json"
         }).done(function(json){
-            $("select[name='employee_id']").empty().trigger('change');
+            $("select[name='mhc_code']").empty().trigger('change');
             $.each(json, function(k,v){
                 var newState = new Option(v.text, v.id, true, true);
-                $("select[name='employee_id']").append(newState).trigger('change');
+                $("select[name='mhc_code']").append(newState).trigger('change');
             });
+            $("select[name='mhc_code']").val(mhc_code).trigger('change');
         }).fail(function(xhr){
             //...
         });
@@ -249,7 +253,7 @@
                 {name:'_token', value:"{{ csrf_token() }}"},
                 {name:'id', value:billing_id},
                 {name:'client_id', value:$("select[name='client_id']").val()},
-                {name:'employee_id', value:$("select[name='employee_id']").val()},
+                {name:'mhc_code', value:$("select[name='mhc_code']").val()},
                 {name:'provider_id', value:$("select[name='provider_id']").val()},
                 {name:'date', value:$("input[name='date']").val()},
                 {name:'diagnosa', value:$("input[name='diagnosa']").val()},

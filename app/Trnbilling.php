@@ -12,7 +12,7 @@ class Trnbilling extends Model
         'code',
         'date',
         'client_id',
-        'employee_id',
+        'mhc_code',
         'provider_id',
         'diagnosa',
         'doctor_id',
@@ -34,7 +34,7 @@ class Trnbilling extends Model
 
     public function employee()
     {
-        return $this->hasOne(Mstclientemployee::class, 'id', 'employee_id');
+        return $this->hasOne(Viewpasienactive::class, 'mhc_code', 'mhc_code');
     }
     
 }

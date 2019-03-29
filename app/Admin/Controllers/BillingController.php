@@ -25,6 +25,7 @@ use App\Trnbilling;
 use App\Mstbillingobj;
 use App\Trnbillingitem;
 use App\Mstprovider;
+use App\Viewpasienactive;
 
 class BillingController extends Controller
 {
@@ -185,7 +186,7 @@ class BillingController extends Controller
             "code" => "FJDLSFJLDKS",
             "date" => $request->date,
             "client_id" => $request->client_id,
-            "employee_id" => $request->employee_id,
+            "mhc_code" => $request->mhc_code,
             "provider_id" => $request->provider_id,
             "diagnosa" => $request->diagnosa,
             "doctor_id" => 99, // temp
@@ -211,7 +212,7 @@ class BillingController extends Controller
             "date"=>$request->date,
             "total"=>$request->total,
             "client_id" => $request->client_id,
-            "employee_id"=>$request->employee_id,
+            "mhc_code"=>$request->mhc_code,
             "diagnosa" => $request->diagnosa
         ]);
         if ($update) {
@@ -228,12 +229,13 @@ class BillingController extends Controller
 
     public function getEmpByClient($client_id)
     {
-        $data = Mstclientemployee::where("client_id", $client_id)->get();
+        $data = Viewpasienactive::where('client_id', $client_id)->get();
+
         $select2data = [];
         foreach ($data as $key => $value) {
             $select2data[] = [
-                "id" => $value->id,
-                "text" => $value->mhc_code ." - ". $value->name
+                "id" => $value->mhc_code,
+                "text" => $value->mhc_code ." - ". $value->name ." (". $value->jenis .")"
             ];
         }
         return response()->json($select2data);

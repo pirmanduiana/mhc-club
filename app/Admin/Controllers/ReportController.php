@@ -219,7 +219,7 @@ class ReportController extends Controller
         ->join('mst_provider','mst_provider.id','=','trn_billing.provider_id')
         ->whereBetween('trn_billing.date',[$start_date, $end_date])
         ->where('client_id',$client_id)
-        ->select(DB::raw('mst_provider.code provider_code'), DB::raw('mst_provider.name provider_name'), DB::raw('CONCAT(MONTHNAME(trn_billing.date)," ",YEAR(trn_billing.date)) as month_name'), DB::raw('COUNT(`trn_billing`.employee_id) AS jml_px'), DB::raw('SUM(trn_billing.total) AS total'))
+        ->select(DB::raw('mst_provider.code provider_code'), DB::raw('mst_provider.name provider_name'), DB::raw('CONCAT(MONTHNAME(trn_billing.date)," ",YEAR(trn_billing.date)) as month_name'), DB::raw('COUNT(`trn_billing`.id) AS jml_px'), DB::raw('SUM(trn_billing.total) AS total'))
         ->groupBy('mst_provider.code','mst_provider.name','month_name')->orderBy('trn_billing.date')->get();
 
         // header
