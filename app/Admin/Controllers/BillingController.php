@@ -190,7 +190,8 @@ class BillingController extends Controller
             "provider_id" => $request->provider_id,
             "diagnosa" => $request->diagnosa,
             "doctor_id" => 99, // temp
-            "total" => $request->total
+            "total" => $request->total,
+            "catatan" => $request->catatan
         ]);
         if ($billing) {
             foreach ($request->item as $p=>$q) {
@@ -213,7 +214,8 @@ class BillingController extends Controller
             "total"=>$request->total,
             "client_id" => $request->client_id,
             "mhc_code"=>$request->mhc_code,
-            "diagnosa" => $request->diagnosa
+            "diagnosa" => $request->diagnosa,
+            "catatan" => $request->catatan
         ]);
         if ($update) {
             foreach ($request->item as $p=>$q) {

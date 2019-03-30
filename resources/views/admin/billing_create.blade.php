@@ -127,6 +127,18 @@
 
                         <div class="col-md-12" style="margin-bottom:10px;">
                             <div class="form-group">
+                                <label for="title" class="col-sm-2  control-label">Catatan</label>
+                                <div class="col-sm-8">                                    
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-sticky-note fa-fw"></i></span>
+                                        <input type="text" id="catatan" name="catatan" class="form-control title" placeholder="Isi catatan bila diperlukan...">
+                                    </div>                         
+                                </div>
+                            </div>
+                        </div><br>
+
+                        <div class="col-md-12" style="margin-bottom:10px;">
+                            <div class="form-group">
                                 <button id="btn_SimpanBill">Simpan</button>
                             </div>
                         </div>
@@ -252,8 +264,9 @@
                 {name:'provider_id', value:$("select[name='provider_id']").val()},
                 {name:'date', value:$("input[name='date']").val()},
                 {name:'diagnosa', value:$("input[name='diagnosa']").val()},
-                {name:'total', value:$("input[name='total']").autoNumeric('get')}
-            ];            
+                {name:'total', value:$("input[name='total']").autoNumeric('get')},
+                {name:'catatan', value:$("input[name='catatan']").val()}
+            ];
             data = $.merge(itemArray, headerArray);            
         });
         $.ajax({

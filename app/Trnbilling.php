@@ -19,7 +19,8 @@ class Trnbilling extends Model
         'subtotal',
         'surcharge',
         'discount',
-        'total'
+        'total',
+        'catatan'
     ];
 
     public function provider()
