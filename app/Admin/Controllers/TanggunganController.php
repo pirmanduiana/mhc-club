@@ -100,7 +100,7 @@ class TanggunganController extends Controller
         $grid = new Grid(new Mstclientemployeemember);
 
         $grid->tools(function ($tools) {
-            $tools->append('<a href="/admin/employee" class="btn btn-sm btn-info"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Daftar karyawan</a>');
+            $tools->append('<a href="javascript::void(0)" onClick="javascript:history.go(-1)" class="btn btn-sm btn-info"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Daftar karyawan</a>');
         });
 
         $grid->filter(function($filter){
@@ -108,7 +108,8 @@ class TanggunganController extends Controller
             $filter->like('name', 'Nama');
             $filter->like('mhc_code', 'Kode MHC');
             $filter->equal('employee_id','Penanggung')->select(function(){
-                return Mstclientemployee::get()->pluck('name','id');
+                return Mstclientemployee::join('mst_client','mst_client.id','mst_client_employee.client_id')->select('mst_client_employee.id', DB::raw('CONCAT(mst_client.code," - ",mst_client_employee.name) as name'))
+                ->get()->pluck('name','id');
             });            
         });
 
@@ -117,10 +118,13 @@ class TanggunganController extends Controller
         $grid->id('ID')->sortable();
         $grid->mhc_code('Kode MHC');
         $grid->name('Nama');
+        $grid->employee_id('Penanggung')->display(function($employee_id){
+            $employee = Mstclientemployee::where('mst_client_employee.id', $employee_id)->join('mst_client','mst_client.id','=','mst_client_employee.client_id')->select('mst_client_employee.*', DB::raw('mst_client.code as client_code'))->first();
+            return '<a href="'.url('/admin/employee/'.$employee_id).'">'.$employee->client_code ."-".$employee->name.'</a>';
+        });
         $grid->family_status('Hub. keluarga');
         $grid->dob('Tgl. lahir');
         $grid->bpjs_code('Kode BPJS');
-        $grid->column('employee.name','Penanggung');
         $grid->status_id('Status')->display(function($status_id){
             $status = [
                 1=>"<span class='label label-info'>Active</span>",
