@@ -106,7 +106,7 @@ class EmployeeController extends Controller
         }
 
         $grid->filter(function($filter){
-            $filter->disableIdFilter();
+            // $filter->disableIdFilter();
             $filter->like('name', 'Nama');
             $filter->like('mhc_code', 'Kode MHC');
             $filter->equal('dob', 'Tgl. lahir')->date();
