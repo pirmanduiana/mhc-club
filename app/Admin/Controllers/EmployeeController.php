@@ -111,7 +111,8 @@ class EmployeeController extends Controller
             $filter->like('mhc_code', 'Kode MHC');
             $filter->equal('dob', 'Tgl. lahir')->date();
             $filter->equal('client_id','Perusahaan')->select(function(){
-                return Mstclient::get()->pluck('name','id');
+                return Mstclient::select(DB::raw('CONCAT(code," - ",name) as name'), 'id')->get()
+                ->pluck('name','id');
             });
             $filter->equal('status_id','Status anggota')->radio([
                 ''   => 'Semua',

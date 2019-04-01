@@ -50,6 +50,7 @@ class ImportController extends Controller
                         $row++; continue;
                     }
                     $employee = new Mstclientemployee();
+                    $employee->id = $v[0];
                     $employee->mhc_code = $v[1];
                     $employee->name = $v[2];
                     $employee->dob = $v[3];
@@ -109,6 +110,7 @@ class ImportController extends Controller
                         $row++; continue;
                     }
                     $tanggungan = new Mstclientemployeemember();
+                    $tanggungan->id = $v[0];
                     $tanggungan->mhc_code = $v[1];
                     $tanggungan->name = $v[2];
                     $tanggungan->dob = $v[3]; 
