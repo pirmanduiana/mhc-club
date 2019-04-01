@@ -100,7 +100,7 @@ class TanggunganController extends Controller
         $grid = new Grid(new Mstclientemployeemember);
 
         $grid->tools(function ($tools) {
-            $tools->append('<a href="javascript::void(0)" onClick="javascript:history.go(-1)" class="btn btn-sm btn-info"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Kembali</a>');
+            $tools->append('<a href="javascript:void(0)" onClick="javascript:history.go(-1)" class="btn btn-sm btn-info"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Kembali</a>');
         });
 
         $grid->filter(function($filter){
