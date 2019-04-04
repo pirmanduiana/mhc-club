@@ -25,7 +25,7 @@
 							</p>
 							<h3><a href="blog.html">{{$bloglist->title}}</a></h3>
 							<p>{{$bloglist->content}}</p>
-							<p><a href="#">Read more <i class="icon-arrow-right3"></i></a></p>
+							<p><a href="{{url('/single-blog/').'/'.$bloglist->id}}">Read more <i class="icon-arrow-right3"></i></a></p>
 						</div>
 					</div>
 				</div>
@@ -37,7 +37,7 @@
 							<p class="date">
 								<span><a href="#">Admin</a></span>
 								<span>May 20 2019</span>
-								<span><a href="#">4 <i class="icon-speech-bubble"></i></a></span>
+								<span><a href="">4 <i class="icon-speech-bubble"></i></a></span>
 							</p>
 							<h3><a href="blog.html">Training for first aid</a></h3>
 							<p>We provide training for our health workers about basic life support. This training covers the procedure for resusciting pulse and heart, the way to handling unconscious patient, handling of patients that have an increased animal bits, handling of patient who have an injury that cause by the fuel or fire.</p>
