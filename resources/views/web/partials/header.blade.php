@@ -51,6 +51,7 @@
 									</ul>
 								</li> -->
 								<li class="{{$page == 'blog' ? 'active' : ''}}"><a href="{{url('/blog')}}">Blog</a></li>
+								<li class="{{$page == 'gallery' ? 'active' : ''}}"><a href="{{url('/gallery')}}">Gallery</a></li>
 								<li class="{{$page == 'contact' ? 'active' : ''}}""><a href="{{url('/contact')}}">Contact</a></li>
 							</ul>
 						</div>

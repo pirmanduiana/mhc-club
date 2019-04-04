@@ -70,6 +70,7 @@ Route::group([
     $router->resource('/web/testimony', 'WebTestimonyController');
     $router->resource('/web/blog', 'WebBlogController');
     $router->resource('/web/service', 'WebServiceController');
+    $router->resource('/web/gallery', 'WebGalleryController');
     
     
 });
