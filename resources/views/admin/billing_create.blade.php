@@ -293,9 +293,34 @@
             todayHighlight: true
         }).attr("autocomplete", "off");
 
-        $('select').select2({
+        $('select[name="client_id"], select[name="provider_id"]').select2({
             allowClear: true,
             placeholder: "Pilih"
+        });
+
+        $('select[name="mhc_code"]').select2({
+            ajax: {
+                url: "/admin/get/employee/byclient",
+                type: "get",
+                dataType: "json",
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        client_id: $('select[name="client_id"]').val()
+                    };
+                },
+                processResults: function (data) {
+                    // parse the results into the format expected by Select2.
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            },
+            minimumInputLength: 2
         });
 
         initAutoNumeric();        
@@ -309,9 +334,9 @@
             simpanBill();
         })
 
-        $("select[name='client_id']").on("change", function(){
-            changeEmployee(this.value);
-        })
+        // $("select[name='client_id']").on("change", function(){
+        //     changeEmployee(this.value);
+        // })
 
     });
 </script>

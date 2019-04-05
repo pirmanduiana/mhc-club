@@ -231,15 +231,13 @@
 
     var changeEmployee = function(this_value){
         $.ajax({
-            url: "/admin/get/employee/byclient/" + this_value,
+            url: "/admin/get/employee/bymhccode/?q=" + encodeURIComponent(this_value),
             type: "get",
             dataType: "json"
         }).done(function(json){
             $("select[name='mhc_code']").empty().trigger('change');
-            $.each(json, function(k,v){
-                var newState = new Option(v.text, v.id, true, true);
-                $("select[name='mhc_code']").append(newState).trigger('change');
-            });
+            var newState = new Option(json.text, json.id, true, true);
+            $("select[name='mhc_code']").append(newState).trigger('change');            
             $("select[name='mhc_code']").val(mhc_code).trigger('change');
         }).fail(function(xhr){
             //...
@@ -299,14 +297,39 @@
             todayHighlight: true
         }).attr("autocomplete", "off");
 
-        $('select').select2({
+        $('select[name="client_id"], select[name="provider_id"]').select2({
             allowClear: true,
             placeholder: "Pilih"
         });
 
+        $('select[name="mhc_code"]').select2({
+            ajax: {
+                url: "/admin/get/employee/byclient",
+                type: "get",
+                dataType: "json",
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        client_id: $('select[name="client_id"]').val()
+                    };
+                },
+                processResults: function (data) {
+                    // parse the results into the format expected by Select2.
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            },
+            minimumInputLength: 2
+        });
+
         initAutoNumeric();
 
-        changeEmployee($("select[name='client_id']").val());
+        changeEmployee("{{$trnbilling->mhc_code}}");
 
         getTotal();
 
@@ -319,9 +342,9 @@
             simpanBill();
         })
 
-        $("select[name='client_id']").on("change", function(){
-            changeEmployee(this.value);
-        })
+        // $("select[name='client_id']").on("change", function(){
+        //     changeEmployee(this.value);
+        // })
 
     });
 </script>

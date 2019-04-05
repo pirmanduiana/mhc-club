@@ -229,9 +229,17 @@ class BillingController extends Controller
         return response()->json($update);
     }
 
-    public function getEmpByClient($client_id)
-    {
-        $data = Viewpasienactive::where('client_id', $client_id)->get();
+    public function getEmpByClient()
+    {        
+        $client_id = $_GET['client_id'];
+
+        $data = Viewpasienactive::where('client_id', $client_id)
+        ->where(function($query){
+            $params = $_GET['q'];
+            $query->orWhere('name','LIKE',"%{$params}%");
+            $query->orWhere('mhc_code','LIKE',"%{$params}%");
+        })
+        ->get();
 
         $select2data = [];
         foreach ($data as $key => $value) {
@@ -240,6 +248,17 @@ class BillingController extends Controller
                 "text" => $value->mhc_code ." - ". $value->name ." (". $value->jenis .")"
             ];
         }
+        return response()->json($select2data);
+    }
+
+    public function getEmpByMhccode()
+    {
+        $mhc_code = urldecode($_GET['q']);
+        $data = Viewpasienactive::where('mhc_code', $mhc_code)->first();
+        $select2data = [
+            "id" => $data->mhc_code,
+            "text" => $data->mhc_code ." - ". $data->name ." (". $data->jenis .")"
+        ];        
         return response()->json($select2data);
     }
 

@@ -14,7 +14,8 @@
 						@endphp
 						@foreach($gallery as $gallerylist)
 						<div class="item">
-							<div class="col-md-6">
+							<div class="gallery-title" style="margin-left: 15px; margin-bottom: 10px;">{{$gallerylist->title}}</div>
+							<div class="col-md-12">
 								<div class="doctor-img" style="background-image: url({{ asset('/uploads/').'/'.$gallerylist->image }});">
 								</div>
 							</div>
@@ -22,7 +23,7 @@
 						@endforeach
 					</div>
 				</div>
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-3 col-sm-6 col-xs-12 animate-box text-center">
 						<div class="doctor">
 							<div class="staff-img" style="background-image: url(images/staff-4.jpg);"></div>
@@ -83,7 +84,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
