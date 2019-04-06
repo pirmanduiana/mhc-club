@@ -342,9 +342,9 @@
             simpanBill();
         })
 
-        // $("select[name='client_id']").on("change", function(){
-        //     changeEmployee(this.value);
-        // })
+        $("select[name='client_id']").on("change", function(){
+            $("select[name='mhc_code']").empty().trigger('change');
+        })
 
     });
 </script>
