@@ -52,7 +52,7 @@
             </div>
             <div class="title">
                 <div class="input-group">
-                    <input type="text" name="search_value" placeholder="Ketik disini ..." class="form-control">
+                    <input type="text" name="search_value" placeholder="Cari pasien disini ..." class="form-control">
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-success btn-flat" id="btn_search">Cari</button>
                     </span>
@@ -92,26 +92,10 @@
         $.ajax({
             url: "/admin/dashboard/search/?q=" + encodeURIComponent(search_value),
             type: "get",
-            dataType: "json"
-        }).done(function(json){
+            dataType: "html"
+        }).done(function(html){
             // ...
-            $("#box_searchresult").show();
-            var html = "";
-            if (json.length == 0) {
-                html = "Tidak ada hasil pencarian...";
-            } else {
-                html += "<ul>";
-                $.each(json, function(k,v){
-                    html += "<li>Hasil pencarian pada data "+k+"</li>";
-                    $.each(v, function(x,y){
-                        html += "<p><a href='"+y.view_url+"'>"+y.kode+"</a>" + "- " + y.nama + " / "
-                        html += "status karyawan " + y.status;
-                        html += "</p>";
-                    });
-                    html += "<hr>";
-                });
-                html += "</ul>";
-            }
+            $("#box_searchresult").show();            
             $("#div_searchresult").html(html);
 
         }).fail(function(xhr){

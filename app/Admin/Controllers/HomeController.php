@@ -62,18 +62,12 @@ class HomeController extends Controller
     public function search($search_value="")
     {
         $result = $this->searchSrc($search_value);
-
-        $group = [];
-        foreach ($result as $x=>$y) {
-            $group[$y->type][$y->id] = [
-                'kode' => $y->mhc_code,
-                'nama' => $y->name,
-                'status' => $y->status_name,
-                'client' => $y->client_name,
-                'view_url' => $y->view_url
-            ];
+        
+        $grouped = [];
+        foreach ($result as $k=>$v) {
+            $grouped[$v->client_name][] = $v->toArray();
         }
 
-        return response()->json($group);
+        return view('admin.dashboard-result')->with(compact('grouped'));
     }
 }
