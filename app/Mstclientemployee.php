@@ -35,4 +35,9 @@ class Mstclientemployee extends Model
     {
         return $this->hasOne(Mstclass::class, 'id', 'class_id');
     }
+
+    public function tanggungan()
+    {
+        return $this->hasMany(Mstclientemployeemember::class, 'employee_id', 'id');
+    }
 }

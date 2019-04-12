@@ -111,6 +111,7 @@ class ReportController extends Controller
         
         $tab->add('Bill by month', view('admin.rpt_bill_bymonth')->with(compact('clients','bulan_array','tahun_array')));
         $tab->add('Bill by date', view('admin.rpt_bill_bydate')->with(compact('clients','bulan_array','tahun_array')));
+        $tab->add('Cetak Karyawan/tanggungan', view('admin.rpt_mst_px')->with(compact('clients')));
 
         return $tab->render();
     }
@@ -340,5 +341,37 @@ class ReportController extends Controller
         $last_date_of_month = $request->last_date_of_month;
 
         return $this->get_billByClient($first_date_of_month, $last_date_of_month, $request->client_id, $request, $pdf);
+    }
+
+    public function mst_px(Request $request, $pdf=0)
+    {
+        /*
+         parameters: array:3 [▼
+            "_token" => "SNkzHwLluDGs9bpFa3VQTL1MacDKqZc64eJGhfux"
+            "client_id" => "4"
+            "status_id" => "1"
+        ]
+         */
+        $parameter = [
+            "title" => "Data Kayawan dan Tanggungan",
+            "client" => Mstclient::find($request->client_id)->name,
+            "status" => ($request->status_id==1 ? "Aktif" : "Tidak Aktif")
+        ];
+
+        $karyawan = Mstclientemployee::where('client_id',$request->client_id)->where('status_id',$request->status_id)
+        ->join('mst_client_department','mst_client_department.id','=','mst_client_employee.department_id')
+        ->join('mst_class','mst_class.id','=','mst_client_employee.class_id')
+        ->select(
+            'mst_client_employee.*',
+            DB::raw('mst_client_department.name as deptname'),
+            DB::raw('mst_class.name as classname')
+        )
+        ->with('tanggungan')->get();
+
+        if ($pdf==1) {
+            $view_pdf = PDF::loadView('admin.print.rpt_mst_px', compact('karyawan','parameter'))->setPaper('a4', 'landscape');
+            return $view_pdf->stream('MHC-Bill Rekap Klaim per Bulan.pdf');
+        }
+        return view('admin.print.rpt_mst_px')->with(compact('karyawan','parameter'));
     }
 }

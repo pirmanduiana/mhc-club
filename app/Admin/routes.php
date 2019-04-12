@@ -53,6 +53,7 @@ Route::group([
     $router->resource('/report', 'ReportController');
     $router->post('/rpt/bill/bymonth/{pdf}', 'ReportController@bill_bymonth');
     $router->post('/rpt/bill/bydate/{pdf}', 'ReportController@bill_bydate');
+    $router->post('/rpt/mst/px/{pdf}', 'ReportController@mst_px');
 
     // dashboard
     $router->get('/dashboard/search', 'HomeController@search');
