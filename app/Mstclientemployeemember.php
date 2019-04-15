@@ -16,7 +16,8 @@ class Mstclientemployeemember extends Model
         'employee_id',
         'family_status',
         'status_id',
-        'catatan'
+        'catatan',
+        'last_inactive'
     ];
 
     public function employee()

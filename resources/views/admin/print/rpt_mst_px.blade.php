@@ -75,7 +75,12 @@
                 <td>{{$v->deptname}}</td>
                 <td>{{$v->classname}}</td>
                 <td>{{$v->bpjs_code}}</td>
-                <td>{{$v->status_id==1 ? "Aktif" : "Tidak aktif"}}</td>
+                <td>
+                  {{$v->status_id==1 ? "Aktif" : "Tidak aktif"}}
+                  @if(!empty($v->last_inactive))
+                  Dinonaktifkan pada {{date('F Y', strtotime($v->last_inactive))}}
+                  @endif
+                </td>
             </tr>
             @endforeach
         </tbody>

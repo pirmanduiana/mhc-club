@@ -10,6 +10,10 @@
         font-size: 24px;
         font-weight: bold;
     }
+    .last_inactive {
+        margin-left: 5px;
+        display: none;
+    }
 </style>
 
 <section class="content">
@@ -233,8 +237,9 @@
                 <div class="radio">
                 <label>
                     <input type="radio" name="optionsRadios" id="optionsRadios2" value="2" {{$employee->status_id==2 ? "checked" : ""}}>
-                    Non aktif
-                </label>
+                    Non aktif 
+                    <input type="text" class="date last_inactive" name="last_inactive">
+                </label>                
                 </div>                
             </div>
             <div class="form-group">
@@ -285,6 +290,15 @@
     $(document).ready(function(){
         
         // ...
+        $('.date').datepicker({
+            format: "yyyy/mm/dd",
+            startDate: "2000-01-01",
+            endDate: "2050-01-01",
+            todayBtn: "linked",
+            autoclose: true,
+            todayHighlight: true
+        }).attr("autocomplete", "off");
+
         $("#a_triggerrubahstatus").on("click", function(){
             modalRubahStatus();
         });
@@ -292,6 +306,14 @@
         $("#btn_rubahstatuskaryawan").on("click", function(e){
             e.preventDefault();
             submitRubahStatus();
+        });
+
+        if ($("input[name='optionsRadios']:checked").val()==2) {                
+            $(".last_inactive").toggle();
+        }
+        
+        $("input[name='optionsRadios']").on("change", function(){
+            $(".last_inactive").toggle();            
         });
 
     });

@@ -239,7 +239,15 @@ class EmployeeController extends Controller
     public function rubahStatus(Request $request)
     {
         // update status
-        $update = Mstclientemployee::find($request->employee_id)->update(["status_id"=>$request->optionsRadios]);
+        $update = Mstclientemployee::find($request->employee_id);
+        $update->update(["status_id" => $request->optionsRadios]);
+
+        if ($request->optionsRadios==2) {
+            $update->update(["last_inactive" => $request->last_inactive]);
+        } else {
+            $update->update(["last_inactive" => null]);
+        }
+
         if ($update) {
             // update tanggungan status
             Mstclientemployeemember::where("employee_id",$request->employee_id)->update(["status_id"=>$request->optionsRadios]);
@@ -250,7 +258,7 @@ class EmployeeController extends Controller
             $log->notes = $before_reason .": ". $request->reason;
             $log->user_id = Admin::user()->id;
             $log->save();
-            if (!empty($log)) {
+            if (!empty($log)) {                
                 return response()->json([true, $log]);
             }
         }
