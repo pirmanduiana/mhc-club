@@ -18,7 +18,8 @@ class Mstclientemployee extends Model
         'department_id',
         'class_id',
         'status_id',
-        'bpjs_code'
+        'bpjs_code',
+        'catatan'
     ];
 
     public function client()

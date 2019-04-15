@@ -15,7 +15,8 @@ class Mstclientemployeemember extends Model
         'bpjs_code',
         'employee_id',
         'family_status',
-        'status_id'
+        'status_id',
+        'catatan'
     ];
 
     public function employee()

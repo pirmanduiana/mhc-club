@@ -173,7 +173,8 @@ class EmployeeController extends Controller
                 "name" => $y->name,
                 "family_status" => $y->family_status,
                 "barcode" => 'data:image/png;base64,' . DNS1D::getBarcodePNG($y->mhc_code, "C39+",1,33,array(1,1,4)),
-                "status_id" => $y->status_id
+                "status_id" => $y->status_id,
+                "catatan" => $y->catatan
             ];
         }
 
@@ -215,6 +216,7 @@ class EmployeeController extends Controller
         })->rules('required');
         $form->radio('status_id','Status karyawan')->options(['1'=>'Active', '2'=>'Inactive'])->default('1');
         $form->text('bpjs_code', 'Kode BPJS')->rules('required');
+        $form->text('catatan', 'Catatan tambahan');
         
         $form->saved(function (Form $form) {
             // update tanggungan status

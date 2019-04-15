@@ -176,6 +176,7 @@ class TanggunganController extends Controller
         $form->date('dob', 'Tgl. lahir');        
         $form->text('bpjs_code', 'Kode BPJS')->rules('required');
         $form->radio('status_id','Status')->options(['1'=>'Active', '2'=>'Inactive'])->default('1');
+        $form->text('catatan', 'Catatan tambahan');
 
         $form->saved(function (Form $form) {
             // log

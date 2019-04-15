@@ -43,9 +43,13 @@
                                         <label for="no_surat1">Kelas:</label><br>
                                         <span class="highlight">{{ $employee->class_name }}</span>
                                     </div>    
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <label for="nama_kegiatan1">Kode BPJS:</label><br>
                                         <span class="highlight">{{ $employee->bpjs_code }}</span>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="nama_kegiatan1">Catatan:</label><br>
+                                        <span class="">{{ $employee->catatan }}</span>
                                     </div>            
                                 </div>
                             </div>
@@ -108,6 +112,7 @@
                                             <th>Nama</th>
                                             <th>Hub. keluarga</th>
                                             <th>Status</th>
+                                            <th>Catatan</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -126,6 +131,8 @@
                                                 @else
                                                     <td><span class='label label-default'>Tidak aktif </span></td>
                                                 @endif
+
+                                                <td>-</td>
 
                                             </tr>                                        
                                             @endforeach
