@@ -89,7 +89,7 @@
 
 <script>    
 
-    var previewRpt = function(){
+    var previewRpt3 = function(){
         var data = $("form[name='frmReport3']").serializeArray();
         $.ajax({
             url: "/admin/rpt/mst/px/0",
@@ -124,7 +124,7 @@
 
         $("#btn_TampilRpt3").on("click", function(e){
             e.preventDefault();
-            previewRpt();
+            previewRpt3();
         });        
 
     });
