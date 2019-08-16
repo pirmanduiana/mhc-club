@@ -20,6 +20,7 @@ use App\Mstclientdepartment;
 use App\Trnclientcoverage;
 use App\Trnemployeelog;
 use App\Mstclientemployeemember;
+use App\Mstprovider;
 use Encore\Admin\Widgets\Tab;
 use DateTime;
 use App\Trnbilling;
@@ -98,6 +99,7 @@ class ReportController extends Controller
         $tab = new Tab();
 
         $clients = Mstclient::where("status_id",1)->get();
+        $providers = Mstprovider::where("status_id",1)->get();
         $bulan_array = [
             1 => "Januari", 2 => "Februari", 3 => "Maret", 4 => "April",
             5 => "Mei", 6 => "Juni", 7 => "Juli", 8 => "Agustus",
@@ -109,8 +111,9 @@ class ReportController extends Controller
             $tahun_array[$i] = $i;
         }
         
-        $tab->add('Bill by month', view('admin.rpt_bill_bymonth')->with(compact('clients','bulan_array','tahun_array')));
-        $tab->add('Bill by date', view('admin.rpt_bill_bydate')->with(compact('clients','bulan_array','tahun_array')));
+        $tab->add('Monthly bill by client', view('admin.rpt_bill_bymonth')->with(compact('clients','bulan_array','tahun_array')));
+        $tab->add('Daily bill by client', view('admin.rpt_bill_bydate')->with(compact('clients','bulan_array','tahun_array')));
+        $tab->add('Daily bill by provider', view('admin.rpt_bill_bydate_provider')->with(compact('providers','bulan_array','tahun_array')));
         $tab->add('Cetak Karyawan/tanggungan', view('admin.rpt_mst_px')->with(compact('clients')));
 
         return $tab->render();
@@ -309,7 +312,7 @@ class ReportController extends Controller
             $param_to = $this->get_MonthName($request->month_to).' '.$request->year_to;
         }
         $parameter = [
-            "title" => "Laporan Klaim per Bulan",
+            "title" => "Laporan Klaim Bulanan per Client",
             "client" => Mstclient::find($request->client_id)->name,
             "from" => $param_from,
             "to" => $param_to
@@ -317,9 +320,116 @@ class ReportController extends Controller
 
         if ($pdf==1) {
             $view_pdf = PDF::loadView('admin.print.rpt_bill_bymonth', compact('data_return','parameter'))->setPaper('a4', 'landscape');
-            return $view_pdf->stream('MHC-Bill Rekap Klaim per Bulan.pdf');
+            return $view_pdf->stream('MHC-Bill Rekap Klaim Bulanan per Client.pdf');
         }
         return view('admin.print.rpt_bill_bymonth')->with(compact('data_return','parameter'));
+    }
+    private function get_billByProvider($start_date, $end_date, $provider_id, $request, $pdf)
+    {
+        $data = Trnbilling::join('mst_client','mst_client.id','=','trn_billing.client_id')
+        ->join('mst_provider','mst_provider.id','=','trn_billing.provider_id')
+        ->whereBetween('trn_billing.date',[$start_date, $end_date])
+        ->where('provider_id',$provider_id)
+        ->select(DB::raw('mst_client.code client_code'), DB::raw('mst_client.name client_name'), DB::raw('CONCAT(MONTHNAME(trn_billing.date)," ",YEAR(trn_billing.date)) as month_name'), DB::raw('COUNT(`trn_billing`.id) AS jml_px'), DB::raw('SUM(trn_billing.total) AS total'))
+        ->groupBy('mst_client.code','mst_client.name','month_name')->orderBy('trn_billing.date')->get();
+
+        // header
+        $vipot_columns = array_unique($data->pluck('month_name')->toArray());
+        $vipot_columns = array_values($vipot_columns);
+
+        // data
+        $grouping = [];
+        foreach ($data as $x=>$y) {
+            $key = $y->client_code;
+            if (!array_key_exists($key, $grouping)) {
+                $grouping[$key] = [
+                    'name' => $y->client_name,
+                    'vipot_values' => [],
+                    'ttl_px' => $y->jml_px,
+                    'ttl_nilai' => $y->total
+                ];
+            } else {
+                $grouping[$key]['ttl_px'] = $grouping[$key]['ttl_px'] + $y->jml_px;
+                $grouping[$key]['ttl_nilai'] = $grouping[$key]['ttl_nilai'] + $y->total;
+            }
+            // grouping by month
+            foreach ($vipot_columns as $v=>$w) {
+                foreach($data as $j=>$k) {
+                    if ($k->month_name==$w) {
+                        if ($k->client_code==$key) {
+                            $grouping[$key]['vipot_values'][$k->month_name] = [
+                                'px' => $k->jml_px,
+                                'nilai' => $k->total
+                            ];
+                        }
+                    } else {
+                        if ($k->client_code==$key) {
+                            $grouping[$key]['vipot_values'][$k->month_name] = [
+                                'px' => $k->jml_px,
+                                'nilai' => $k->total
+                            ];
+                        } else {
+                            $grouping[$key]['vipot_values'][$w] = [
+                                'px' => 0,
+                                'nilai' => 0
+                            ];
+                        }
+                    }
+                }
+            }
+            // sorting ref to vipot columns
+            $grouping[$key]['vipot_values'] = array_merge(array_flip($vipot_columns), $grouping[$key]['vipot_values']);
+        }
+
+        // sum data
+        $get_vipots = [];
+        foreach ($grouping as $a=>$b) {
+            foreach ($b['vipot_values'] as $c=>$d) {
+                $get_vipots[$c][] = $d;
+            }
+        }
+        $group_by_month = [];
+        foreach ($get_vipots as $g=>$h) {
+            foreach($h as $i=>$j) {
+                $key = $g;
+                if (! array_key_exists($key, $group_by_month) ) {
+                    $group_by_month[$key] = [
+                        'px'=>$j['px'],
+                        'nilai'=>$j['nilai']
+                    ];
+                } else {
+                    $group_by_month[$key]['px'] = $group_by_month[$key]['px'] + $j['px'];
+                    $group_by_month[$key]['nilai'] = $group_by_month[$key]['nilai'] + $j['nilai'];
+                }
+            }
+        }
+
+        $data_return = [
+            "vipot" => $vipot_columns,
+            "data" => $grouping,
+            "sum" => $group_by_month
+        ];
+
+        $param_from = $request->first_date_of_month;
+        if (!empty($request->month_from)) {
+            $param_from = $this->get_MonthName($request->month_from).' '.$request->year_from;
+        }        
+        $param_to = $request->last_date_of_month;
+        if (!empty($request->month_from)) {
+            $param_to = $this->get_MonthName($request->month_to).' '.$request->year_to;
+        }
+        $parameter = [
+            "title" => "Laporan Klaim Bulanan per Provider",
+            "provider" => Mstprovider::find($request->provider_id)->name,
+            "from" => $param_from,
+            "to" => $param_to
+        ];
+
+        if ($pdf==1) {
+            $view_pdf = PDF::loadView('admin.print.rpt_bill_bymonth_provider', compact('data_return','parameter'))->setPaper('a4', 'landscape');
+            return $view_pdf->stream('MHC-Bill Rekap Klaim Bulanan per Provider.pdf');
+        }
+        return view('admin.print.rpt_bill_bymonth_provider')->with(compact('data_return','parameter'));
     }
 
     public function bill_bymonth(Request $request, $pdf=0)
@@ -341,6 +451,14 @@ class ReportController extends Controller
         $last_date_of_month = $request->last_date_of_month;
 
         return $this->get_billByClient($first_date_of_month, $last_date_of_month, $request->client_id, $request, $pdf);
+    }
+
+    public function bill_bydateprovider(Request $request, $pdf=0)
+    {
+        $first_date_of_month = $request->first_date_of_month;
+        $last_date_of_month = $request->last_date_of_month;
+
+        return $this->get_billByProvider($first_date_of_month, $last_date_of_month, $request->provider_id, $request, $pdf);
     }
 
     public function mst_px(Request $request, $pdf=0)
