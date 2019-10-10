@@ -15,11 +15,12 @@ class PageController extends Controller
     //
     public function index()
     {
-        // $company = Syscompany::first();
+        $company = Syscompany::first();
         $client = Mstclient::all()->count();
         $provider = Mstprovider::all()->count();
         $page = '';
-        return view('web.page.home',compact('page','client','provider'));
+
+        return view('web.page.home',compact('client','provider','company','page'));
     }
 
     public function page($page = "")

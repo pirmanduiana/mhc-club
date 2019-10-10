@@ -172,7 +172,7 @@
 					</span>
 				</div>
 				<div class="col-md-6 col-md-pull-6 animate-box">
-					<h2>About Mandiri Health Care</h2>
+					<h2>About {{$company->name}}</h2>
 					<p class="text-justify">
 						<img src="{{ asset('/uploads').'/'.$about->image_logo }}" class="about-logo">
 						{{$about->content}}
