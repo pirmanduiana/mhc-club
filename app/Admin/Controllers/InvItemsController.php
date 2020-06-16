@@ -3,6 +3,9 @@
 namespace App\Admin\Controllers;
 
 use App\InvItems;
+use App\InvUnits;
+use App\InvStatuses;
+use App\InvCategories;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -133,12 +136,22 @@ class InvItemsController extends Controller
 
         $form->text('code', 'Code');
         $form->text('name', 'Name');
-        $form->number('inv_categories_id', 'Inv categories id');
-        $form->decimal('composition', 'Composition');
+        
+        $form->select('inv_categories_id', 'Kategori')->options(function($inv_categories_id){
+            return InvCategories::get()->pluck('name','id');
+        });
+
         $form->date('expired_on', 'Expired on')->default(date('Y-m-d'));
-        $form->decimal('price', 'Price');
-        $form->number('inv_m_prices_id', 'Inv m prices id');
-        $form->number('status', 'Status')->default(1);
+        $form->decimal('buy_price', 'Buying Price');
+        $form->decimal('sales_price', 'Selling Price');
+
+        $form->select('inv_units_id', 'Unit')->options(function($inv_units_id){
+            return InvUnits::get()->pluck('name','id');
+        });
+
+        $form->select('inv_statuses_id', 'Status')->options(function($inv_statuses_id){
+            return InvStatuses::get()->pluck('name','id');
+        });
 
         return $form;
     }
