@@ -75,5 +75,11 @@ Route::group([
     $router->resource('/web/service', 'WebServiceController');
     $router->resource('/web/gallery', 'WebGalleryController');
     
-    
+    // inventory
+    $router->resource('/inventory/items', 'InvItemsController');
+    $router->resource('/inventory/categories', 'InvCategoriesController');
+    $router->resource('/inventory/prices', 'InvPricesController');
+    $router->resource('/inventory/vendors', 'InvVendorsController');
+    $router->resource('/inventory/warehouses', 'InvWarehousesController');
+    $router->resource('/inventory/transactions', 'InvTransactionsController');
 });
