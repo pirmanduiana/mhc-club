@@ -85,6 +85,7 @@ class InvTransactionsController extends Controller
         $grid->column('InvItems.name', 'Barang');
         $grid->column('InvVendors.name', 'Vendor');
         $grid->column('InvWarehouses.name', 'Gudang');
+        $grid->trn_date('Tanggal');
         $grid->code('Code');
         $grid->qty('Qty');
         $grid->column('InvUnits.name', 'Unit');
