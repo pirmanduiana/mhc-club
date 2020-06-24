@@ -2,7 +2,7 @@
 
 return [
 
-    'landing-app' => 'Mandiri Health Care',
+    'landing-app' => 'Mandiri Harapan Cemerlang',
 
     /*
     |--------------------------------------------------------------------------
@@ -13,7 +13,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Mandiri Health Care',
+    'name' => 'Mandiri Harapan Cemerlang',
 
     /*
     |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => 'Mandiri Health Care',
+    'logo' => 'Mandiri Harapan Cemerlang',
 
     /*
     |--------------------------------------------------------------------------

@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\InvWarehouses;
+use App\InvStatuses;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -122,7 +123,9 @@ class InvWarehousesController extends Controller
 
         $form->text('code', 'Code');
         $form->text('name', 'Name');
-        $form->number('status', 'Status')->default(1);
+        $form->select('inv_statuses_id', 'Status')->options(function($inv_statuses_id){
+            return InvStatuses::get()->pluck('name','id');
+        })->default(0);
 
         return $form;
     }

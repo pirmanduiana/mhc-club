@@ -8,6 +8,7 @@ use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use Illuminate\Routing\Controller;
 use App\Mstprovider;
+use App\InvWarehouses;
 
 class UserController extends Controller
 {
@@ -165,6 +166,9 @@ class UserController extends Controller
 
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));
+        $form->select('inv_warehouses_id', 'Gudang')->options(function(){
+            return InvWarehouses::pluck('name','id');
+        });
 
         $form->saving(function (Form $form) {
             if ($form->password && $form->model()->password != $form->password) {

@@ -82,4 +82,6 @@ Route::group([
     $router->resource('/inventory/vendors', 'InvVendorsController');
     $router->resource('/inventory/warehouses', 'InvWarehousesController');
     $router->resource('/inventory/transactions', 'InvTransactionsController');
+    $router->resource('/inventory/stockins', 'InvStockInsController');
+    $router->resource('/inventory/stockouts', 'InvStockOutsController');
 });
