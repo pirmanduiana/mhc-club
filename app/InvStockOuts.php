@@ -22,4 +22,19 @@ class InvStockOuts extends Model
     {
         return $this->belongsTo(InvWarehouses::class);
     }
+
+    public function InvTransactions()
+    {
+        return $this->hasMany(InvTransactions::class, 'code', 'code');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($model)
+        {
+            $model->InvTransactions()->delete();
+        });
+    }
 }
