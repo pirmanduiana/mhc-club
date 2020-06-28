@@ -168,6 +168,7 @@ class InvStockInsController extends Controller
                 return $units;
             })->rules('required');
             $nestedForm->text('price')->default(0)->rules('required|numeric');
+            $nestedForm->text('rwTtl','Total');
         });
 
         $form->radio('status', __('Status'))->options([
@@ -184,6 +185,7 @@ class InvStockInsController extends Controller
                     $trn->inv_warehouses_id = $form->inv_warehouses_id;
                     $trn->trn_date = $form->date;
                     $trn->code = $form->code;
+                    $trn->doc_id = $form->model()->id;
                     $trn->qty = $v->qty;
                     $trn->inv_units_id = $v->inv_units_id;
                     $trn->price = $v->price;

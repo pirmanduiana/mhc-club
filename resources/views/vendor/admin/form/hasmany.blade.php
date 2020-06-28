@@ -114,9 +114,15 @@
     </div>
 </div>
 
+{{-- hiddens --}}
+<input type="hidden" value="{{$column}}" name="im">
+
 <script>
     qtys = ".qty:visible";
     prices = ".price:visible";
+    totals = ".rwTtl:visible";
+    im = $("input[name='im']").val();
+
     function addCommas(nStr)
     {
         nStr += '';
@@ -131,40 +137,96 @@
     }
     function getSumQty(){
         var tq = parseFloat(0);
-        $(qtys).each(function() {
+        $(qtys).each(function(){
             tq = tq + parseFloat(this.value);
         });
         return tq;
     }
     function getSumPrice(){
         var tp = parseFloat(0);
-        $(prices).each(function() {
+        $(prices).each(function(){
             tp = tp + parseFloat(this.value);
         });
         return tp;
     }
     function getGrandTtl(){
-        return getSumQty() * getSumPrice();
+        var rwTtl = parseFloat(0);
+        $(totals).each(function(){
+            rwTtl = rwTtl + parseFloat(this.value);
+        })
+        return rwTtl;
     }
+    function getRowTotal(elId, qty){
+        var rwTtl = parseFloat(qty) * parseFloat($("input[name='"+im+"["+elId+"][price]']").val());        
+        return rwTtl;
+    }
+    function getEachRowTotal(){
+        $(totals).each(function(){
+            var elName = this.name;
+            var itmId = item.getId(elName);            
+            var qty = $("input[name='"+im+"["+itmId+"][qty]']").val();
+            $("input[name='"+im+"["+itmId+"][rwTtl]']").val(getRowTotal(itmId, qty));
+        })
+    }
+
+    var item = {
+        'getId' : function(en){
+            id = en.replace(im,'');
+            id = id.replace(/inv_items_id|qty|rwTtl|price/g,'')
+            id = id.replace(/[\[\]']+/g,'');
+            return id;
+        },
+        'getProp' : function(brgId, itmId)
+        {
+            $.ajax({
+                url: '/admin/inventory/barang/' + brgId,
+                type: 'get',
+                dataType: 'json',
+                beforeSend: function(){
+                    console.log('waiting...!');
+                }
+            }).done(function(res){
+                console.log('finish...!');
+                if (res.success) {
+                    $("select[name='"+im+"["+itmId+"][inv_units_id]']").val(res.data.inv_units_id).trigger('change');
+                    $("input[name='"+im+"["+itmId+"][price]']").val(res.data.sales_price);
+                    $("input[name='"+im+"["+itmId+"][qty]']").focus().select();
+                }
+            }).fail(function(fail){
+                return fail;
+            });
+        }
+    };
 
     $(function(){
 
-        $("div.ttlQty").html(addCommas(getSumQty()));
-        $("div.ttlPrice").html(addCommas(getSumPrice()));
+        getEachRowTotal();
         $("div.grandTotal").html(addCommas(getGrandTtl()));
 
         $(document).on('keyup', qtys, function(){
-            $("div.ttlQty").html(addCommas(getSumQty()));
+            var elName = this.name;
+            var itmId = item.getId(elName);
+            $("input[name='"+im+"["+itmId+"][rwTtl]']").val(getRowTotal(itmId, this.value));
             $("div.grandTotal").html(addCommas(getGrandTtl()));
         });
         $(document).on('keyup', prices, function(){
-            $("div.ttlPrice").html(addCommas(getSumPrice()));
+            var elName = this.name;
+            var itmId = item.getId(elName);
+            var qty = $("input[name='"+im+"["+itmId+"][qty]']").val();
+            $("input[name='"+im+"["+itmId+"][rwTtl]']").val(getRowTotal(itmId, qty));
             $("div.grandTotal").html(addCommas(getGrandTtl()));
         });
-        $(document).on('click', '.remove', function(){
-            $("div.ttlQty").html(addCommas(getSumQty()));
-            $("div.ttlPrice").html(addCommas(getSumPrice()));
+        $(document).on('click', '.remove', function(){            
             $("div.grandTotal").html(addCommas(getGrandTtl()));
+        });
+
+        console.clear();
+        $(document).on('change', '.inv_items_id', function(){
+            console.clear();
+            var elName = this.name;
+            var itmId = item.getId(elName);            
+            var brgId = this.value;
+            item.getProp(brgId, itmId);
         });
 
     });

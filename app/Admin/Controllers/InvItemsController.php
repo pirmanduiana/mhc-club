@@ -155,4 +155,21 @@ class InvItemsController extends Controller
 
         return $form;
     }
+
+    public function getBarang($id)
+    {
+        $brg = InvItems::find($id);
+        
+        if (!empty($brg)) {
+            return response()->json([
+                'success' => true,
+                'data' => $brg
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'data' => null
+        ]);
+    }
 }

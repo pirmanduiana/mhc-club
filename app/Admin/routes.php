@@ -84,4 +84,5 @@ Route::group([
     $router->resource('/inventory/transactions', 'InvTransactionsController');
     $router->resource('/inventory/stockins', 'InvStockInsController');
     $router->resource('/inventory/stockouts', 'InvStockOutsController');
+    $router->get('/inventory/barang/{id}', 'InvItemsController@getBarang');
 });
