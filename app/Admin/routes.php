@@ -24,8 +24,6 @@ Route::group([
     $router->get('auth/logout', $authController.'@getLogout');
     $router->get('auth/setting', $authController.'@getSetting');
     $router->put('auth/setting', $authController.'@putSetting');
-    // registerAuthRoutes() diatas dinonaktifkan diganti dengan yg ini:
-
 
     // backoffice
     $router->get('/', 'HomeController@index');
@@ -85,4 +83,8 @@ Route::group([
     $router->resource('/inventory/stockins', 'InvStockInsController');
     $router->resource('/inventory/stockouts', 'InvStockOutsController');
     $router->get('/inventory/barang/{id}', 'InvItemsController@getBarang');
+    $router->resource('/inventory/stockmuts', 'InvStockMutsController');
+
+    // utilities
+    // ...
 });
