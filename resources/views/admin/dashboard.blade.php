@@ -27,7 +27,10 @@
         margin-bottom: 25px;
     }
     #box_searchresult {
-        display: none;
+        /* display: none; */
+    }
+    .highlight {
+        background-color: #2ecc71;
     }
 </style>
 
@@ -51,12 +54,14 @@
                 <a href="{{ url('/admin/client') }}">Clients <i class="fa fa-external-link"></i></a>
             </div>
             <div class="title">
-                <div class="input-group">
-                    <input type="text" name="search_value" placeholder="Cari pasien disini ..." class="form-control">
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-success btn-flat" id="btn_search">Cari</button>
-                    </span>
-                </div>
+                <form name="frmSearchPx" method="GET" action="/admin/dashboard/search">
+                    <div class="input-group">
+                        <input type="text" name="s" placeholder="Cari pasien disini ..." class="form-control" value="{{app('request')->input('s')}}">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-success btn-flat" id="btn_search">Cari</button>
+                        </span>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -72,7 +77,35 @@
                     <div class="media">                        
                         <div class="media-body">
                             <div class="clearfix" id="div_searchresult">
-                                <!-- ... -->
+                                @if(empty($grouped))
+                                    Tidak ada hasil pencarian...
+                                @else
+                                    <table class="table" border="0">    
+                                        <tbody>
+                                        @foreach($grouped as $k=>$g)
+                                            <tr>
+                                                <td colspan="8" class="client bold">{{$k}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="10%" class="bold">ID</td>
+                                                <td width="10%" class="bold">Kode MHC</td>
+                                                <td width="20%" class="bold">Nama</td>            
+                                                <td width="10%" class="bold">Status</td>
+                                                <td width="10%" class="bold">Pilihan</td>
+                                            </tr>
+                                            @foreach($g as $x=>$y)
+                                            <tr class="tr-result">
+                                                <td class="{{$y["status_name"]=="Active"?"black":"red"}}">{{$y['id']}}</td>
+                                                <td class="{{$y["status_name"]=="Active"?"black":"red"}}">{{$y['mhc_code']}}</td>
+                                                <td class="{{$y["status_name"]=="Active"?"black":"red"}}">{{$y['name']}}</td>
+                                                <td class="{{$y["status_name"]=="Active"?"black":"red"}}">{{$y['type']}} <span class='label label-{{$y["status_name"]=="Active"?"info":"danger"}}'>{{$y['status_name']}}</span></td>
+                                                <td class="{{$y["status_name"]=="Active"?"black":"red"}}"><a href="{{$y['view_url']}}">Lihat detail</a></td>
+                                            </tr>
+                                            @endforeach
+                                        @endforeach
+                                        </tbody>    
+                                    </table>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -85,12 +118,12 @@
 
 <script>
 
-    var search = function(search_value){
-        if (search_value=="") {
+    var search = function(s){
+        if (s=="") {
             return false;
         }
         $.ajax({
-            url: "/admin/dashboard/search/?q=" + encodeURIComponent(search_value),
+            url: "/admin/dashboard/search/?q=" + encodeURIComponent(s),
             type: "get",
             dataType: "html"
         }).done(function(html){
@@ -105,11 +138,14 @@
     
     $(document).ready(function(){
         
-        $("#btn_search").on("click", function(){
-            var search_value = $("input[name='search_value']").val();
-            search(search_value);
-        });
-
+        // $("#btn_search").on("click", function(){
+        //     var s = $("input[name='s']").val();
+        //     search(s);
+        // });
+        
+        var term = $('input[name="s"]').val();
+        $("body").highlight(term);
+        
     });
 
 </script>

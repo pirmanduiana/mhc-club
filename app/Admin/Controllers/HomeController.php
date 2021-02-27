@@ -2,13 +2,14 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-use Encore\Admin\Layout\Content;
-use App\Mstclientemployee;
 use DB;
-use App\Mstclientemployeemember;
-use App\Mstprovider;
 use Encore\Admin\Facades\Admin;
+use Encore\Admin\Layout\Content;
+use App\Mstprovider;
+use App\Mstclientemployee;
+use App\Mstclientemployeemember;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -21,9 +22,9 @@ class HomeController extends Controller
             ->body(view('admin.dashboard')->with(compact('provider')));
     }
 
-    private function searchSrc()
+    private function searchSrc($search_value)
     {
-        $search_value = urldecode($_GET['q']);
+        // $search_value = urldecode($_GET['q']);
         $karyawan = Mstclientemployee::join('mst_client','mst_client.id','=','mst_client_employee.client_id')
         ->join('mst_status','mst_status.id','=','mst_client_employee.status_id')
         ->where('mst_client_employee.name','LIKE',"%{$search_value}%")
@@ -59,15 +60,20 @@ class HomeController extends Controller
         return $tanggungan;
     }
 
-    public function search($search_value="")
+    public function search(Request $request, Content $content)
     {
-        $result = $this->searchSrc($search_value);
-        
+        $result = $this->searchSrc($request->input('s'));
         $grouped = [];
         foreach ($result as $k=>$v) {
             $grouped[$v->client_name][] = $v->toArray();
         }
-
-        return view('admin.dashboard-result')->with(compact('grouped'));
+        $provider = Mstprovider::find(Admin::user()->provider_id);
+        
+        return $content
+            ->header('Dashboard')
+            ->description(' ')
+            ->body(
+                view('admin.dashboard', compact('provider', 'grouped'))
+            );
     }
 }

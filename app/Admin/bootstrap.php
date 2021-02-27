@@ -27,3 +27,6 @@ Form::extend('ckeditor', CKEditor::class);
 
 // autonumeric js
 Admin::js('/vendor/autoNumeric/autoNumeric.js');
+
+// highlight js
+Admin::js('/vendor/highlight/jquery.highlight-5.js');
