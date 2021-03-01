@@ -56,7 +56,7 @@
             <div class="title">
                 <form name="frmSearchPx" method="GET" action="/admin/dashboard/search">
                     <div class="input-group">
-                        <input type="text" name="s" placeholder="Cari pasien disini ..." class="form-control" value="{{app('request')->input('s')}}">
+                        <input type="text" name="s" placeholder="Cari pasien disini ..." class="form-control" value="{{app('request')->input('s')}}" required>
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-success btn-flat" id="btn_search">Cari</button>
                         </span>

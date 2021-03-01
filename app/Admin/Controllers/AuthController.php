@@ -46,11 +46,9 @@ class AuthController extends BaseAuthController
 
         // check wheter the provider active or not
         $the_user = Administrator::where('username', $credentials['username']);
-        $the_role = $the_user->join('admin_role_users','admin_role_users.user_id','=','admin_users.id');
-        $the_role = $the_role->join('admin_roles','admin_roles.id','=','admin_role_users.role_id');
-        $the_role = $the_role->select('admin_users.*', DB::raw('admin_roles.name as role_name'))->first();
-        if ($the_role->role_name=="Provider") {
-            $the_provider_status = Mstprovider::find($the_role->provider_id)->status_id;
+        $the_roles = $the_user->with('roles')->first()->roles->pluck('name')->toArray();
+        if (\in_array('Provider', $the_roles)) {
+            $the_provider_status = Mstprovider::find($the_user->first()->provider_id)->status_id;
             if ($the_provider_status==2) {
                 return back()->withInput()->withErrors([
                     $this->username() => $this->getFailedLoginMessageProvider(),
