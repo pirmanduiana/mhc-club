@@ -44,8 +44,10 @@ class AuthController extends BaseAuthController
             return back()->withInput()->withErrors($validator);
         }
 
+        $user_table = new Administrator;
+
         // check wheter the provider active or not
-        $the_user = Administrator::where('username', $credentials['username']);
+        $the_user = $user_table::where('username', $credentials['username']);
         $the_roles = $the_user->with('roles')->first()->roles->pluck('name')->toArray();
         if (\in_array('Provider', $the_roles)) {
             $the_provider_status = Mstprovider::find($the_user->first()->provider_id)->status_id;
@@ -57,6 +59,11 @@ class AuthController extends BaseAuthController
         }
 
         if ($this->guard()->attempt($credentials)) {
+            $user = $user_table::find($this->guard()->user()->id);
+            if (is_null($user->api_token)) {
+                $user->generateToken();
+            }
+
             return $this->sendLoginResponse($request);
         }
 

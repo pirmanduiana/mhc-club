@@ -82,4 +82,13 @@ class Administrator extends Model implements AuthenticatableContract
 
         return $this->belongsToMany($relatedModel, $pivotTable, 'user_id', 'permission_id');
     }
+
+    public function generateToken()
+    {
+        $this->api_token = str_random(60);
+        $this->save();
+
+        return $this->api_token;
+    }
+
 }

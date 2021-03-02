@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,15 @@ use Illuminate\Http\Request;
 |
 */
 
+// middleware users
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+// middleware admin_users
+Route::group(['prefix' => 'admin'], function(Router $router)
+{
+    $router->middleware('auth:apiadmin')->get('test', function(){
+        return 'test';
+    });
 });
