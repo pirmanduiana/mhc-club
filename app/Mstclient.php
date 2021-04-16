@@ -21,4 +21,9 @@ class Mstclient extends Model
         'contract_end',
         'status_id'
     ];
+
+    public function employees()
+    {
+        return $this->hasMany(Mstclientemployee::class, 'client_id', 'id');
+    }
 }

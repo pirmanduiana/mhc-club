@@ -15,14 +15,19 @@ use Illuminate\Routing\Router;
 */
 
 // middleware users
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('user', function (Request $request) {
     return $request->user();
 });
 
 // middleware admin_users
 Route::group(['prefix' => 'admin'], function(Router $router)
 {
-    $router->middleware('auth:apiadmin')->get('test', function(){
-        return 'test';
+    $router->post('login', 'Api\Admin\AuthController@login');
+
+    $router->middleware('auth:apiadmin')->get('user', function(Request $request){
+        return $request->user();
     });
+
+    // $router->middleware('auth:apiadmin')->get('/search', )
+
 });
