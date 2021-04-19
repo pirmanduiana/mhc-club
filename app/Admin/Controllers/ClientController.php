@@ -183,12 +183,14 @@ class ClientController extends Controller
         $form->radio('status_id','Status')->options(['1'=>'Active', '2'=>'Inactive'])->default('1');
 
         $form->saved(function (Form $form) {
-            $updates = ["status_id" => $form->status_id];
-            // karyawan
-            $emp = Mstclientemployee::where("client_id", $form->model()->id)->update($updates);
-            if ($emp!=0) {
-                // tanggungan
-                Mstclientemployeemember::whereIn('employee_id', $form->model()->employees()->get()->pluck('id'))->update($updates);
+            if ($form->model()->status_id == 2) {
+                $updates = ["status_id" => $form->status_id];
+                // karyawan
+                $emp = Mstclientemployee::where("client_id", $form->model()->id)->update($updates);
+                if ($emp!=0) {
+                    // tanggungan
+                    Mstclientemployeemember::whereIn('employee_id', $form->model()->employees()->get()->pluck('id'))->update($updates);
+                }
             }
         });
 
