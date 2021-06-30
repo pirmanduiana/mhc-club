@@ -60,6 +60,10 @@
     .sign-kanan {
         float: right;
     }
+    .btn-download a {
+        color: white;
+        cursor: default;
+    }
 </style>
 <div class="sw-hasil-container">
     <div class="sw-hasil-header">
