@@ -54,9 +54,6 @@
     .footer-2 td {
         text-align: center;
     }
-    .signer {
-        margin-bottom: 72px;
-    }
     .sign-kiri {
         float: left;
     }
@@ -66,6 +63,17 @@
     .btn-download a {
         color: white;
         cursor: default;
+    }
+    img.stamp-doctor {
+        width: 29%;
+        position: absolute;
+        right: 7px;
+        top: 131px;
+    }
+    img.stamp-mhc {
+        width: 118px;
+        right: 8%;
+        bottom: 1%;
     }
 </style>
 <div class="sw-hasil-container">
@@ -91,7 +99,10 @@
         <div class="sec-1">
             <table class="tb-isian">
                 <tr><td width="30%">DOCTOR</td><td>: {{$data->dokter->dokter}}</td></tr>
-                <tr class="dc-id"><td width="30%">NO. SIP</td><td>: {{$data->dokter->no_sip}}</td></tr>
+                <tr class="dc-id">
+                    <td width="30%">NO. SIP</td>
+                    <td>: {{$data->dokter->no_sip}} <img class="stamp-doctor" src="{{asset('/uploads/images/swab-stempel-dokter.png')}}"></td>
+                </tr>
                 <tr><td width="30%">Patient Name</td><td>: {{$data->nama_pasien}}</td></tr>
                 <tr><td width="30%">ID. Card</td><td>: {{$data->no_identitas}}</td></tr>
                 <tr><td width="30%">Date of Birth</td><td>: {{$data->tanggal_lahir}}</td></tr>
@@ -136,6 +147,9 @@
                         <div class="sign-template">
                             <div class="sign-date">Denpasar, {{$data->tanggal_periksa}}</div>
                             <div class="signer">Authorized by,</div>
+                            <div class="stamp-mhc-container">
+                                <img class="stamp-mhc" src="{{asset('/uploads/images/swab-stempel-mhc.png')}}">
+                            </div>
                             <div class="signer-name">{{$data->dokter->dokter}}</div>
                         </div>
                     </td>
