@@ -31,6 +31,9 @@
     td.center {
         text-align: center;
     }
+    td.right {
+        text-align: right;
+    }
     .kop-comp-title {
         font-size: 20pt;
         font-weight: bold;
@@ -84,13 +87,18 @@
         color: red;
         font-weight: bold;
     }
+    /* .sign-template {
+        background-image: url("{{asset('/uploads/images/swab-stempel-mhc.png')}}");
+        background-size: 300px 100px;
+        background-repeat: no-repeat;
+    } */
 </style>
 <div class="sw-hasil-container {{$ispdf==0 ? 'master-ispdf' : ''}}">
     <div class="sw-hasil-header">
         <table>
             <tr>
-                <td width="20%"><img class="logo-mhc" src="{{asset('uploads/images/logo.png')}}"></td>
-                <td class="center" width="70%">
+                <td width="20%" class="right"><img class="logo-mhc" src="{{asset('uploads/images/logo.png')}}"></td>
+                <td class="center" width="60%">
                     <div class="kop-comp-title">MANDIRI HEALTH CARE</div>
                     <div class="kop-comp-desc">
                         Jl. Tukad Badung XXI B No.16, Renon Denpasar- Bali<br>
@@ -98,7 +106,7 @@
                         Email : admin@mhc-club.com // Website : www.mhc-club.com
                     </div>
                 </td>
-                <td class="btn-download" width="10%">
+                <td class="btn-download" width="20%">
                     @if ($show_tools_button==1)
                         <a target="_blank" href="/admin/swab/{{$data->id}}/pull" class="btn btn-primary btn-xs"><i class='fa fa-file-pdf-o'></i>&nbsp;&nbsp;Download</a>
                         &nbsp;&nbsp;
@@ -110,7 +118,7 @@
     </div>
     <div class="sw-hasil-body">
         <div class="sec-1">
-            <table class="tb-isian">
+            <table>
                 <tr><td width="30%">DOCTOR</td><td>: {{$data->dokter->dokter}}</td></tr>
                 <tr class="dc-id">
                     <td width="30%">NO. SIP</td>
@@ -121,6 +129,8 @@
                         @endif
                     </td>
                 </tr>
+            </table>
+            <table class="tb-isian">
                 <tr><td width="30%">Patient Name</td><td>: {{$data->nama_pasien}}</td></tr>
                 <tr><td width="30%">ID. Card</td><td>: {{$data->no_identitas}}</td></tr>
                 <tr><td width="30%">Date of Birth</td><td>: {{$data->tanggal_lahir}}</td></tr>
