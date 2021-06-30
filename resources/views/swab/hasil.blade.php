@@ -10,6 +10,11 @@
     .sw-hasil-header {
         margin-bottom: 20px;
     }
+    .btn-download {
+        vertical-align: top;
+        padding-top: 10px;
+        text-align: right;
+    }
     table {
         width: 100%;
     }
@@ -68,6 +73,9 @@
                         Telp. 0819 9986 1734 / 0852 3825 9966<br>
                         Email : admin@mhc-club.com // Website : www.mhc-club.com
                     </div>
+                </td>
+                <td class="btn-download">
+                    <a target="_blank" href="/admin/swab/{{$data->id}}/pull" class="btn btn-block btn-primary btn-xs"><i class='fa fa-file-pdf-o'></i>&nbsp;&nbsp;Download</a>
                 </td>
             </tr>
         </table>
