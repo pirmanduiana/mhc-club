@@ -14,6 +14,7 @@
         vertical-align: top;
         padding-top: 10px;
         text-align: right;
+        display: flex;
     }
     table {
         width: 100%;
@@ -60,10 +61,6 @@
     .sign-kanan {
         float: right;
     }
-    .btn-download a {
-        color: white;
-        cursor: default;
-    }
     img.stamp-doctor {
         width: 29%;
         position: absolute;
@@ -93,7 +90,11 @@
                     </div>
                 </td>
                 <td class="btn-download" width="10%">
-                    <a target="_blank" href="/admin/swab/{{$data->id}}/pull" class="btn btn-block btn-primary btn-xs"><i class='fa fa-file-pdf-o'></i>&nbsp;&nbsp;Download</a>
+                    @if ($ispdf==0)
+                        <a target="_blank" href="/admin/swab/{{$data->id}}/pull" class="btn btn-primary btn-xs"><i class='fa fa-file-pdf-o'></i>&nbsp;&nbsp;Download</a>
+                        &nbsp;&nbsp;
+                        <a href="/admin/swabs" class="btn btn-xs btn-default" title="List"><i class="fa fa-list"></i><span class="hidden-xs">&nbsp;List</span></a>
+                    @endif
                 </td>
             </tr>
         </table>
