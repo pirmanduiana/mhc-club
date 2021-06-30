@@ -26,9 +26,12 @@
         text-align: center;
     }
     .kop-comp-title {
-        font-size: 25pt;
+        font-size: 20pt;
         font-weight: bold;
         color: #fbbf3a;
+    }
+    .kop-comp-desc {
+        font-size: 11pt;
     }
 
     .sw-hasil-body table {
