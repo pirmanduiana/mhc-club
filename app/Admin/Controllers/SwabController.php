@@ -132,7 +132,16 @@ class SwabController extends Controller
         $form = new Form(new Swabs);
 
         $form->text('nama_pasien', 'Nama pasien')->rules('required');
-        $form->text('no_identitas', 'No identitas')->rules('required|unique:swabs,no_identitas');
+
+        $form->text('no_identitas', 'No identitas')->rules(function($form){
+            // create
+            if (!$id = $form->model()->id) {
+                return 'required|unique:swabs,no_identitas';
+            } else {
+                return 'required';
+            }
+        });
+
         $form->image('scan_ktp', 'Scan KTP')->move('swab');
         $form->date('tanggal_lahir', 'Tanggal lahir')->default(date('Y-m-d'))->rules('required');
         $form->radio('swab_m_kelamin_id', 'Jenis kelamin')->options(['1' => 'Laki-laki', '2'=> 'Perempuan'])->default('1');
