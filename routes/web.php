@@ -18,5 +18,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/', 'PageController@index')->name('homepage');
     Route::get('/{uri}', 'PageController@page')->name('page');
     Route::get('/single-blog/{id}', 'PageController@single_blog');
-});
 
+    // hasil swab
+    Route::get('/swab/{no_identitas}', 'SwabController@getHasilSwab');
+});

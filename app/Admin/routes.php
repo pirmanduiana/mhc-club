@@ -87,4 +87,9 @@ Route::group([
 
     // utilities
     // ...
+
+    // swabs
+    $router->resource('/swabs', 'SwabController');
+    $router->post('/swab/{id}/setQrBase64', 'SwabController@setQrBase64');
+    $router->get('/swab/{id}/pull', 'SwabController@pull');
 });
