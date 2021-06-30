@@ -92,8 +92,9 @@ class SwabController extends Controller
         $grid->tanggal_periksa('Tanggal periksa');
         $grid->jam('Jam');
         $grid->column('hasil.keterangan');
-        $grid->created_at('Created at');
-        $grid->updated_at('Updated at');
+        $grid->column('created_at', 'Download')->display(function($created_at){
+            return "<a target='_blank' href='/admin/swab/$this->id/pull'><i class='fa fa-file-pdf-o'></i> Surat</a>";
+        });
 
         return $grid;
     }
