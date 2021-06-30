@@ -87,11 +87,14 @@
         color: red;
         font-weight: bold;
     }
-    /* .sign-template {
+    .sign-template {
         background-image: url("{{asset('/uploads/images/swab-stempel-mhc.png')}}");
-        background-size: 300px 100px;
+        background-size: 200px 180px;
         background-repeat: no-repeat;
-    } */
+    }
+    .stamp-mhc-container {
+        height: 78px;
+    }
 </style>
 <div class="sw-hasil-container {{$ispdf==0 ? 'master-ispdf' : ''}}">
     <div class="sw-hasil-header">
@@ -181,9 +184,9 @@
                             <div class="sign-date">Denpasar, {{$month." ".$day.", ".$year}}</div>
                             <div class="signer">Authorized by,</div>
                             <div class="stamp-mhc-container {{$ispdf==1 ? 'stamp-mhc-ispdf' : ''}}">
-                                @if ($ispdf==0)
+                                {{-- @if ($ispdf==0)
                                     <img class="stamp-mhc" src="{{asset('/uploads/images/swab-stempel-mhc.png')}}">
-                                @endif
+                                @endif --}}
                             </div>
                             <div class="signer-name">{{$data->dokter->dokter}}</div>
                         </div>
