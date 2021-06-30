@@ -1,8 +1,5 @@
 <title>MHC - Hasil Swab {{$data->nama_pasien}}</title>
 <style>
-    .body-breysme {
-        background-color: grey;
-    }
     .master-ispdf {
         margin: 66px;
     }
@@ -223,14 +220,10 @@
             })
         }
     }
-    
-    $(function(){
-        if ($("#qrbase64").val() == "") {
+
+    (function() {        
+        if (document.getElementById('qrbase64').value == "") {
             generate();
         }
-
-        if ($("#ispdf").val() == "0") {
-            $("body").addClass('body-breysme')
-        }
-    })
+    })();
 </script>
