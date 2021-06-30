@@ -131,13 +131,13 @@ class SwabController extends Controller
         $form->text('no_identitas', 'No identitas')->rules('required');
         $form->image('scan_ktp', 'Scan KTP')->move('swab');
         $form->date('tanggal_lahir', 'Tanggal lahir')->default(date('Y-m-d'))->rules('required');
-        $form->radio('swab_m_kelamin_id', 'Swab m kelamin id')->options(['1' => 'Laki-laki', '2'=> 'Perempuan'])->default('1');
+        $form->radio('swab_m_kelamin_id', 'Jenis kelamin')->options(['1' => 'Laki-laki', '2'=> 'Perempuan'])->default('1');
         $form->text('alamat', 'Alamat')->rules('required');
         $form->date('tanggal_periksa', 'Tanggal periksa')->default(date('Y-m-d'))->rules('required');
         $form->time('jam', 'Jam')->default(date('H:i:s'))->rules('required');
         $form->text('bahan', 'Bahan')->default('Nasal Swab')->rules('required');
-        $form->radio('swab_m_hasil_id', 'Swab m hasil id')->options(['1' => 'Positif', '2'=> 'Negatif'])->default('2');
-        $form->select('swab_m_dokter_id', 'Swab m dokter id')->options(function($id){
+        $form->radio('swab_m_hasil_id', 'Hasil tes')->options(['1' => 'Negatif', '2'=> 'Positif'])->default('1');
+        $form->select('swab_m_dokter_id', 'Dokter')->options(function($id){
             return Dokter::get()->pluck('dokter','id');
         })->default(1);
         $form->hidden('doc_url');
