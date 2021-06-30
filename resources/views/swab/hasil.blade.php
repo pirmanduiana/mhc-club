@@ -90,7 +90,7 @@
                     </div>
                 </td>
                 <td class="btn-download" width="10%">
-                    @if ($ispdf==0)
+                    @if ($show_tools_button==1)
                         <a target="_blank" href="/admin/swab/{{$data->id}}/pull" class="btn btn-primary btn-xs"><i class='fa fa-file-pdf-o'></i>&nbsp;&nbsp;Download</a>
                         &nbsp;&nbsp;
                         <a href="/admin/swabs" class="btn btn-xs btn-default" title="List"><i class="fa fa-list"></i><span class="hidden-xs">&nbsp;List</span></a>
