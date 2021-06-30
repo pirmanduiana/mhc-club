@@ -72,8 +72,8 @@
     <div class="sw-hasil-header">
         <table>
             <tr>
-                <td><img class="logo-mhc" src="{{asset('uploads/images/logo.png')}}"></td>
-                <td class="center">
+                <td width="20%"><img class="logo-mhc" src="{{asset('uploads/images/logo.png')}}"></td>
+                <td class="center" width="70%">
                     <div class="kop-comp-title">MANDIRI HEALTH CARE</div>
                     <div class="kop-comp-desc">
                         Jl. Tukad Badung XXI B No.16, Renon Denpasar- Bali<br>
@@ -81,7 +81,7 @@
                         Email : admin@mhc-club.com // Website : www.mhc-club.com
                     </div>
                 </td>
-                <td class="btn-download">
+                <td class="btn-download" width="10%">
                     <a target="_blank" href="/admin/swab/{{$data->id}}/pull" class="btn btn-block btn-primary btn-xs"><i class='fa fa-file-pdf-o'></i>&nbsp;&nbsp;Download</a>
                 </td>
             </tr>
@@ -93,31 +93,31 @@
                 <tr><td width="30%">DOCTOR</td><td>: {{$data->dokter->dokter}}</td></tr>
                 <tr class="dc-id"><td width="30%">NO. SIP</td><td>: {{$data->dokter->no_sip}}</td></tr>
                 <tr><td width="30%">Patient Name</td><td>: {{$data->nama_pasien}}</td></tr>
-                <tr><td width="30%">ID. NO.</td><td>: {{$data->no_identitas}}</td></tr>
-                <tr><td width="30%">Birth Date</td><td>: {{$data->tanggal_lahir}}</td></tr>
-                <tr><td width="30%">Sex</td><td>: {{$data->kelamin->kelamin}}</td></tr>
+                <tr><td width="30%">ID. Card</td><td>: {{$data->no_identitas}}</td></tr>
+                <tr><td width="30%">Date of Birth</td><td>: {{$data->tanggal_lahir}}</td></tr>
+                <tr><td width="30%">Gender</td><td>: {{$data->kelamin->kelamin}}</td></tr>
                 <tr><td width="30%">Address</td><td>: {{$data->alamat}}</td></tr>
-                <tr><td width="30%">Tanggal Pemeriksaan</td><td>: {{$data->tanggal_periksa}}</td></tr>
-                <tr><td width="30%">Jam</td><td>: {{$data->jam}}</td></tr>
-                <tr><td width="30%">Bahan</td><td>: {{$data->bahan}}</td></tr>
+                <tr><td width="30%">Date of Test</td><td>: {{$data->tanggal_periksa}}</td></tr>
+                <tr><td width="30%">Time</td><td>: {{$data->jam}}</td></tr>
+                <tr><td width="30%">Method</td><td>: {{$data->bahan}}</td></tr>
             </table>
         </div>
         <div class="sec-2">
-            <h4>Hasil Pemeriksaan</h4>
+            <h4>Test Result</h4>
             <table class="tb-hasil-pemeriksaan">
-                <tr><td colspan="2" align="center">Analisis</td><td>Hasil</td><td>Unit</td><td>Rentang Referensi</td></tr>
-                <tr><td colspan="2" align="center">Imunoserologi</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                <tr><td>Rapid Test</td><td>{} Antigen SARS CoV - 2</td><td>{{$data->hasil->keterangan}}</td><td>&nbsp;</td><td>Negatif</td></tr>
+                <tr><td colspan="2" align="center">Analysis</td><td>Result</td><td>Unit</td><td>Reference Range</td></tr>
+                <tr><td colspan="2" align="center">Imunoserology</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr><td>Rapid Test</td><td>{} Antigen SARS CoV - 2</td><td>{{$data->hasil->keterangan}}</td><td>&nbsp;</td><td>Negative</td></tr>
             </table>
         </div>
     </div>
     <div class="sw-hasil-footer">
         <div class="footer-1">
-            Saran:
+            Suggestions:
             <ul>
-                <li>Hasil positif harus dipastikan dengan melakukan PCR</li>
-                <li>Tetap menjaga social/physical distancing</li>
-                <li>Pertahankan perilaku hidup bersih dan sehat (cuci tangan, terapkan etika batuk, gunakan masker, jaga stamina)</li>
+                <li>Positive result must be confirmed by performing PCR Swab Test,</li>
+                <li>Keep doing social/physical distancing,</li>
+                <li>Keep doing PHBS (Clean and Healty Behavior), wash your hands, apply cough ethics, use mask, and keep stamina well.</li>
             </ul>
         </div>
         <div class="footer-2">
@@ -135,7 +135,7 @@
                     <td class="sign-kanan">
                         <div class="sign-template">
                             <div class="sign-date">Denpasar, {{$data->tanggal_periksa}}</div>
-                            <div class="signer">Pemeriksa</div>
+                            <div class="signer">Authorized by,</div>
                             <div class="signer-name">{{$data->dokter->dokter}}</div>
                         </div>
                     </td>
