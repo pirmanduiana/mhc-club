@@ -43,6 +43,7 @@
     .sw-hasil-body table {
         border: 1px solid;
         border-collapse: collapse;
+        position: relative;
     }
     .sw-hasil-body table tr td {
         padding: 5px;
@@ -69,8 +70,8 @@
     img.stamp-doctor {
         width: 29%;
         position: absolute;
-        right: 7px;
-        top: 15%;
+        right: -46px;
+        top: 8px;
     }
     img.stamp-mhc {
         width: 118px;
