@@ -84,6 +84,12 @@ class SwabController extends Controller
     {
         $grid = new Grid(new Swabs);
 
+        $grid->filter(function($filter){
+            $filter->disableIdFilter();
+            $filter->like('nama_pasien', 'Nama pasien');
+            $filter->like('no_identitas', 'No identitas');
+        });
+
         $grid->no_identitas('No identitas');
         $grid->nama_pasien('Nama pasien');
         $grid->tanggal_lahir('Tanggal lahir');
@@ -91,10 +97,8 @@ class SwabController extends Controller
         $grid->alamat('Alamat');
         $grid->tanggal_periksa('Tanggal periksa');
         $grid->jam('Jam');
-        $grid->column('hasil.keterangan');
-        $grid->column('created_at', 'Download')->display(function($created_at){
-            return "<a target='_blank' href='/admin/swab/$this->id/pull'><i class='fa fa-file-pdf-o'></i> Surat</a>";
-        });
+        $grid->column('hasil.keterangan', 'Hasil SWAB');
+        $grid->column('created_at');
 
         return $grid;
     }
@@ -124,6 +128,7 @@ class SwabController extends Controller
 
         $form->text('nama_pasien', 'Nama pasien')->rules('required');
         $form->text('no_identitas', 'No identitas')->rules('required');
+        $form->image('scan_ktp', 'Scan KTP')->move('swab');
         $form->date('tanggal_lahir', 'Tanggal lahir')->default(date('Y-m-d'))->rules('required');
         $form->radio('swab_m_kelamin_id', 'Swab m kelamin id')->options(['1' => 'Laki-laki', '2'=> 'Perempuan'])->default('1');
         $form->text('alamat', 'Alamat')->rules('required');

@@ -72,6 +72,13 @@ return [
             'url' => env('APP_URL').'/uploads',
         ],
 
+        'swab' => [
+            'driver' => 'local',
+            'root' => storage_path('app/swab'),
+            'visibility' => 'public',
+            'url' => env('APP_URL').'/uploads',
+        ]
+
     ],
 
 ];
