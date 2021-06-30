@@ -117,7 +117,7 @@
                 <tr><td width="30%">Gender</td><td>: {{$data->kelamin->kelamin}}</td></tr>
                 <tr><td width="30%">Address</td><td>: {{$data->alamat}}</td></tr>
                 <tr><td width="30%">Date of Test</td><td>: {{$data->tanggal_periksa}}</td></tr>
-                <tr><td width="30%">Time</td><td>: {{$data->jam}}</td></tr>
+                <tr><td width="30%">Time</td><td>: {{$data->jam}} WITA</td></tr>
                 <tr><td width="30%">Method</td><td>: {{$data->bahan}}</td></tr>
             </table>
         </div>
@@ -153,7 +153,12 @@
                     </td>
                     <td class="sign-kanan">
                         <div class="sign-template">
-                            <div class="sign-date">Denpasar, {{$data->tanggal_periksa}}</div>
+                            @php
+                                $month = date("F", strtotime($data->tanggal_periksa));
+                                $day = date("d", strtotime($data->tanggal_periksa));
+                                $year = date("Y", strtotime($data->tanggal_periksa));
+                            @endphp
+                            <div class="sign-date">Denpasar, {{$month." ".$day.", ".$year}}</div>
                             <div class="signer">Authorized by,</div>
                             <div class="stamp-mhc-container {{$ispdf==1 ? 'stamp-mhc-ispdf' : ''}}">
                                 @if ($ispdf==0)
