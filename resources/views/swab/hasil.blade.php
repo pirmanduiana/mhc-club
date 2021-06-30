@@ -144,7 +144,6 @@
         });
 
         qrcodejs._oDrawing._elImage.onload = ev => { 
-            // console.log(ev.target.src);
             $.ajax({
                 url: '/admin/swab/{{$data->id}}/setQrBase64',
                 method: 'post',
