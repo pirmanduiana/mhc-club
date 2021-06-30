@@ -70,7 +70,7 @@
         width: 29%;
         position: absolute;
         right: 7px;
-        top: 22%;
+        top: 15%;
     }
     img.stamp-mhc {
         width: 118px;
@@ -79,6 +79,10 @@
     }
     .stamp-mhc-ispdf {
         height: 70px;
+    }
+    .positif {
+        color: red;
+        font-weight: bold;
     }
 </style>
 <div class="sw-hasil-container {{$ispdf==0 ? 'master-ispdf' : ''}}">
@@ -132,7 +136,7 @@
             <table class="tb-hasil-pemeriksaan">
                 <tr><td colspan="2" align="center">Analysis</td><td>Result</td><td>Unit</td><td>Reference Range</td></tr>
                 <tr><td colspan="2" align="center">Imunoserology</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                <tr><td>Rapid Test</td><td>{} Antigen SARS CoV - 2</td><td>{{$data->hasil->keterangan}}</td><td>&nbsp;</td><td>Negative</td></tr>
+                <tr><td>Rapid Test</td><td>{} Antigen SARS CoV - 2</td><td class="{{$data->hasil->id==2 ? 'positif' : 'negatif'}}">{{$data->hasil->keterangan}}</td><td>&nbsp;</td><td>Negative</td></tr>
             </table>
         </div>
     </div>
