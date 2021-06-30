@@ -41,8 +41,8 @@ class SwabController extends Controller
     public function show($id, Content $content)
     {
         return $content
-            ->header('Detail')
-            ->description('description')
+            ->header('Surat')
+            ->description(Swabs::find($id)->nama_pasien)
             ->body($this->detail($id));
     }
 
