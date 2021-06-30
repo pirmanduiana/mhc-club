@@ -11,7 +11,8 @@ class SwabController extends Controller
     {
         $data = Swabs::where('no_identitas', $no_identitas)->with('dokter','kelamin','hasil')->first();
         $qrcode = "https://mhc-club.com/swab/$data->no_identitas";
+        $ispdf = 0;
 
-        return view('swab.hasil', compact('data','qrcode'));
+        return view('swab.hasil', compact('data','qrcode','ispdf'));
     }
 }

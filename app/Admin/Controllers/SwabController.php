@@ -113,8 +113,9 @@ class SwabController extends Controller
     {
         $data = Swabs::where('id', $id)->with('dokter','kelamin','hasil')->first();
         $qrcode = "https://mhc-club.com/swab/$data->no_identitas";
+        $ispdf = 0;
 
-        return view('swab.hasil', compact('data','qrcode'));
+        return view('swab.hasil', compact('data','qrcode','ispdf'));
     }
 
     /**
@@ -153,8 +154,9 @@ class SwabController extends Controller
     {
         $data = Swabs::where('id', $id)->with('dokter','kelamin','hasil')->first();
         $qrcode = "https://mhc-club.com/swab/$data->no_identitas";
+        $ispdf = 1;
 
-        $view_pdf = PDF::loadView('swab.hasil', compact('data','qrcode'))->setPaper('a4', 'portrait');
+        $view_pdf = PDF::loadView('swab.hasil', compact('data','qrcode','ispdf'))->setPaper('a4', 'portrait');
         return $view_pdf->stream('MHC - Hasil Swab.pdf');
     }
 

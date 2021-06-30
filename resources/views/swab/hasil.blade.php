@@ -75,6 +75,9 @@
         right: 8%;
         bottom: 1%;
     }
+    .stamp-mhc-ispdf {
+        height: 70px;
+    }
 </style>
 <div class="sw-hasil-container">
     <div class="sw-hasil-header">
@@ -101,7 +104,12 @@
                 <tr><td width="30%">DOCTOR</td><td>: {{$data->dokter->dokter}}</td></tr>
                 <tr class="dc-id">
                     <td width="30%">NO. SIP</td>
-                    <td>: {{$data->dokter->no_sip}} <img class="stamp-doctor" src="{{asset('/uploads/images/swab-stempel-dokter.png')}}"></td>
+                    <td>
+                        : {{$data->dokter->no_sip}}
+                        @if ($ispdf==0)
+                            <img class="stamp-doctor" src="{{asset('/uploads/images/swab-stempel-dokter.png')}}">
+                        @endif
+                    </td>
                 </tr>
                 <tr><td width="30%">Patient Name</td><td>: {{$data->nama_pasien}}</td></tr>
                 <tr><td width="30%">ID. Card</td><td>: {{$data->no_identitas}}</td></tr>
@@ -147,8 +155,10 @@
                         <div class="sign-template">
                             <div class="sign-date">Denpasar, {{$data->tanggal_periksa}}</div>
                             <div class="signer">Authorized by,</div>
-                            <div class="stamp-mhc-container">
-                                <img class="stamp-mhc" src="{{asset('/uploads/images/swab-stempel-mhc.png')}}">
+                            <div class="stamp-mhc-container {{$ispdf==1 ? 'stamp-mhc-ispdf' : ''}}">
+                                @if ($ispdf==0)
+                                    <img class="stamp-mhc" src="{{asset('/uploads/images/swab-stempel-mhc.png')}}">
+                                @endif
                             </div>
                             <div class="signer-name">{{$data->dokter->dokter}}</div>
                         </div>
