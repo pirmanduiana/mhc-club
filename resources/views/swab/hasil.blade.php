@@ -1,10 +1,15 @@
 <title>MHC - Hasil Swab {{$data->nama_pasien}}</title>
 <style>
+    .body-breysme {
+        background-color: grey;
+    }
+    .master-ispdf {
+        margin: 66px;
+    }
     .sw-hasil-container {
         background: white;
         position: relative;
         padding: 0 35px 35px 35px;
-        height: 944px;
     }
     
     .sw-hasil-header {
@@ -65,7 +70,7 @@
         width: 29%;
         position: absolute;
         right: 7px;
-        top: 131px;
+        top: 22%;
     }
     img.stamp-mhc {
         width: 118px;
@@ -76,7 +81,7 @@
         height: 70px;
     }
 </style>
-<div class="sw-hasil-container">
+<div class="sw-hasil-container {{$ispdf==0 ? 'master-ispdf' : ''}}">
     <div class="sw-hasil-header">
         <table>
             <tr>
@@ -176,6 +181,7 @@
 </div>
 
 <input type="hidden" id="qrbase64" value="{{$data->qrcode}}">
+<input type="hidden" id="ispdf" value="{{$ispdf}}">
 
 <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="{{asset('/vendor/qrcodejs/qrcode.js')}}"></script>
@@ -206,6 +212,10 @@
     $(function(){
         if ($("#qrbase64").val() == "") {
             generate();
+        }
+
+        if ($("#ispdf").val() == "0") {
+            $("body").addClass('body-breysme')
         }
     })
 </script>
