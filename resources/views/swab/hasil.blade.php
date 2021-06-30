@@ -3,7 +3,7 @@
     .sw-hasil-container {
         background: white;
         position: relative;
-        padding: 35px;
+        padding: 0 35px 35px 35px;
         height: 944px;
     }
     
@@ -41,7 +41,7 @@
         border: 1px solid black;
     }
     .sec-1, .sw-hasil-body, .footer-1 {
-        margin-bottom: 14px;
+        margin-bottom: 30px;
     }    
     .footer-2 td {
         text-align: center;
