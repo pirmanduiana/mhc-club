@@ -133,7 +133,7 @@
             </table>
             <table class="tb-isian">
                 <tr><td width="30%">Patient Name</td><td>: {{$data->nama_pasien}}</td></tr>
-                <tr><td width="30%">ID. Card</td><td>: {{$data->no_identitas}}</td></tr>
+                <tr><td width="30%">ID. Card</td><td>: {{$data->nama_pasien==$data->no_identitas ? "-" : $data->no_identitas}}</td></tr>
                 <tr><td width="30%">Date of Birth</td><td>: {{$data->tanggal_lahir}}</td></tr>
                 <tr><td width="30%">Gender</td><td>: {{$data->kelamin->kelamin}}</td></tr>
                 <tr><td width="30%">Address</td><td>: {{$data->alamat}}</td></tr>
