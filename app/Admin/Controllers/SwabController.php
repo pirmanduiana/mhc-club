@@ -88,6 +88,7 @@ class SwabController extends Controller
             $filter->disableIdFilter();
             $filter->like('nama_pasien', 'Nama pasien');
             $filter->like('no_identitas', 'No identitas');
+            $filter->between('tanggal_periksa', 'Tanggal periksa')->date();
             $filter->in('swab_m_hasil_id', 'Hasil')->checkbox(['1' => 'Negatif', '2'=> 'Positif']);
         });
 
