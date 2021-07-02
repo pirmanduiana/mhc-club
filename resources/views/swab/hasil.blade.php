@@ -87,7 +87,7 @@
     }
     .sign-template {
         background-image: url("{{asset('/uploads/images/swab-stempel-mhc.png')}}");
-        background-size: 200px 180px;
+        background-size: 250px 180px;
         background-repeat: no-repeat;
     }
     .stamp-mhc-container {
@@ -172,7 +172,7 @@
                             </div>
                         @endif
                     </td>
-                    <td class="sign-kanan">
+                    <td class="sign-kanan" width="250px">
                         <div class="sign-template">
                             @php
                                 $month = date("F", strtotime($data->tanggal_periksa));
