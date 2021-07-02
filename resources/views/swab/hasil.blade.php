@@ -86,9 +86,11 @@
         font-weight: bold;
     }
     .sign-template {
-        background-image: url("{{asset('/uploads/images/swab-stempel-mhc.png')}}");
         background-size: 250px 180px;
         background-repeat: no-repeat;
+    }
+    .sign-template-with-bg {
+        background-image: url("{{asset('/uploads/images/swab-stempel-mhc.png')}}");
     }
     .stamp-mhc-container {
         height: 78px;
@@ -163,7 +165,7 @@
         <div class="footer-2">
             <table>
                 <tr>
-                    <td class="signt-kiri">
+                    <td class="signt-kiri" width="128px">
                         @if (isset($data->qrcode))
                             <img src="{{$data->qrcode}}">
                         @else
@@ -173,7 +175,7 @@
                         @endif
                     </td>
                     <td class="sign-kanan" width="250px">
-                        <div class="sign-template">
+                        <div class="sign-template {{$ispdf==0 ? 'sign-template-with-bg' : ''}}">
                             @php
                                 $month = date("F", strtotime($data->tanggal_periksa));
                                 $day = date("d", strtotime($data->tanggal_periksa));
