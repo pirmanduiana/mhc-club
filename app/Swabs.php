@@ -22,4 +22,12 @@ class Swabs extends Model
     {
         return $this->hasOne('App\SwabMHasil', 'id', 'swab_m_hasil_id');
     }
+
+    protected static function boot()
+    {
+        parent::boot();    
+        static::addGlobalScope('sl', function ($builder) {
+            $builder->where('sl', '0');
+        });
+    }
 }
