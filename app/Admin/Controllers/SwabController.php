@@ -83,6 +83,7 @@ class SwabController extends Controller
     protected function grid()
     {
         $grid = new Grid(new Swabs);
+        $grid->model()->where('sl', 0);
 
         $grid->filter(function($filter){
             $filter->disableIdFilter();
