@@ -6,12 +6,13 @@ use PDF;
 use App\Swabs;
 use App\SwabMDokter as Dokter;
 use App\Http\Controllers\Controller;
-use Encore\Admin\Controllers\HasResourceActions;
+use Illuminate\Http\Request;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
-use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
-use Illuminate\Http\Request;
+use Encore\Admin\Facades\Admin;
+use Encore\Admin\Layout\Content;
+use Encore\Admin\Controllers\HasResourceActions;
 
 class SwabController extends Controller
 {
@@ -155,12 +156,12 @@ class SwabController extends Controller
             return Dokter::get()->pluck('dokter','id');
         })->default(1);
         $form->hidden('doc_url');
-
-        $form->disableEditingCheck(false);
+        $form->hidden('created_by');
 
         // callback after save
         $form->saving(function (Form $form) {
             $form->doc_url = "https://mhc-club.com/swab/$form->no_identitas";
+            $form->created_by = Admin::user()->id;
         });
 
         $form->saved(function(Form $form){
