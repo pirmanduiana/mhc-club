@@ -193,16 +193,18 @@ class SwabController extends Controller
 
     public function getSlPage()
     {
-        $swabs = Swabs::all();
-        return view('swab.seamless', compact('swabs'));
+        $swabs = Swabs::where('sl', 0)->get();
+        $yg_sudah_kadung_disl = Swabs::where('sl', 1)->get();
+        return view('swab.seamless', compact('swabs','yg_sudah_kadung_disl'));
     }
     public function postSl(Request $request)
     {
         $data = $request->swabs;
+        $sl = $request->sl;
         
         foreach ($data as $key => $value) {
             $swab = Swabs::find($value);
-            $swab->sl = 1;
+            $swab->sl = $sl;
             $swab->update();
         }
 
