@@ -180,7 +180,7 @@ class SwabController extends Controller
         $show_tools_button = 0;
 
         $view_pdf = PDF::loadView('swab.hasil', compact('data','qrcode','ispdf','show_tools_button'))->setPaper('a4', 'portrait');
-        return $view_pdf->stream('MHC - Hasil Swab.pdf');
+        return $view_pdf->stream("MHC - Hasil Swab $data->nama_pasien.pdf");
     }
 
     public function setQrBase64(Request $request, $id)
