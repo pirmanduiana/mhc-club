@@ -33,3 +33,6 @@ Admin::js('/vendor/highlight/jquery.highlight-5.js');
 
 // qrcode js
 Admin::js('/vendor/qrcodejs/qrcode.js');
+
+// jquery print
+Admin::js('/vendor/jprint/jQuery.print.min.js');

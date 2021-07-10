@@ -1,8 +1,5 @@
 <title>MHC - Hasil Swab {{$data->nama_pasien}}</title>
 <style>
-    .master-ispdf {
-        /* margin: 66px; */
-    }
     .sw-hasil-container {
         background: white;
         position: relative;
@@ -95,7 +92,7 @@
         height: 78px;
     }
 </style>
-<div class="sw-hasil-container {{$ispdf==0 ? 'master-ispdf' : ''}}">
+<div class="sw-hasil-container">
     <div class="sw-hasil-header">
         <table>
             <tr>
@@ -108,9 +105,11 @@
                         Email : admin@mhc-club.com // Website : www.mhc-club.com
                     </div>
                 </td>
-                <td class="btn-download" width="20%">
+                <td class="btn-download .avoid-this" width="20%">
                     @if ($show_tools_button==1)
                         <a target="_blank" href="/admin/swab/{{$data->id}}/pull" title="Download PDF" class=""><i class='fa fa-file-pdf-o'></i></a>
+                        &nbsp;&nbsp;
+                        <a target="_blank" href="javascript:void(0);" title="Cetak" onclick="printDiv();"><i class='fa fa-print'></i></a>
                         &nbsp;&nbsp;
                         <a href="/admin/swabs/create" class="" title="Buat baru"><i class="fa fa-plus"></i><span class="hidden-xs"></span></a>
                         &nbsp;&nbsp;
@@ -223,6 +222,21 @@
                 console.log("done");
             })
         }
+    }
+
+    function printDiv() {
+        $(".content").print({
+            //Use Global styles
+            globalStyles : false,
+            //Add link with attrbute media=print
+            mediaPrint : false,
+            //Print in a hidden iframe
+            iframe : false,
+            //Don't print this
+            noPrintSelector : ".avoid-this",
+            //Log to console when printing is done via a deffered callback
+            deferred: $.Deferred().done(function() { console.log('Printing done', arguments); })
+        });
     }
 
     (function() {        
