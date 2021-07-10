@@ -1,7 +1,7 @@
 <title>MHC - Hasil Swab {{$data->nama_pasien}}</title>
 <style>
     .master-ispdf {
-        margin: 66px;
+        /* margin: 66px; */
     }
     .sw-hasil-container {
         background: white;
@@ -13,10 +13,9 @@
         margin-bottom: 20px;
     }
     .btn-download {
+        padding-top: 13px;
         vertical-align: top;
-        padding-top: 10px;
         text-align: right;
-        display: flex;
     }
     table {
         width: 100%;
@@ -111,9 +110,11 @@
                 </td>
                 <td class="btn-download" width="20%">
                     @if ($show_tools_button==1)
-                        <a target="_blank" href="/admin/swab/{{$data->id}}/pull" class="btn btn-primary btn-xs"><i class='fa fa-file-pdf-o'></i>&nbsp;&nbsp;Download</a>
+                        <a target="_blank" href="/admin/swab/{{$data->id}}/pull" title="Download PDF" class=""><i class='fa fa-file-pdf-o'></i></a>
                         &nbsp;&nbsp;
-                        <a href="/admin/swabs" class="btn btn-xs btn-default" title="List"><i class="fa fa-list"></i><span class="hidden-xs">&nbsp;List</span></a>
+                        <a href="/admin/swabs/create" class="" title="Buat baru"><i class="fa fa-plus"></i><span class="hidden-xs"></span></a>
+                        &nbsp;&nbsp;
+                        <a href="/admin/swabs" class="" title="Kembali ke daftar"><i class="fa fa-list"></i><span class="hidden-xs"></span></a>
                     @endif
                 </td>
             </tr>
