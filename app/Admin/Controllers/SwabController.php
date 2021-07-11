@@ -160,6 +160,10 @@ class SwabController extends Controller
 
         // callback after save
         $form->saving(function (Form $form) {
+            if ($form->model()->no_identitas != $form->no_identitas) {
+                $form->model()->qrcode = null;
+                $form->model()->update();
+            }
             $form->doc_url = "https://mhc-club.com/swab/$form->no_identitas";
             $form->created_by = Admin::user()->id;
         });
