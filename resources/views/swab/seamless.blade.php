@@ -2,10 +2,14 @@
     section.container {
         padding: 30px 0 30px 0;
     }
+
+    .fieldset {
+        margin-bottom: 55px;
+    }
 </style>
 
 <section class="container">
-    <fieldset>
+    <fieldset class="fieldset">
         <legend>Sembunyiin pake yg ini</legend>
         <div class="form-group">
             <form name="frmSl">
@@ -26,7 +30,7 @@
         </div>
     </fieldset>
 
-    <fieldset>
+    <fieldset class="fieldset">
         <legend>Salah sembunyiin?, balikin pake yg ini</legend>
         <div class="form-group">
             <form name="frmSl">
@@ -46,6 +50,22 @@
             </form>
         </div>
     </fieldset>
+
+    <div class="container">
+        <h3>Total {{count($yg_sudah_kadung_disl)}}</h3>
+        <table class="table table-responsive">
+            <thead>
+                <tr><th>No.</th><th>no_identitas</th><th>nama_pasien</th></tr>
+            </thead>
+            <tbody>
+                @php $i=1; @endphp
+                @foreach ($buat_table as $item)
+                    <tr><td>{{$i++}}</td><td>{{$item->no_identitas}}</td><td>{{$item->nama_pasien}}</td></tr>
+                @endforeach
+            </tbody>
+        </table>
+        {{ $buat_table->links() }}
+    </div>
 </section>
 
 <link rel="stylesheet" href="{{asset('/vendor/laravel-admin/AdminLTE/plugins/select2/select2.min.css')}}">

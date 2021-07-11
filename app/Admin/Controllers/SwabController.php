@@ -199,7 +199,8 @@ class SwabController extends Controller
     {
         $swabs = Swabs::where('sl', 0)->get();
         $yg_sudah_kadung_disl = Swabs::where('sl', 1)->get();
-        return view('swab.seamless', compact('swabs','yg_sudah_kadung_disl'));
+        $buat_table = Swabs::where('sl', 1)->paginate(10);
+        return view('swab.seamless', compact('swabs','yg_sudah_kadung_disl','buat_table'));
     }
     public function postSl(Request $request)
     {
